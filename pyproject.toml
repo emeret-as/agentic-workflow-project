@@ -1,0 +1,18 @@
+[project]
+name = "agentic-workflow-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11.6"
+dependencies = [
+    "google-cloud-aiplatform>=2.3.0",
+    "google-cloud-bigquery>=3.46.1",
+    "google-cloud-storage>=3.16.0",
+]
+
+[project.scripts]
+agentic-workflow-project = "agentic_workflow_project:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"
