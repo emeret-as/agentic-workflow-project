@@ -20,3 +20,15 @@ build/
 # IDE
 .vscode/
 .idea/
+
+# Logs TensorBoard téléchargés en local
+logs/
+
+# Modèles téléchargés en local (trop lourds pour git)
+models/
+
+# Résultats du pipeline téléchargés en local
+outputs/
+
+# Pipeline compilé, regénéré à chaque lancement de scripts/pipeline_runner.py
+model_training_pipeline.json
