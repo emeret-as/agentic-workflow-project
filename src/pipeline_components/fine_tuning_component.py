@@ -27,7 +27,7 @@ def fine_tuning_component(
     lora_r: int = 8,
     lora_alpha: int = 16,
     lora_dropout: float = 0.05,
-    num_train_epochs: int = 10,
+    num_train_epochs: int = 3,
     learning_rate: float = 3e-4,
     per_device_train_batch_size: int = 16,
     max_length: int = 64,
