@@ -1,7 +1,7 @@
 """Chainlit web app calling the fine-tuned Yoda model deployed on Vertex AI.
 
 Lancement, depuis la racine du repo :
-    uv run --env-file .env chainlit run src/app/main.py
+    PYTHONPATH=. uv run --env-file .env chainlit run src/app/main.py
 """
 
 import re

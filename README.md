@@ -83,8 +83,10 @@ Lance une seule fois : chaque lancement crée un pipeline et réserve des GPU.
 ## Application Chainlit et monitoring (sessions 4-5)
 
 ```bash
-uv run --env-file .env chainlit run src/app/main.py
+PYTHONPATH=. uv run --env-file .env chainlit run src/app/main.py
 ```
+
+`PYTHONPATH=.` est nécessaire pour que l'app trouve le package `src`.
 
 L'app (`src/app/main.py`) appelle l'endpoint avec un token `gcloud` (usage de développement
 uniquement : en production, utiliser un compte de service). Chaque message produit dans Langfuse :
