@@ -32,3 +32,10 @@ outputs/
 
 # Pipeline compilé, regénéré à chaque lancement de scripts/pipeline_runner.py
 model_training_pipeline.json
+
+# Config Chainlit auto-générée au premier lancement
+.chainlit/
+chainlit.md
+
+# Cache ruff
+.ruff_cache/
