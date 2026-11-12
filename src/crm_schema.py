@@ -116,7 +116,9 @@ def has_corrupted_text(text: str) -> bool:
 
 
 def normalize(value: Any) -> Any:
-    """Normalize a field value for comparison (case, spaces)."""
+    """Normalize a field value for comparison (case, accents, spaces)."""
     if isinstance(value, str):
-        return " ".join(value.split()).casefold()
+        decomposed = unicodedata.normalize("NFKD", value)
+        stripped = "".join(c for c in decomposed if not unicodedata.combining(c))
+        return " ".join(stripped.split()).casefold()
     return value

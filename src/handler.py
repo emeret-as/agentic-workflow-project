@@ -6,7 +6,7 @@ Le conteneur le charge et appelle `EndpointHandler.__call__` pour chaque requêt
 
 Format de requête (imposé par Vertex AI) :
     {"instances": [{"input": "<|user|>\\n...<|end|>\\n<|assistant|>"}],
-     "parameters": {"max_new_tokens": 64, ...}}
+     "parameters": {"max_new_tokens": 160, ...}}
 Format de réponse :
     {"predictions": ["<|user|>...<|assistant|>... <|end|>"]}
 """
@@ -24,7 +24,7 @@ DEVICE_MAP = os.getenv("HANDLER_DEVICE_MAP", "cuda:0")
 
 # Paramètres de génération par défaut, écrasés par ceux de la requête
 DEFAULT_GENERATION_PARAMETERS: dict[str, Any] = {
-    "max_new_tokens": 64,
+    "max_new_tokens": 160,
     "do_sample": False,
 }
 
