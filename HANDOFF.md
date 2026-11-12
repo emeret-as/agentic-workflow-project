@@ -32,7 +32,7 @@ Modèle : `microsoft/Phi-3-mini-4k-instruct` fine-tuné en LoRA. Données 100 % 
 | Région | `europe-west2` (seule région avec quota GPU) |
 | Bucket | `emeret-llmops` |
 | Repo GitHub | https://github.com/emeret-as/agentic-workflow-project |
-| Branche de travail | `crm-use-case` (locale, **non poussée**) |
+| Branche de travail | `crm-use-case` (poussée sur GitHub, **pas de PR** : on travaille directement dessus) |
 | Modèle Yoda dans le registre | `models/6374284521612771328`, version 1, nommé `emeret-ureboullet_model` |
 
 Données : `data/crm_meeting_notes.csv` (558 notes, versionné), copie sur
@@ -41,9 +41,13 @@ Données : `data/crm_meeting_notes.csv` (558 notes, versionné), copie sur
 ## 3. État du code (branche `crm-use-case`, arbre propre)
 
 Commits : `1803e59` (pipeline CRM), `2debd86` (app Chainlit CRM, normalisation sans accents),
-`1751d14` (README). Les commits `82e78ab` (branche `session-4-deployment`) et ceux de
-`crm-use-case` **ne sont pas poussés** : `git push` renvoie 403 car le keychain contient un
-autre compte GitHub. À régler avant tout (voir §6).
+`1751d14` (README), puis ce fichier. Les branches `session-4-deployment` (jusqu'à `82e78ab`) et
+`crm-use-case` sont **poussées** sur `origin`. Récupérer le travail avec
+`git fetch && git checkout crm-use-case`.
+
+Pousser nécessite d'être connecté à GitHub avec un compte ayant accès en écriture à
+`emeret-as/agentic-workflow-project` (vérifier avec `gh auth status`). Un 403 « denied to
+emeret-perso » signifie que `gh` utilise le mauvais compte : `gh auth switch`.
 
 Fichiers clés :
 - `src/crm_schema.py` : schéma, listes fermées, consigne, `build_user_content`, `parse_json`,
@@ -150,10 +154,10 @@ dans `.env` est **obsolète** (l'endpoint a été supprimé).
 
 ## 6. Ce qu'il reste à faire (dans l'ordre)
 
-1. **Réparer l'accès GitHub et pousser.** Le 403 vient du compte du keychain. Une fois réglé,
-   pousser `session-4-deployment` puis `crm-use-case` et ouvrir une PR vers `main`
-   (https://github.com/emeret-as/agentic-workflow-project/pull/new/session-4-deployment).
-   Le collaborateur `MathieuHS` (le prof) a été invité au repo.
+1. **Accès au repo.** Le code est déjà poussé (voir §3). Vérifier que vous avez accès en
+   écriture. Aucune PR n'est ouverte : décider avec l'utilisateur si une PR `crm-use-case` ->
+   `main` est nécessaire à la fin (elle inclut aussi `session-4-deployment`). Le collaborateur
+   `MathieuHS` (le prof) a été invité au repo.
 2. **Terminer le pipeline `...20261112183827`** : lire les métriques d'évaluation et analyser les
    erreurs par style, longueur et présence d'un élément parasite (colonnes `style`, `length`,
    `distractor` du CSV). Garder les chiffres pour le brief.
