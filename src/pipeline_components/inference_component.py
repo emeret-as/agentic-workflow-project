@@ -21,9 +21,16 @@ def inference_component(
     test_dataset: Input[Dataset],
     predictions: Output[Dataset],
     max_new_tokens: int = 160,
+    use_base_model: bool = False,
 ) -> None:
-    """Extract CRM records from the test notes with the fine-tuned model."""
+    """Extract CRM records from the test notes with the fine-tuned model.
+
+    `use_base_model=True` : même inférence avec Phi-3 seul (sans les adaptateurs
+    LoRA), pour mesurer ce qu'apporte le fine-tuning (pipeline d'évaluation du
+    modèle de base).
+    """
     import ast
+    import json
     import logging
     import re
     from pathlib import Path
@@ -95,8 +102,16 @@ def inference_component(
         bnb_4bit_use_double_quant=True,
         bnb_4bit_compute_dtype=torch.float32,
     )
+    model_source = local_model_dir
+    if use_base_model:
+        # Modèle de base : on lit son identifiant Hugging Face dans la config LoRA
+        adapter_config = json.loads(
+            (Path(local_model_dir) / "adapter_config.json").read_text()
+        )
+        model_source = adapter_config["base_model_name_or_path"]
+        logger.info(f"Base model only (no LoRA adapters): {model_source}")
     llm = AutoModelForCausalLM.from_pretrained(
-        local_model_dir, device_map="cuda:0", quantization_config=bnb_config
+        model_source, device_map="cuda:0", quantization_config=bnb_config
     )
     tokenizer = AutoTokenizer.from_pretrained(local_model_dir)
 
