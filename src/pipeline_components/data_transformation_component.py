@@ -18,11 +18,21 @@ def data_transformation_component(
     train_dataset: OutputPath("Dataset"),  # type: ignore
     test_dataset: OutputPath("Dataset"),  # type: ignore
 ) -> None:
-    """Format and split Yoda Sentences for Phi-3 fine-tuning."""
+    """Format and split CRM meeting notes for Phi-3 fine-tuning."""
     import logging
 
     import pandas as pd
     from datasets import Dataset
+
+    # Consigne placée devant les notes. Copie de `src/crm_schema.py` (un
+    # composant Kubeflow est autonome) : la garder identique au mot près, y
+    # compris dans l'inférence, le handler et l'app.
+    instruction = (
+        "Extrais la fiche CRM au format JSON à partir des notes de réunion "
+        "ci-dessous. Clés : company, contact_name, contact_role, need, "
+        "budget_eur, next_action, deadline. Utilise null quand l'information "
+        "est absente.\n\n"
+    )
 
     def format_dataset_to_phi_messages(dataset: Dataset) -> Dataset:
         """Format dataset to Phi messages structure."""
@@ -30,17 +40,15 @@ def data_transformation_component(
         def format_dataset(examples):
             """Format a single example to Phi messages structure."""
             converted_sample = [
-                {"role": "user", "content": examples["prompt"]},
-                {"role": "assistant", "content": examples["completion"]},
+                {"role": "user", "content": instruction + examples["note"]},
+                {"role": "assistant", "content": examples["record"]},
             ]
             return {"messages": converted_sample}
 
-        return (
-            dataset.rename_column("sentence", "prompt")
-            .rename_column("translation_extra", "completion")
-            .map(format_dataset)
-            .remove_columns(["prompt", "completion", "translation"])
-        )
+        # On garde le style, la longueur et l'élément parasite : ils servent à
+        # analyser les erreurs par catégorie, ils ne sont pas utilisés pour
+        # l'entraînement (SFTTrainer ne lit que `messages`).
+        return dataset.map(format_dataset).remove_columns(["note", "record"])
 
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
@@ -51,7 +59,13 @@ def data_transformation_component(
 
     logger.info("Formatting and splitting dataset...")
     formatted_dataset = format_dataset_to_phi_messages(dataset)
-    split_dataset = formatted_dataset.train_test_split(test_size=train_test_split_ratio)
+    split_dataset = formatted_dataset.train_test_split(
+        test_size=train_test_split_ratio, seed=42
+    )
+    logger.info(
+        f"Train: {len(split_dataset['train'])} rows, "
+        f"test: {len(split_dataset['test'])} rows"
+    )
 
     logger.info(f"Writing train dataset to {train_dataset}...")
     split_dataset["train"].to_csv(train_dataset, index=False)

@@ -20,9 +20,9 @@ def inference_component(
     model: Input[Model],
     test_dataset: Input[Dataset],
     predictions: Output[Dataset],
-    max_new_tokens: int = 64,
+    max_new_tokens: int = 160,
 ) -> None:
-    """Compute predictions on the test set with the fine-tuned model."""
+    """Extract CRM records from the test notes with the fine-tuned model."""
     import ast
     import logging
     import re
@@ -51,9 +51,9 @@ def inference_component(
             local_path.parent.mkdir(parents=True, exist_ok=True)
             blob.download_to_filename(local_path)
 
-    def build_prompt(tokenizer: AutoTokenizer, sentence: str):
-        """Build a prompt from a sentence applying the chat template."""
-        messages = [{"role": "user", "content": sentence}]
+    def build_prompt(tokenizer: AutoTokenizer, user_content: str):
+        """Build a prompt from the user message applying the chat template."""
+        messages = [{"role": "user", "content": user_content}]
         return tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
@@ -111,15 +111,16 @@ def inference_component(
     # -- Prédictions -----------------------------------------------------------
     rows = []
     for i, conversation in enumerate(conversations):
-        sentence = conversation[0]["content"]  # message user : phrase normale
-        reference = conversation[1]["content"]  # message assistant : vraie phrase Yoda
-        prompt = build_prompt(tokenizer, sentence)
+        # message user = consigne + note ; message assistant = vraie fiche JSON
+        user_content = conversation[0]["content"]
+        reference = conversation[1]["content"]
+        prompt = build_prompt(tokenizer, user_content)
         model_output = generate_response(
             llm, tokenizer, prompt, max_new_tokens=max_new_tokens, do_sample=False
         )
         rows.append(
             {
-                "user_input": sentence,
+                "user_input": user_content,
                 "reference": reference,
                 "extracted_response": extract_response(model_output),
             }

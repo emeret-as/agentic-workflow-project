@@ -12,7 +12,7 @@ REGION: str = os.getenv("GCP_REGION", "europe-west2")
 BUCKET_NAME: str | None = os.getenv("GCP_BUCKET_NAME")
 
 # Paths
-RAW_DATASET_URI: str = f"gs://{BUCKET_NAME}/yoda_sentences.csv"
+RAW_DATASET_URI: str = f"gs://{BUCKET_NAME}/crm_meeting_notes.csv"
 PIPELINE_ROOT_PATH: str = f"{BUCKET_NAME}/vertexai-pipeline-root/"
 
 # Vertex AI Endpoint (session 4) : requis seulement par l'application Chainlit
