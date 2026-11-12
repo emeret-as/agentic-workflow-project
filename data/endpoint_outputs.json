@@ -1,0 +1,1136 @@
+[
+  {
+    "id": "test-00",
+    "note": "Salut ! Suite à notre échange avec le Cabinet Rivoire, ils cherchent activement à concevoir et déployer une plateforme de données centralisée. Pour la suite des opérations, j'ai prévu de les recontacter afin de planifier un nouvel appel de suivi d'ici peu.",
+    "reference": {
+      "company": "Cabinet Rivoire",
+      "contact_name": null,
+      "contact_role": null,
+      "need": "data_platform",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "dafb599227c5512b5576f4c88d8f8876",
+    "output": "{\"company\": \"Cabinet Rivoire\", \"contact_name\": null, \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 6.69,
+    "exact_match": true
+  },
+  {
+    "id": "test-01",
+    "note": "Suite à notre entretien avec la Clinique Lefranc, j'ai pu échanger longuement avec Laure Bernard, leur Directrice informatique. Leur besoin prioritaire est d'intégrer un assistant virtuel intelligent basé sur l'IA pour soulager le secrétariat médical. Pour ce projet d'envergure, ils disposent d'une enveloppe globale évaluée à 235 500                euros, avec une date limite de réalisation fixée au 13 mai 2027. J'en ai brièvement parlé à notre collègue commercial Julien, qui pense que ce dossier est très prometteur pour notre fin de trimestre. Désormais, l'action à mener consiste à attendre la décision de leur comité de direction qui doit réaliser une validation interne avant que nous puissions lancer les prochaines étapes de notre collaboration.",
+    "reference": {
+      "company": "Clinique Lefranc",
+      "contact_name": "Laure Bernard",
+      "contact_role": "Directrice informatique",
+      "need": "ai_assistant",
+      "budget_eur": 235500,
+      "next_action": "internal_review",
+      "deadline": "2027-05-13"
+    },
+    "source": "test",
+    "trace_id": "3ac5b98fb1db18083f973f2c17173fb4",
+    "output": "{\"company\": \"Clinique Lefranc\", \"contact_name\": \"Laure Bernard\", \"contact_role\": \"Directrice informatique\", \"need\": \"ai_assistant\", \"budget_eur\": 235500, \"next_action\": \"internal_review\", \"deadline\": \"2027-05-13\"}",
+    "valid_record": true,
+    "latency_seconds": 9.16,
+    "exact_match": true
+  },
+  {
+    "id": "test-02",
+    "note": "Appel ce jour avec Camille Dubois, Responsable achats chez Textiles Marchetti. Besoin urgent d'un outil d'intelligence artif. type chatbot interne pr automatiser rep. aux salariés. Budget max de 67 k‐. Client disponible pr avancer rapidement sur ce dossier. Je dois envoyer une proposit. com. d\ttaill\te avec chiffrage d'ici fin de semaine. A noter : je serai absent pr cong\ts annuels du 10 au 17 mai, sans lien avec ce projet.",
+    "reference": {
+      "company": "Textiles Marchetti",
+      "contact_name": "Camille Dubois",
+      "contact_role": "Responsable achats",
+      "need": "ai_assistant",
+      "budget_eur": 67000,
+      "next_action": "send_proposal",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "68accf9fc1f03e776f80febc135b2858",
+    "output": "{\"company\": \"Textiles Marchetti\", \"contact_name\": \"Camille Dubois\", \"contact_role\": \"Responsable achats\", \"need\": \"ai_assistant\", \"budget_eur\": 67000, \"next_action\": \"send_proposal\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 8.31,
+    "exact_match": true
+  },
+  {
+    "id": "test-03",
+    "note": "Nous avons échangé ce matin avec les équipes de la société Domaine Sauvage au sujet de leur infrastructure décisionnelle. L'entreprise exprime un besoin pressant concernant la création d'un référentiel de données unique et structuré pour l'ensemble de leurs services. Ils ont validé une enveloppe budgétaire d'environ 228 500 euros pour mener à bien ce chantier. Pour la suite, notre objectif est de leur transmettre rapidement une offre commerciale détaillée et chiffrée. Durant nos discussions, ils ont d'ailleurs mentionné les pratiques de leur rival direct, la marque Terroirs Secrets. Nous devons nous positionner de manière très compétitive pour remporter ce projet d'envergure.",
+    "reference": {
+      "company": "Domaine Sauvage",
+      "contact_name": null,
+      "contact_role": null,
+      "need": "data_platform",
+      "budget_eur": 228500,
+      "next_action": "send_proposal",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "41011120c7215987a201e551ba918df1",
+    "output": "{\"company\": \"Domaine Sauvage\", \"contact_name\": null, \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": 228500, \"next_action\": \"send_proposal\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 15.53,
+    "exact_match": true
+  },
+  {
+    "id": "test-04",
+    "note": "Alors Antoine Simon de Logistique Kervalec veut blinder leur infra réseau avec de la cybersécurité robuste pour un budget exact de 238000 euros. Je dois planifier une démo de notre solution, mais attention je serai en vacances le 12 mai, alors que leur deadline finale est fixée au 14 juillet 2027.",
+    "reference": {
+      "company": "Logistique Kervalec",
+      "contact_name": "Antoine Simon",
+      "contact_role": null,
+      "need": "cybersecurity",
+      "budget_eur": 238000,
+      "next_action": "schedule_demo",
+      "deadline": "2027-07-14"
+    },
+    "source": "test",
+    "trace_id": "ecdb45724fa59e2dd8e5ecc929af2271",
+    "output": "{\"company\": \"Logistique Kervalec\", \"contact_name\": \"Antoine Simon\", \"contact_role\": null, \"need\": \"cybersecurity\", \"budget_eur\": 238000, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-07-14\"}",
+    "valid_record": true,
+    "latency_seconds": 7.5,
+    "exact_match": true
+  },
+  {
+    "id": "test-05",
+    "note": "Alors aujourd'hui j'ai eu en ligne la Responsable achats de chez Laboratoires Kervalec, une discussion très intéressante mais un peu décousue. Ils veulent moderniser leur fonctionnement interne et leur grand projet du moment c'est de réussir à automatiser de nombreux processus opérationnels pour gagner du temps au quotidien. Mon collègue de l'équipe commerciale, Alexandre, m'avait dit de faire attention à leurs exigences techniques. Niveau budget, elle m'a confirmé une enveloppe globale de 194 500 euros pour cette prestation. Par contre, il y a une contrainte de temps assez forte car tout doit être opérationnel et finalisé pour le 8 juin 2027 au plus tard. Pour la suite de nos échanges, la balle est dans notre camp. Je dois préparer un document chiffré complet et leur faire parvenir cette proposition commerciale d'ici la fin de semaine. On verra ensuite comment ils réagissent mais le contact est bien établi.",
+    "reference": {
+      "company": "Laboratoires Kervalec",
+      "contact_name": null,
+      "contact_role": "Responsable achats",
+      "need": "process_automation",
+      "budget_eur": 194500,
+      "next_action": "send_proposal",
+      "deadline": "2027-06-08"
+    },
+    "source": "test",
+    "trace_id": "5b3e8605d85f1a98e9b20f0481a1d609",
+    "output": "{\"company\": \"Laboratoires Kervalec\", \"contact_name\": null, \"contact_role\": \"Responsable achats\", \"need\": \"process_automation\", \"budget_eur\": 194500, \"next_action\": \"send_proposal\", \"deadline\": \"2027-06-08\"}",
+    "valid_record": true,
+    "latency_seconds": 8.57,
+    "exact_match": true
+  },
+  {
+    "id": "test-06",
+    "note": "Alors voilà, j'ai eu en ligne Inès Muller qui est la Directrice informatique au sein de la société Transports Beaulieu. Elle m'a expliqué qu'ils ont vraiment besoin de blinder tout leur système informatique face aux menaces actuelles, c'est devenu une priorité absolue chez eux d'améliorer leur cybersécurité globale. Elle m'a dit qu'ils allaient d'abord participer au Salon de la Logistique qui se tient le 12 octobre prochain, mais cela n'a rien à voir avec le calendrier de notre projet. Pour ce qui est de l'enveloppe budgétaire allouée, rien n'est encore figé pour l'instant. Pareil pour la date d'échéance finale, nous n'avons pas encore fixé de planning précis. Ils veulent avancer étape par étape. On a convenu que je devais lui faire parvenir de la documentation complète sur nos offres de sécurité ainsi que des retours d'expérience de nos clients du secteur.",
+    "reference": {
+      "company": "Transports Beaulieu",
+      "contact_name": "Inès Muller",
+      "contact_role": "Directrice informatique",
+      "need": "cybersecurity",
+      "budget_eur": null,
+      "next_action": "send_documentation",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "e72882c8705bb8ccee0a4992593d75b2",
+    "output": "{\"company\": \"Transports Beaulieu\", \"contact_name\": \"Inès Muller\", \"contact_role\": \"Directrice informatique\", \"need\": \"cybersecurity\", \"budget_eur\": null, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 7.03,
+    "exact_match": true
+  },
+  {
+    "id": "test-07",
+    "note": "Appel ce jour avec Hugo Garcia, Responsable innovation chez Laboratoires Ardenne. Son proj : migrer des applications vers le cloud pr moderniser l'infra tech. Pas de visibilité budgétaire pr l'instant, validation en cours. Échéance fixée impérativement pr le 28 mai 2027. Client semble trèes pressé par le calendrier de sa direction. Next step : planifier un nouvel appel de suivi d'ici deux semaines pr faire un point d'étape. On doit affiner la prop technique avt cet appel.",
+    "reference": {
+      "company": "Laboratoires Ardenne",
+      "contact_name": "Hugo Garcia",
+      "contact_role": "Responsable innovation",
+      "need": "cloud_migration",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": "2027-05-28"
+    },
+    "source": "test",
+    "trace_id": "67105f9d4c317c5c42200527b79ba741",
+    "output": "{\"company\": \"Laboratoires Ardenne\", \"contact_name\": \"Hugo Garcia\", \"contact_role\": \"Responsable innovation\", \"need\": \"cloud_migration\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": \"2027-05-28\"}",
+    "valid_record": true,
+    "latency_seconds": 9.23,
+    "exact_match": true
+  },
+  {
+    "id": "test-08",
+    "note": "J'ai rencontré Laure Bonnet, Directrice informatique au sein de la Pharmacie Perrin. L'objectif de la structure est de déployer un assistant IA intelligent pour fluidifier le support interne des équipes. Le budget alloué pour cette intégration est de 49 500 €. À noter que Laure Bonnet sera en congés annuels du 12 au 19 octobre, ce qui n'impacte pas le projet car aucune date cible n'est fixée. L'action à mener désormais est d'organiser une démonstration de notre outil.",
+    "reference": {
+      "company": "Pharmacie Perrin",
+      "contact_name": "Laure Bonnet",
+      "contact_role": "Directrice informatique",
+      "need": "ai_assistant",
+      "budget_eur": 49500,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "7e62ed62757d4eb1e4d3a24f796e4a12",
+    "output": "{\"company\": \"Pharmacie Perrin\", \"contact_name\": \"Laure Bonnet\", \"contact_role\": \"Directrice informatique\", \"need\": \"ai_assistant\", \"budget_eur\": 49500, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 8.23,
+    "exact_match": true
+  },
+  {
+    "id": "test-09",
+    "note": "Bonjour, j'ai rencontré Karim Simon, Chef de projet digital chez Logistique Marchetti. Ils disposent de 189 500 € pour migrer leurs applications vers le cloud avant le 02/11/2027. À noter qu'il sera en congé le 15 août. Prochaine étape : organiser une démonstration.",
+    "reference": {
+      "company": "Logistique Marchetti",
+      "contact_name": "Karim Simon",
+      "contact_role": "Chef de projet digital",
+      "need": "cloud_migration",
+      "budget_eur": 189500,
+      "next_action": "schedule_demo",
+      "deadline": "2027-11-02"
+    },
+    "source": "test",
+    "trace_id": "9fa9b3a33d4e4ba4c5800e2d0288970e",
+    "output": "{\"company\": \"Logistique Marchetti\", \"contact_name\": \"Karim Simon\", \"contact_role\": \"Chef de projet digital\", \"need\": \"cloud_migration\", \"budget_eur\": 189500, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-11-02\"}",
+    "valid_record": true,
+    "latency_seconds": 8.84,
+    "exact_match": true
+  },
+  {
+    "id": "test-10",
+    "note": "J'ai échangé ce jour avec Pierre Fournier, qui occupe la fonction de Responsable innovation au sein du Cabinet Vasseur. L'objectif de notre discussion portait sur l'évolution de leur infrastructure technique actuelle. Cette structure fait face à un éparpillement de ses sources d'information. Ils éprouvent aujourd'hui le besoin de concevoir une plateforme de données unifiée pour centraliser l'ensemble de leurs flux. Aucun budget précis n'a été communiqué à ce stade de l'étude. Pour la mise en œuvre de ce chantier, le Cabinet Vasseur s'est fixé une date butoir au 16 juin 2027. Par ailleurs, Pierre Fournier m'a indiqué qu'il participerait à un séminaire annuel le 14 janvier 2027, ce qui n'impacte pas notre calendrier. Nous avons convenu d'une action à réaliser rapidement. Je dois programmer une démonstration technique de notre outil avec ses équipes. Cela permettra de valider la faisabilité technique de leur projet de centralisation.",
+    "reference": {
+      "company": "Cabinet Vasseur",
+      "contact_name": "Pierre Fournier",
+      "contact_role": "Responsable innovation",
+      "need": "data_platform",
+      "budget_eur": null,
+      "next_action": "schedule_demo",
+      "deadline": "2027-06-16"
+    },
+    "source": "test",
+    "trace_id": "9c6db69498f84b67ccc02f91e654cc81",
+    "output": "{\"company\": \"Cabinet Vasseur\", \"contact_name\": \"Pierre Fournier\", \"contact_role\": \"Responsable innovation\", \"need\": \"data_platform\", \"budget_eur\": null, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-06-16\"}",
+    "valid_record": true,
+    "latency_seconds": 8.07,
+    "exact_match": true
+  },
+  {
+    "id": "test-11",
+    "note": "On a vu Pierre Girard pour la société Menuiseries Ferrand et il faut absolument mettre en place une plateforme de données centralisée pour regrouper leurs informations. C'est un beau projet à 160 k€ et je vais demander à mon collègue Alexandre de m'aider à lui envoyer de la documentation et des références clients au plus vite.",
+    "reference": {
+      "company": "Menuiseries Ferrand",
+      "contact_name": "Pierre Girard",
+      "contact_role": null,
+      "need": "data_platform",
+      "budget_eur": 160000,
+      "next_action": "send_documentation",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "7fc2907c7d7f24d4df23609d0196a645",
+    "output": "{\"company\": \"Menuiseries Ferrand\", \"contact_name\": \"Pierre Girard\", \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": 160000, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 7.03,
+    "exact_match": true
+  },
+  {
+    "id": "test-12",
+    "note": "J'ai eu un entretien approfondi avec la Clinique Rivoire aujourd'hui. Mon interlocutrice était Nadia Bonnet, qui exerce la fonction de Responsable innovation au sein de l'établissement. L'échange a principalement porté sur leur volonté d'obtenir des tableaux de bord de pilotage pour mieux suivre l'activité de leurs services. Ils ont actuellement un effectif de 450 collaborateurs répartis sur deux pavillons. Aucun budget n'a été arrêté à ce stade des discussions, car l'enveloppe globale dépendra des arbitrages de leur conseil d'administration. Concernant le calendrier, la date butoir absolue pour la mise en place de cette solution est le 18 février 2027. À ce jour, la prochaine étape consiste à attendre la validation interne du client avant toute suite. Nadia Bonnet doit en effet présenter notre approche à sa direction générale la semaine prochaine pour obtenir leur feu vert. Je reprendrai contact avec elle dès que cette présentation aura eu lieu.",
+    "reference": {
+      "company": "Clinique Rivoire",
+      "contact_name": "Nadia Bonnet",
+      "contact_role": "Responsable innovation",
+      "need": "analytics_dashboard",
+      "budget_eur": null,
+      "next_action": "internal_review",
+      "deadline": "2027-02-18"
+    },
+    "source": "test",
+    "trace_id": "5a4d7d8f877292316ce9c152f6f6af7c",
+    "output": "{\"company\": \"Clinique Rivoire\", \"contact_name\": \"Nadia Bonnet\", \"contact_role\": \"Responsable innovation\", \"need\": \"analytics_dashboard\", \"budget_eur\": null, \"next_action\": \"internal_review\", \"deadline\": \"2027-02-18\"}",
+    "valid_record": true,
+    "latency_seconds": 6.52,
+    "exact_match": true
+  },
+  {
+    "id": "test-13",
+    "note": "- Entretien avec Pierre Michel, Responsable innovation chez Maison Castelnau.\n- À noter : Pierre sera absent pour congés annuels du 10 au 17 avril.\n- Le besoin exprimé concerne la montée en compétences via l'animation de sessions pour former leurs équipes.\n- Pas de budget précis évoqué à ce stade.\n- Date limite de réalisation des prestations fixée au 30 mai 2027.\n- Action corrective immédiate : caler un point téléphonique de suivi pour affiner le périmètre.",
+    "reference": {
+      "company": "Maison Castelnau",
+      "contact_name": "Pierre Michel",
+      "contact_role": "Responsable innovation",
+      "need": "team_training",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": "2027-05-30"
+    },
+    "source": "test",
+    "trace_id": "3c6e3006581c7ad15c89809213c576a0",
+    "output": "{\"company\": \"Maison Castelnau\", \"contact_name\": \"Pierre Michel\", \"contact_role\": \"Responsable innovation\", \"need\": \"team_training\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": \"2027-05-30\"}",
+    "valid_record": true,
+    "latency_seconds": 6.12,
+    "exact_match": true
+  },
+  {
+    "id": "test-14",
+    "note": "Salut Michel, je te fais un retour rapide sur mon rendez-vous d'aujourd'hui avec Julien Girard, le Directeur financier du Cabinet Delmotte. Ils cherchent un partenaire pour obtenir des tableaux de bord de pilotage performants afin de suivre leur activité en temps réel. C'est un projet d'envergure pour Cabinet Delmotte, estimé à 273 000 euros. À ce sujet, je serai d'ailleurs sur un salon professionnel le 15 novembre 2026, ce qui n'a aucun impact sur leur calendrier. Pour leur projet, l'échéance absolue est fixée au 7 mars 2027. Pour la suite, je dois rédiger et leur envoyer une proposition commerciale chiffrée d'ici quelques jours. Ils ont hâte de voir notre approche méthodologique. Les équipes techniques sont déjà prêtes à m'épauler sur la partie chiffrage. Je pense que nous avons une vraie carte à jouer sur ce dossier très stratégique pour ce trimestre.",
+    "reference": {
+      "company": "Cabinet Delmotte",
+      "contact_name": "Julien Girard",
+      "contact_role": "Directeur financier",
+      "need": "analytics_dashboard",
+      "budget_eur": 273000,
+      "next_action": "send_proposal",
+      "deadline": "2027-03-07"
+    },
+    "source": "test",
+    "trace_id": "f908a4130100ecbe7a7efa4820e07688",
+    "output": "{\"company\": \"Cabinet Delmotte\", \"contact_name\": \"Julien Girard\", \"contact_role\": \"Directeur financier\", \"need\": \"analytics_dashboard\", \"budget_eur\": 273000, \"next_action\": \"send_proposal\", \"deadline\": \"2027-03-07\"}",
+    "valid_record": true,
+    "latency_seconds": 6.19,
+    "exact_match": true
+  },
+  {
+    "id": "test-15",
+    "note": "Entretien très constructif ce matin avec la Fonderie Marchetti. Cette entreprise, qui compte actuellement 4 sites industriels en France, cherche une solution pour automatiser ses flux et processus métier récurrents. Leur enveloppe budgétaire globale est fixée à 74500 euros pour cette transformation. Les équipes souhaitent avancer rapidement avec une échéance fixée au 10 décembre 2027. La prochaine étape consiste à bloquer une date pour leur faire une présentation concrète du logiciel. Je les recontacte rapidement pour valider ce point.",
+    "reference": {
+      "company": "Fonderie Marchetti",
+      "contact_name": null,
+      "contact_role": null,
+      "need": "process_automation",
+      "budget_eur": 74500,
+      "next_action": "schedule_demo",
+      "deadline": "2027-12-10"
+    },
+    "source": "test",
+    "trace_id": "64a2cf9dc30ba6a21cee7a12443f10d6",
+    "output": "{\"company\": \"Fonderie Marchetti\", \"contact_name\": null, \"contact_role\": null, \"need\": \"process_automation\", \"budget_eur\": 74500, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-12-10\"}",
+    "valid_record": true,
+    "latency_seconds": 5.3,
+    "exact_match": true
+  },
+  {
+    "id": "test-16",
+    "note": "Appel Menuiseries Valmont avec Romain Henry, Directeur informatique. Effectif global : 350 salariés. Projet de refonte complète et modernisation de leur outil de gestion commerciale. Budget max de 174 500 euros, deadline fixée au 30/07/2027. Doivent faire le point en interne avant de nous recontacter.",
+    "reference": {
+      "company": "Menuiseries Valmont",
+      "contact_name": "Romain Henry",
+      "contact_role": "Directeur informatique",
+      "need": "crm_migration",
+      "budget_eur": 174500,
+      "next_action": "internal_review",
+      "deadline": "2027-07-30"
+    },
+    "source": "test",
+    "trace_id": "8db8950685419f11f584c480df5ad8af",
+    "output": "{\"company\": \"Menuiseries Valmont\", \"contact_name\": \"Romain Henry\", \"contact_role\": \"Directeur informatique\", \"need\": \"crm_migration\", \"budget_eur\": 174500, \"next_action\": \"internal_review\", \"deadline\": \"2027-07-30\"}",
+    "valid_record": true,
+    "latency_seconds": 5.99,
+    "exact_match": true
+  },
+  {
+    "id": "test-17",
+    "note": "Salut Thomas, je sors de mon échange avec Mathieu Laurent pour la société Maison Valmont. Ils comptent actuellement 450 collaborateurs sur leur site principal. Ils expriment un fort intérêt pour nos solutions afin de renforcer leur protection contre les cyberattaques. Pour l'instant, nous devons simplement attendre qu'ils mènent leur audit et leur validation en interne avant de planifier la suite de nos échanges. Je te tiens au courant dès qu'il y a du nouveau.",
+    "reference": {
+      "company": "Maison Valmont",
+      "contact_name": "Mathieu Laurent",
+      "contact_role": null,
+      "need": "cybersecurity",
+      "budget_eur": null,
+      "next_action": "internal_review",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "83aeff29434952f329e1570e0c7d5cad",
+    "output": "{\"company\": \"Maison Valmont\", \"contact_name\": \"Mathieu Laurent\", \"contact_role\": null, \"need\": \"cybersecurity\", \"budget_eur\": null, \"next_action\": \"internal_review\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.44,
+    "exact_match": true
+  },
+  {
+    "id": "test-18",
+    "note": "Salut,\n\nJe te fais un retour suite à mon rendez-vous de ce matin avec la société Transports Saint-Aubin. J'ai rencontré Thomas Muller, qui est leur Directeur commercial. Ils font face à une forte croissance de leur activité logistique ces derniers mois. Pour y faire face, leur priorité absolue est de concevoir des flux automatisés pour leurs différents processus métier afin de faire gagner du temps aux équipes opérationnelles. Notre collègue de l'équipe commerciale, Pierre, m'avait prévenu qu'ils avaient des soucis de saisie manuelle de données, ce qui se confirme. Aucun budget précis n'a été défini pour le moment, ils attendent nos propositions pour se positionner financièrement. De même, aucune échéance temporelle stricte n'a été évoquée durant l'échange. La suite logique est que nous leur fassions parvenir une offre de prix détaillée d'ici la fin de semaine. Je vais avoir besoin de ton aide pour estimer la charge de développement sur la partie API. On fait un point rapide cet après-midi pour caler les chiffres ? Merci d'avance pour ton retour.\n\nBonne journée !",
+    "reference": {
+      "company": "Transports Saint-Aubin",
+      "contact_name": "Thomas Muller",
+      "contact_role": "Directeur commercial",
+      "need": "process_automation",
+      "budget_eur": null,
+      "next_action": "send_proposal",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "d8ab9261395b98574ecbc88c1c9dcbd9",
+    "output": "{\"company\": \"Transports Saint-Aubin\", \"contact_name\": \"Thomas Muller\", \"contact_role\": \"Directeur commercial\", \"need\": \"process_automation\", \"budget_eur\": null, \"next_action\": \"send_proposal\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.92,
+    "exact_match": true
+  },
+  {
+    "id": "test-19",
+    "note": "La société Menuiseries Marchetti, représentée par Laure Mercier, sa Directrice commerciale, souhaite moderniser en profondeur son outil de gestion de la relation client. Ce projet de migration dispose d'un budget de 263 000 euros, avec une échéance fixée au 21 juillet 2027. Avant de planifier une suite opérationnelle, nous devons attendre leur retour après leur examen interne, sachant qu'ils participent au salon de l'habitat le 15 mars 2027.",
+    "reference": {
+      "company": "Menuiseries Marchetti",
+      "contact_name": "Laure Mercier",
+      "contact_role": "Directrice commerciale",
+      "need": "crm_migration",
+      "budget_eur": 263000,
+      "next_action": "internal_review",
+      "deadline": "2027-07-21"
+    },
+    "source": "test",
+    "trace_id": "35f757334ed66ff6949748d8a6977bd8",
+    "output": "{\"company\": \"Menuiseries Marchetti\", \"contact_name\": \"Laure Mercier\", \"contact_role\": \"Directrice commerciale\", \"need\": \"crm_migration\", \"budget_eur\": 263000, \"next_action\": \"internal_review\", \"deadline\": \"2027-07-21\"}",
+    "valid_record": true,
+    "latency_seconds": 5.85,
+    "exact_match": true
+  },
+  {
+    "id": "test-20",
+    "note": "Suite à notre réunion avec la société Textiles Castelnau, il apparaît qu'ils souhaitent moderniser leur outil industriel en automatisant plusieurs de leurs processus métier répétitifs. Pour ce faire, ils allouent une enveloppe budgétaire conséquente de 276 000 euros. Mon collègue Julien m'a confirmé que le dossier est prioritaire pour nous. Afin d'avancer efficacement sur cette opportunité, notre prochaine action sera d'impliquer un décideur clé lors de notre futur rendez-vous de cadrage. L'objectif est de finaliser l'accord d'ici la date butoir fixée au 25 juin 2027.",
+    "reference": {
+      "company": "Textiles Castelnau",
+      "contact_name": null,
+      "contact_role": null,
+      "need": "process_automation",
+      "budget_eur": 276000,
+      "next_action": "involve_stakeholder",
+      "deadline": "2027-06-25"
+    },
+    "source": "test",
+    "trace_id": "3dce9c888151be17595ccf1bdd513226",
+    "output": "{\"company\": \"Textiles Castelnau\", \"contact_name\": null, \"contact_role\": null, \"need\": \"process_automation\", \"budget_eur\": 276000, \"next_action\": \"involve_stakeholder\", \"deadline\": \"2027-06-25\"}",
+    "valid_record": true,
+    "latency_seconds": 5.5,
+    "exact_match": true
+  },
+  {
+    "id": "test-21",
+    "note": "Rendez-vous avec Logistique Perrin qui gère actuellement 5 entrepôts. Ils souhaitent déployer des outils de reporting visuels et des tableaux de bord pour piloter leur activité. L'échéance est fixée au 07/06/2027, et nous devons associer un décisionnaire clé à notre prochain point.",
+    "reference": {
+      "company": "Logistique Perrin",
+      "contact_name": null,
+      "contact_role": null,
+      "need": "analytics_dashboard",
+      "budget_eur": null,
+      "next_action": "involve_stakeholder",
+      "deadline": "2027-06-07"
+    },
+    "source": "test",
+    "trace_id": "b3bb54bb2ccd5aadb5d10042f920b989",
+    "output": "{\"company\": \"Logistique Perrin\", \"contact_name\": null, \"contact_role\": null, \"need\": \"analytics_dashboard\", \"budget_eur\": null, \"next_action\": \"involve_stakeholder\", \"deadline\": \"2027-06-07\"}",
+    "valid_record": true,
+    "latency_seconds": 4.96,
+    "exact_match": true
+  },
+  {
+    "id": "test-22",
+    "note": "Lors de notre échange, Julien Bernard m'a fait part de l'intention de la société Transports Duchêne d'acquérir de nouveaux tableaux de bord pour optimiser le pilotage de leur activité. Le budget alloué pour ce projet s'élève à 55 000 euros. Nous avons convenu de programmer un appel de suivi très prochainement afin d'affiner les détails techniques.",
+    "reference": {
+      "company": "Transports Duchêne",
+      "contact_name": "Julien Bernard",
+      "contact_role": null,
+      "need": "analytics_dashboard",
+      "budget_eur": 55000,
+      "next_action": "schedule_followup_call",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "639274723e5419ea4f1fe2f51da9846d",
+    "output": "{\"company\": \"Transports Duchêne\", \"contact_name\": \"Julien Bernard\", \"contact_role\": null, \"need\": \"analytics_dashboard\", \"budget_eur\": 55000, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.88,
+    "exact_match": true
+  },
+  {
+    "id": "test-23",
+    "note": "Salut Thomas, je te fais un point rapide suite à mon échange avec Antoine Bernard de chez Laboratoires Vasseur. Ils possèdent actuellement 4 sites de production en France, ce qui complexifie leur logistique actuelle. Leur projet est de migrer l'ensemble de leurs applications métiers vers des infrastructures cloud. Ils ont un budget de 287 500 euros alloué à cette transition. L'échéance de mise en service est fixée pour le 29 juin 2027 au plus tard. L'ambiance était excellente et ils semblent très motivés par ce projet. Nous devons maintenant caler une date pour leur organiser une démonstration complète de nos solutions de virtualisation. Les équipes techniques sont déjà prêtes de leur côté. Je pense que nous avons toutes nos chances sur ce dossier. Dis-moi quand tu serais disponible pour m'accompagner sur cette prochaine présentation. Merci d'avance pour ton retour rapide !",
+    "reference": {
+      "company": "Laboratoires Vasseur",
+      "contact_name": "Antoine Bernard",
+      "contact_role": null,
+      "need": "cloud_migration",
+      "budget_eur": 287500,
+      "next_action": "schedule_demo",
+      "deadline": "2027-06-29"
+    },
+    "source": "test",
+    "trace_id": "7eb281388c5563cdbe4193fea7a40ebd",
+    "output": "{\"company\": \"Laboratoires Vasseur\", \"contact_name\": \"Antoine Bernard\", \"contact_role\": null, \"need\": \"cloud_migration\", \"budget_eur\": 287500, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-06-29\"}",
+    "valid_record": true,
+    "latency_seconds": 5.72,
+    "exact_match": true
+  },
+  {
+    "id": "test-24",
+    "note": "On a fait un point téléphonique aujourd'hui avec Sarah Girard qui est la Directrice informatique de la structure Fonderie Marchetti. D'ailleurs, ils m'ont parlé de la concurrence, notamment de MetalTech qui fait des choses un peu similaires. L'idée générale de leur côté c'est vraiment de réussir à automatiser tous leurs flux et processus de gestion actuels. Pour le projet, ils annoncent une enveloppe budgétaire globale de 137 500 euros. Prochaine étape, on doit se caler un créneau pour leur faire une belle démonstration de notre outil.",
+    "reference": {
+      "company": "Fonderie Marchetti",
+      "contact_name": "Sarah Girard",
+      "contact_role": "Directrice informatique",
+      "need": "process_automation",
+      "budget_eur": 137500,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "d15d95a1510b206f6168192fbbbe3bce",
+    "output": "{\"company\": \"Fonderie Marchetti\", \"contact_name\": \"Sarah Girard\", \"contact_role\": \"Directrice informatique\", \"need\": \"process_automation\", \"budget_eur\": 137500, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.37,
+    "exact_match": true
+  },
+  {
+    "id": "test-25",
+    "note": "Alors voilà, j'ai eu au téléphone la société Pharmacie Sauvage aujourd'hui. J'ai pu m'entretenir directement avec un certain Karim Garcia qui est notre contact là-bas. Il m'a expliqué qu'ils cherchent absolument à simplifier et à rendre automatiques plusieurs de leurs processus de travail quotidiens qui leur prennent un temps fou. Pour le moment, il ne m'a pas donné de budget précis, c'est encore flou de leur côté. Par contre, ils ont une date limite très claire pour que tout fonctionne, c'est le 14 mars 2027. Ah oui, il m'a aussi dit qu'il participerait à un grand séminaire professionnel sur la santé le 12 octobre 2027, mais bon ça n'a rien à voir avec notre calendrier actuel. Ils ont vraiment besoin de gagner en efficacité opérationnelle car ils croulent sous la paperasse. Du coup, on s'est mis d'accord sur la suite des opérations. Je dois programmer un autre appel de suivi avec lui très prochainement pour affiner tout ça et avancer sur le dossier.",
+    "reference": {
+      "company": "Pharmacie Sauvage",
+      "contact_name": "Karim Garcia",
+      "contact_role": null,
+      "need": "process_automation",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": "2027-03-14"
+    },
+    "source": "test",
+    "trace_id": "1ebf223e2212aaead6b99e53c01568c5",
+    "output": "{\"company\": \"Pharmacie Sauvage\", \"contact_name\": \"Karim Garcia\", \"contact_role\": null, \"need\": \"process_automation\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": \"2027-03-14\"}",
+    "valid_record": true,
+    "latency_seconds": 5.77,
+    "exact_match": true
+  },
+  {
+    "id": "test-26",
+    "note": "Salut Thomas,\n\nJe te fais un retour suite à mon échange de ce matin avec la Fonderie Saint-Aubin. J'ai eu en ligne Élodie Simon, la Responsable marketing du groupe. Elle m'a fait part d'une vraie problématique sur l'unification de leurs sources d'information. Son souhait est de déployer un système de gestion centralisée pour toutes leurs données métiers. \n\nPour ce chantier, ils disposent d'un budget précis de 121 500 euros. C'est une belle opportunité pour nous. Ils aimeraient que tout soit opérationnel pour le 14 novembre 2027. \n\nJ'ai d'ailleurs brièvement échangé avec notre collègue Julien de l'équipe commerciale pour savoir s'il avait déjà géré un cas similaire dans ce secteur d'activité. Il m'a confirmé que nous avions de bons arguments à faire valoir. \n\nPour la suite, je dois envoyer de la documentation technique complète ainsi que quelques cas clients de référence d'ici la fin de semaine. Je te garde au courant des avancées. \n\nBonne fin de journée !",
+    "reference": {
+      "company": "Fonderie Saint-Aubin",
+      "contact_name": "Élodie Simon",
+      "contact_role": "Responsable marketing",
+      "need": "data_platform",
+      "budget_eur": 121500,
+      "next_action": "send_documentation",
+      "deadline": "2027-11-14"
+    },
+    "source": "test",
+    "trace_id": "5b7739c1824c6b0ecc288f4a3411c726",
+    "output": "{\"company\": \"Fonderie Saint-Aubin\", \"contact_name\": \"Élodie Simon\", \"contact_role\": \"Responsable marketing\", \"need\": \"data_platform\", \"budget_eur\": 121500, \"next_action\": \"send_documentation\", \"deadline\": \"2027-11-14\"}",
+    "valid_record": true,
+    "latency_seconds": 6.18,
+    "exact_match": true
+  },
+  {
+    "id": "test-27",
+    "note": "Alors voilà, j'ai eu Thomas Bernard au téléphone ce matin pour faire le point sur leur situation. C'était un échange assez informel mais très intéressant avec le Cabinet Montcalm. En gros, ils ont un vrai problème de dispersion de leurs fichiers actuellement. Ils veulent absolument tout regrouper au même endroit pour que leurs analystes bossent mieux. On parle donc d'installer un système pour centraliser toutes leurs sources de données. Ils ont un budget assez précis qui tourne autour des 22 000 euros pour cette opération. Par contre, il y a pas mal de contraintes de calendrier en interne chez eux. Il faut que tout soit opérationnel et livré au plus tard pour le 13 janvier 2027. C'est leur date limite absolue d'après ce que j'ai compris. Sinon, Thomas m'a dit qu'il devait en discuter avec ses associés cette semaine. Du coup, notre prochaine étape c'est de caler un autre coup de fil pour faire le suivi. On verra à ce moment-là comment on avance sur leur dossier.",
+    "reference": {
+      "company": "Cabinet Montcalm",
+      "contact_name": "Thomas Bernard",
+      "contact_role": null,
+      "need": "data_platform",
+      "budget_eur": 22000,
+      "next_action": "schedule_followup_call",
+      "deadline": "2027-01-13"
+    },
+    "source": "test",
+    "trace_id": "c13ed92b939958cc1808404eb1cb4ff7",
+    "output": "{\"company\": \"Cabinet Montcalm\", \"contact_name\": \"Thomas Bernard\", \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": 22000, \"next_action\": \"schedule_followup_call\", \"deadline\": \"2027-01-13\"}",
+    "valid_record": true,
+    "latency_seconds": 5.87,
+    "exact_match": true
+  },
+  {
+    "id": "test-28",
+    "note": "Alors là j'ai eu Sophie Mercier au téléphone, elle est Cheffe de projet digital pour la boîte Menuiseries Montcalm. Elle m'a expliqué qu'ils ont un besoin urgent pour automatiser des processus métier complexes au sein de leur service logistique. Je me disais que mon collègue Julien pourrait m'aider sur ce coup-là car il s'y connaît bien. Par contre côté timing et budget ils n'ont pas encore de visibilité claire. Du coup pour l'instant l'action c'est d'attendre la validation interne du client avant toute suite de notre côté.",
+    "reference": {
+      "company": "Menuiseries Montcalm",
+      "contact_name": "Sophie Mercier",
+      "contact_role": "Cheffe de projet digital",
+      "need": "process_automation",
+      "budget_eur": null,
+      "next_action": "internal_review",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "930062a36489d7202e98339e46cfad76",
+    "output": "{\"company\": \"Menuiseries Montcalm\", \"contact_name\": \"Sophie Mercier\", \"contact_role\": \"Cheffe de projet digital\", \"need\": \"process_automation\", \"budget_eur\": null, \"next_action\": \"internal_review\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.76,
+    "exact_match": true
+  },
+  {
+    "id": "test-29",
+    "note": "J'ai eu au téléphone Inès Guerin, la Responsable achats de Transports Kervalec, qui veut déployer un assistant IA ou un chatbot interne, son budget est de 245 500 euros pour ça. Faut absolument lui envoyer de la documentation et des références clients d'ici le 4 juillet 2027.",
+    "reference": {
+      "company": "Transports Kervalec",
+      "contact_name": "Inès Guerin",
+      "contact_role": "Responsable achats",
+      "need": "ai_assistant",
+      "budget_eur": 245500,
+      "next_action": "send_documentation",
+      "deadline": "2027-07-04"
+    },
+    "source": "test",
+    "trace_id": "496724e2f28125b11f02811648eaeb3a",
+    "output": "{\"company\": \"Transports Kervalec\", \"contact_name\": \"Inès Guerin\", \"contact_role\": \"Responsable achats\", \"need\": \"ai_assistant\", \"budget_eur\": 245500, \"next_action\": \"send_documentation\", \"deadline\": \"2027-07-04\"}",
+    "valid_record": true,
+    "latency_seconds": 5.98,
+    "exact_match": true
+  },
+  {
+    "id": "test-30",
+    "note": "Je sors de mon échange téléphonique avec Pierre Blanc qui est le Responsable achats chez Pharmacie Saint-Aubin. On a pas mal discuté de leur informatique et ils veulent absolument basculer toute leur infrastructure et leurs applicatifs métiers vers des serveurs distants pour gagner en flexibilité. C'est un gros chantier pour eux, surtout qu'ils veulent que tout soit opérationnel avant le 29 mai 2027. Ils n'ont pas encore arrêté d'enveloppe budgétaire précise pour le moment, c'est en cours d'évaluation. Ils m'ont d'ailleurs glissé que leur principal concurrent, la Pharmacie du Grand-Pont, prenait aussi ce virage numérique. En ce qui nous concerne, il n'y a pas d'action immédiate de notre côté car ils doivent d'abord mener une concertation en interne pour valider les orientations de cette transition. Ils reviendront vers nous une fois cette étape franchie.",
+    "reference": {
+      "company": "Pharmacie Saint-Aubin",
+      "contact_name": "Pierre Blanc",
+      "contact_role": "Responsable achats",
+      "need": "cloud_migration",
+      "budget_eur": null,
+      "next_action": "internal_review",
+      "deadline": "2027-05-29"
+    },
+    "source": "test",
+    "trace_id": "a7a478e3672c8ac6ac9d041cc28adbd0",
+    "output": "{\"company\": \"Pharmacie Saint-Aubin\", \"contact_name\": \"Pierre Blanc\", \"contact_role\": \"Responsable achats\", \"need\": \"cloud_migration\", \"budget_eur\": null, \"next_action\": \"internal_review\", \"deadline\": \"2027-05-29\"}",
+    "valid_record": true,
+    "latency_seconds": 5.52,
+    "exact_match": true
+  },
+  {
+    "id": "test-31",
+    "note": "Appel ce jor avec Hugo Bernard de chez Laboratoires Ferrand. Besoin de former de tte urgence leurs équipes sur les nveaux outils. Pas d'info sur le budget pr l'instant. Processus de décison assez flou de leur côté. L'objctif est clair pour la suite. Il faut absoulement faire participer un décideur clé à notre prochain rdv. Je relance la semaine pro pour caler ça.",
+    "reference": {
+      "company": "Laboratoires Ferrand",
+      "contact_name": "Hugo Bernard",
+      "contact_role": null,
+      "need": "team_training",
+      "budget_eur": null,
+      "next_action": "involve_stakeholder",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "0b1eed95dd78fb78464590b503b1f329",
+    "output": "{\"company\": \"Laboratoires Ferrand\", \"contact_name\": \"Hugo Bernard\", \"contact_role\": null, \"need\": \"team_training\", \"budget_eur\": null, \"next_action\": \"involve_stakeholder\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.72,
+    "exact_match": true
+  },
+  {
+    "id": "test-32",
+    "note": "Alors voilà, je sors de ma réunion téléphonique avec le Domaine Tessier, j'ai eu en ligne leur Responsable innovation. Ils veulent absolument moderniser leur infrastructure informatique en effectuant le transfert de l'ensemble de leurs applications métier vers le cloud. C'est un gros chantier, ils prévoient une enveloppe globale de 220 500 ’euros pour cela. La date limite pour tout mettre en place est fixée au 5 octobre 2027. C'est assez tendu car ils doivent rester compétitifs face à la cave rivale, les Châteaux du Val, qui avance aussi très vite. Il y a beaucoup d'aspects techniques à régler sur la sécurité et le stockage. Pour que le projet avance vraiment, on a convenu de la suite de la démarche. Il faut absolument faire participer un décideur, notamment le directeur financier ou général, lors de notre prochain échange. Je dois préparer une présentation simplifiée pour lui. On se rappelle très vite pour caler cette date.",
+    "reference": {
+      "company": "Domaine Tessier",
+      "contact_name": null,
+      "contact_role": "Responsable innovation",
+      "need": "cloud_migration",
+      "budget_eur": 220500,
+      "next_action": "involve_stakeholder",
+      "deadline": "2027-10-05"
+    },
+    "source": "test",
+    "trace_id": "3e658b129ec4197c9662a4791e8ec24c",
+    "output": "{\"company\": \"Domaine Tessier\", \"contact_name\": null, \"contact_role\": \"Responsable innovation\", \"need\": \"cloud_migration\", \"budget_eur\": 220500, \"next_action\": \"involve_stakeholder\", \"deadline\": \"2027-10-05\"}",
+    "valid_record": true,
+    "latency_seconds": 5.8,
+    "exact_match": true
+  },
+  {
+    "id": "test-33",
+    "note": "Bonjour, je te sollicite pour faire un point suite à ma rencontre chez Fonderie Perrin. J'ai été reçu par Sarah Michel, qui occupe le poste de Directrice commerciale au sein de l'entreprise. Son besoin est clair : elle souhaite équiper son équipe d'outils décisionnels performants pour suivre l'activité. Elle veut absolument obtenir des tableaux de bord de pilotage ergonomiques et connectés à leur outil de production. C'est un projet très stratégique pour eux. Le budget alloué à cette intégration est de 76 500 €. L'ensemble de la solution doit être opérationnel pour le 9 mars 2027. Pour la suite, nous avons convenu d'une action précise. Je dois planifier et organiser une démonstration technique de notre plateforme d'analyse d'ici quinze jours. Cela permettra de rassurer les futurs utilisateurs sur la simplicité d'utilisation. Je te tiendrai informé dès que la date de cette présentation sera bloquée.",
+    "reference": {
+      "company": "Fonderie Perrin",
+      "contact_name": "Sarah Michel",
+      "contact_role": "Directrice commerciale",
+      "need": "analytics_dashboard",
+      "budget_eur": 76500,
+      "next_action": "schedule_demo",
+      "deadline": "2027-03-09"
+    },
+    "source": "test",
+    "trace_id": "e2cbbb6bc7160467a8b19deced5b0f5d",
+    "output": "{\"company\": \"Fonderie Perrin\", \"contact_name\": \"Sarah Michel\", \"contact_role\": \"Directrice commerciale\", \"need\": \"analytics_dashboard\", \"budget_eur\": 76500, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-03-09\"}",
+    "valid_record": true,
+    "latency_seconds": 5.78,
+    "exact_match": true
+  },
+  {
+    "id": "test-34",
+    "note": "Lors de notre échange avec Hugo Bonnet, Responsable achats au sein de l'entreprise Textiles Lefranc, nous avons longuement évoqué leur volonté de renforcer leur cybersécurité face aux menaces actuelles. Le client a fixé une échéance claire pour la finalisation de ce projet au 3 octobre 2027. Pour avancer, l'action suivante consiste à planifier un nouvel appel de suivi afin d'affiner leur cahier des charges. À noter que je serai absent la semaine précédente en raison du salon professionnel textile annuel. Nous reprendrons contact immédiatement après mon retour pour finaliser les contours de notre proposition.",
+    "reference": {
+      "company": "Textiles Lefranc",
+      "contact_name": "Hugo Bonnet",
+      "contact_role": "Responsable achats",
+      "need": "cybersecurity",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": "2027-10-03"
+    },
+    "source": "test",
+    "trace_id": "905797c5250de6584a8300d38412a74e",
+    "output": "{\"company\": \"Textiles Lefranc\", \"contact_name\": \"Hugo Bonnet\", \"contact_role\": \"Responsable achats\", \"need\": \"cybersecurity\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": \"2027-10-03\"}",
+    "valid_record": true,
+    "latency_seconds": 5.48,
+    "exact_match": true
+  },
+  {
+    "id": "test-35",
+    "note": "Salut Thomas, je sors de mon échange avec le Responsable achats de la société Groupe Tessier. Ils expriment un réel intérêt pour monter en compétences et former leurs équipes sur nos outils. Leur concurrent direct, les Établissements Duchemin, semble aussi s'y intéresser d'après ce qu'il a glissé durant notre discussion. De notre côté, il n'y a pas de budget encore défini pour cette initiative. Pour avancer, nous avons convenu d'organiser une démonstration personnalisée de notre plateforme d'e-learning d'ici peu. Je te tiens au courant dès que le créneau est validé pour que tu puisses m'accompagner.",
+    "reference": {
+      "company": "Groupe Tessier",
+      "contact_name": null,
+      "contact_role": "Responsable achats",
+      "need": "team_training",
+      "budget_eur": null,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "ee8f2719c403e2ae52e1e338b59502d3",
+    "output": "{\"company\": \"Groupe Tessier\", \"contact_name\": null, \"contact_role\": \"Responsable achats\", \"need\": \"team_training\", \"budget_eur\": null, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.63,
+    "exact_match": true
+  },
+  {
+    "id": "test-36",
+    "note": "Échange intéressant aujourd'hui avec l'équipe d'Assurances Montcalm. Ils cherchent à intégrer un outil d'intelligence artificielle conversationnelle pour épauler leurs collaborateurs au quotidien. Ils souhaitent ainsi moderniser leurs processus opérationnels très rapidement. Durant nos discussions, ils ont mentionné surveiller de près les initiatives des Mutuelles Lombard, leur principal rival sur le secteur. De notre côté, nous devons désormais formaliser une offre tarifaire détaillée pour ce projet. Je compte leur transmettre ce devis d'ici la fin de la semaine.",
+    "reference": {
+      "company": "Assurances Montcalm",
+      "contact_name": null,
+      "contact_role": null,
+      "need": "ai_assistant",
+      "budget_eur": null,
+      "next_action": "send_proposal",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "910d8cf7db9d3b3b637f6a2b65434fd7",
+    "output": "{\"company\": \"Assurances Montcalm\", \"contact_name\": null, \"contact_role\": null, \"need\": \"ai_assistant\", \"budget_eur\": null, \"next_action\": \"send_proposal\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.31,
+    "exact_match": true
+  },
+  {
+    "id": "test-37",
+    "note": "-\tRDV Karim Guerin, Chef de projet digital chez Imprimerie Perrin (société réalisant 12M€ de CA)\n-\tBesoin : refonte complète et migration de leur outil de suivi des ventes\n-\tAction : programmer rapidement une démo de notre solution",
+    "reference": {
+      "company": "Imprimerie Perrin",
+      "contact_name": "Karim Guerin",
+      "contact_role": "Chef de projet digital",
+      "need": "crm_migration",
+      "budget_eur": null,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "3c88e4bb5362986429df3bb1d77c0b6c",
+    "output": "{\"company\": \"Imprimerie Perrin\", \"contact_name\": \"Karim Guerin\", \"contact_role\": \"Chef de projet digital\", \"need\": \"crm_migration\", \"budget_eur\": null, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.91,
+    "exact_match": true
+  },
+  {
+    "id": "test-38",
+    "note": "Rendez-vous ce matin avec Laure Garcia, Cheffe de projet digital pour l'Imprimerie Lefranc. L'objectif principal de leur projet est d'automatiser des processus métier afin d'optimiser leur flux de production. Ils ont validé une enveloppe budgétaire globale de 141 500 € pour cette opération. Pour avancer efficacement, la prochaine étape sera de faire participer un décideur à notre prochain échange. Mon collègue de l'équipe commerciale, Thomas, m'accompagnera lors de cette future réunion.",
+    "reference": {
+      "company": "Imprimerie Lefranc",
+      "contact_name": "Laure Garcia",
+      "contact_role": "Cheffe de projet digital",
+      "need": "process_automation",
+      "budget_eur": 141500,
+      "next_action": "involve_stakeholder",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "e708ed3ca3d206ddf0dcbcb14f6193dc",
+    "output": "{\"company\": \"Imprimerie Lefranc\", \"contact_name\": \"Laure Garcia\", \"contact_role\": \"Cheffe de projet digital\", \"need\": \"process_automation\", \"budget_eur\": 141500, \"next_action\": \"involve_stakeholder\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.39,
+    "exact_match": true
+  },
+  {
+    "id": "test-39",
+    "note": "Pour l'Imprimerie Ardenne, j'ai dicté cette note après mon entretien avec Sophie Roux. Elle m'a fait part d'un vrai problème d'éparpillement de leurs informations. Leur grand projet est d'installer un système moderne pour centraliser l'ensemble de leurs bases de données. Actuellement, ils perdent un temps fou à chercher les fichiers des clients. Tout est stocké sur des serveurs locaux différents et c'est un vrai bazar. Il n'y a pas de budget défini pour le moment, on doit d'abord estimer le travail. Par contre, ils ont une contrainte de temps très précise pour ce chantier. Tout doit être opérationnel et livré pour le 7 octobre 2027 au plus tard. C'est un défi de taille mais tout à fait réalisable pour nous. Concernant la suite des événements, je dois rédiger et leur transmettre un devis formel détaillé très vite. Je vais me poser sur le chiffrage technique dès ce soir. C'est un dossier très intéressant avec un fort potentiel de développement. Je te tiens au courant dès que le document est envoyé.",
+    "reference": {
+      "company": "Imprimerie Ardenne",
+      "contact_name": "Sophie Roux",
+      "contact_role": null,
+      "need": "data_platform",
+      "budget_eur": null,
+      "next_action": "send_proposal",
+      "deadline": "2027-10-07"
+    },
+    "source": "test",
+    "trace_id": "5b11052a8d6e24e24bb324a452b21508",
+    "output": "{\"company\": \"Imprimerie Ardenne\", \"contact_name\": \"Sophie Roux\", \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": null, \"next_action\": \"send_proposal\", \"deadline\": \"2027-10-07\"}",
+    "valid_record": true,
+    "latency_seconds": 5.62,
+    "exact_match": true
+  },
+  {
+    "id": "test-40",
+    "note": "Alors voilà, j'ai eu en ligne Hugo Bernard pour la société Fonderie Valmont. En fait, il occupe le poste de Chef de projet digital là-bas. Il m'a expliqué qu'ils ont vraiment besoin de sécuriser davantage leurs systèmes informatiques contre les attaques et les virus. Actuellement, ils tournent sur une vieille infrastructure et ça craint un peu. D'ailleurs, notre collègue Julien m'avait dit qu'ils cherchaient ce genre de solutions. Niveau pognon, ils ont une enveloppe de 23500 euros pour ce projet, pas plus. Pas de date limite précise pour le moment, ils veulent prendre leur temps. Du coup, qu'est-ce qu'on fait ? Ah oui, il faut absolument qu'on leur propose un rendez-vous de présentation de nos outils. Je pense qu'il faut caler ça assez vite. Je vais le rappeler pour planifier une session de présentation en direct. On verra ce que ça donne après cela.",
+    "reference": {
+      "company": "Fonderie Valmont",
+      "contact_name": "Hugo Bernard",
+      "contact_role": "Chef de projet digital",
+      "need": "cybersecurity",
+      "budget_eur": 23500,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "23451fed9df0ff2bf7cc209c1dbabd0c",
+    "output": "{\"company\": \"Fonderie Valmont\", \"contact_name\": \"Hugo Bernard\", \"contact_role\": \"Chef de projet digital\", \"need\": \"cybersecurity\", \"budget_eur\": 23500, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.01,
+    "exact_match": true
+  },
+  {
+    "id": "test-41",
+    "note": "Lors de notre entretien, Hugo Guerin, Directeur général des Assurances Vasseur, a exprimé le besoin d'automatiser plusieurs processus métier afin de gagner en efficacité opérationnelle. Un budget d'environ 73 500 euros est alloué à ce projet. En prévision de l'absence de leur équipe pour un séminaire annuel le 12 octobre 2026, nous devons convenir d'un rendez-vous pour leur faire une démonstration de nos outils.",
+    "reference": {
+      "company": "Assurances Vasseur",
+      "contact_name": "Hugo Guerin",
+      "contact_role": "Directeur général",
+      "need": "process_automation",
+      "budget_eur": 73500,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "ad1c8cde261ab318c39ac5473dc7a094",
+    "output": "{\"company\": \"Assurances Vasseur\", \"contact_name\": \"Hugo Guerin\", \"contact_role\": \"Directeur général\", \"need\": \"process_automation\", \"budget_eur\": 73500, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.96,
+    "exact_match": true
+  },
+  {
+    "id": "test-42",
+    "note": "Salut Thomas, je te fais un point rapide suite à mon échange avec la société Maison Castelnau. J'ai eu en ligne Léa Guerin, qui occupe le poste de Directrice générale. Leur grand chantier actuel est de consolider l'ensemble de leurs flux d'informations au même endroit. Ils veulent construire une infrastructure moderne pour cela. Le rendez-vous s'est très bien passé et l'ambiance était détendue. Ils ont un calendrier assez précis en tête. Tout doit être opérationnel d'ici le 13 janvier 2027. C'est une échéance importante pour leur fin d'année fiscale. Concernant l'étape d'après, nous devons planifier une nouvelle session. L'objectif sera d'inclure un autre membre de leur direction pour valider les aspects techniques. Elle m'a d'ailleurs dit qu'elle était impatiente de voir notre démo. Je te tiens au courant dès que j'ai leur retour de disponibilité. Bon après-midi !",
+    "reference": {
+      "company": "Maison Castelnau",
+      "contact_name": "Léa Guerin",
+      "contact_role": "Directrice générale",
+      "need": "data_platform",
+      "budget_eur": null,
+      "next_action": "involve_stakeholder",
+      "deadline": "2027-01-13"
+    },
+    "source": "test",
+    "trace_id": "224cab63834cd5a3bf6070078fc9b473",
+    "output": "{\"company\": \"Maison Castelnau\", \"contact_name\": \"Léa Guerin\", \"contact_role\": \"Directrice générale\", \"need\": \"data_platform\", \"budget_eur\": null, \"next_action\": \"involve_stakeholder\", \"deadline\": \"2027-01-13\"}",
+    "valid_record": true,
+    "latency_seconds": 5.39,
+    "exact_match": true
+  },
+  {
+    "id": "test-43",
+    "note": "- Entretien ce jour avec Hugo Mercier, occupant la fonction de Directeur général au sein de la société Logistique Lefranc.\n- L'entreprise compte actuellement plus de 250 collaborateurs répartis sur 4 entrepôts logistiques en France.\n- Le besoin identifié concerne la création d'outils décisionnels modernes, spécifiquement des tableaux de bord de pilotage d'activité.\n- Les managers manquent de visibilité en temps réel sur les flux de marchandises et les stocks.\n- Le projet est jugé hautement stratégique pour optimiser la rotation des camions.\n- Aucun budget précis n'a été communiqué lors de notre échange, le sujet reste ouvert.\n- Pas de calendrier défini non plus à ce stade des discussions.\n- Ils souhaitent d'abord évaluer notre savoir-faire sur des cas d'usage similaires au leur.\n- L'étape suivante est d'adresser nos fiches produits détaillées.\n- Je vais également joindre plusieurs études de cas d'autres acteurs du secteur.\n- L'objectif est de les rassurer sur notre capacité à traiter de gros volumes de données.",
+    "reference": {
+      "company": "Logistique Lefranc",
+      "contact_name": "Hugo Mercier",
+      "contact_role": "Directeur général",
+      "need": "analytics_dashboard",
+      "budget_eur": null,
+      "next_action": "send_documentation",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "ec50a0c1fdbda150858e988fd45fe417",
+    "output": "{\"company\": \"Logistique Lefranc\", \"contact_name\": \"Hugo Mercier\", \"contact_role\": \"Directeur général\", \"need\": \"analytics_dashboard\", \"budget_eur\": null, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.61,
+    "exact_match": true
+  },
+  {
+    "id": "test-44",
+    "note": "J'ai \tchang\t avec Sophie Faure de la Clinique Valmont qui m'a confirm\t leur volont\t de s\tcuriser totalement leurs infrastructures informatiques contre les cyberattaques. Ils ont d\tbloqu\t un budget cons\tquent d'environ 297 000 euros, mais ils doivent d'abord mener une r\tflexion et une validation en interne avant que nous puissions avancer sur les \ttapes suivantes. Pour m\tmoire, leur \tquipe sera indisponible durant leur s\tminaire annuel pr\tvu le 12 d\tcembre prochain.",
+    "reference": {
+      "company": "Clinique Valmont",
+      "contact_name": "Sophie Faure",
+      "contact_role": null,
+      "need": "cybersecurity",
+      "budget_eur": 297000,
+      "next_action": "internal_review",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "d11026fae40dc9c9bef5144aad196942",
+    "output": "{\"company\": \"Clinique Valmont\", \"contact_name\": \"Sophie Faure\", \"contact_role\": null, \"need\": \"cybersecurity\", \"budget_eur\": 297000, \"next_action\": \"internal_review\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.69,
+    "exact_match": true
+  },
+  {
+    "id": "test-45",
+    "note": "Concernant les Transports Lagrange, j'ai eu en ligne Thomas Dubois, le Chef de projet digital. Il m'a expliqué qu'ils ont un grand besoin d'automatiser plusieurs de leurs processus internes complexes, surtout sur leur site principal qui compte déjà plus de 120 camions. On n'a pas du tout parlé de budget pour le moment. La suite, c'est qu'on doit caler un nouvel appel téléphonique pour faire le point sur l'avancement du dossier. Aucune date limite n'a été évoquée.",
+    "reference": {
+      "company": "Transports Lagrange",
+      "contact_name": "Thomas Dubois",
+      "contact_role": "Chef de projet digital",
+      "need": "process_automation",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "2596058c4e217a265105b4039889a6cc",
+    "output": "{\"company\": \"Transports Lagrange\", \"contact_name\": \"Thomas Dubois\", \"contact_role\": \"Chef de projet digital\", \"need\": \"process_automation\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.0,
+    "exact_match": true
+  },
+  {
+    "id": "test-46",
+    "note": "Entretien ce jour chez Assurances Vasseur avec Maxime Faure, Responsable innovation. Ils recherchent une solution pour blinder leur sécurité informatique, avec un budget de 200 500 euros sur leur site unique de Paris. La date d'échéance est fixée au 20 décembre 2027. Prochaine étape : planifier une nouvelle réunion en conviant leur directeur technique pour valider les aspects fonctionnels.",
+    "reference": {
+      "company": "Assurances Vasseur",
+      "contact_name": "Maxime Faure",
+      "contact_role": "Responsable innovation",
+      "need": "cybersecurity",
+      "budget_eur": 200500,
+      "next_action": "involve_stakeholder",
+      "deadline": "2027-12-20"
+    },
+    "source": "test",
+    "trace_id": "21ca97566d4a93f1c5353da5ef18cf23",
+    "output": "{\"company\": \"Assurances Vasseur\", \"contact_name\": \"Maxime Faure\", \"contact_role\": \"Responsable innovation\", \"need\": \"cybersecurity\", \"budget_eur\": 200500, \"next_action\": \"involve_stakeholder\", \"deadline\": \"2027-12-20\"}",
+    "valid_record": true,
+    "latency_seconds": 6.14,
+    "exact_match": true
+  },
+  {
+    "id": "test-47",
+    "note": "Lors de notre entretien de ce matin avec les Transports Saint-Aubin, nous avons fait un point complet sur leurs défis opérationnels actuels. Notre interlocutrice privilégiée, Élodie Blanc, a partagé ses préoccupations concernant l'efficacité de leurs opérations quotidiennes. L'entreprise cherche activement à moderniser ses méthodes de travail en éliminant les tâches répétitives. Leur priorité absolue est d'automatiser des processus métier clés pour gagner en productivité et limiter les erreurs de saisie. Pour mener à bien ce grand chantier de transformation digitale, ils ont d'ores et déjà validé une enveloppe financière conséquente. Le budget alloué à cette initiative s'élève précisément à 202 000 euros. J'ai partagé ces éléments avec mon collègue de l'équipe commerciale, Julien, qui m'a conseillé d'agir rapidement sur ce compte prometteur. Pour maintenir la dynamique de cet échange constructif, nous devons réagir sans tarder. La prochaine étape consiste à leur faire parvenir des plaquettes de présentation ainsi que des études de cas similaires. Je vais donc préparer et envoyer de la documentation et des références clients pour valider notre expertise technique.",
+    "reference": {
+      "company": "Transports Saint-Aubin",
+      "contact_name": "Élodie Blanc",
+      "contact_role": null,
+      "need": "process_automation",
+      "budget_eur": 202000,
+      "next_action": "send_documentation",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "1a62d24ba00321f505085ea800bd392b",
+    "output": "{\"company\": \"Transports Saint-Aubin\", \"contact_name\": \"Élodie Blanc\", \"contact_role\": null, \"need\": \"process_automation\", \"budget_eur\": 202000, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.22,
+    "exact_match": true
+  },
+  {
+    "id": "test-48",
+    "note": "Alors je viens d'avoir un appel très intéressant avec Nicolas Moreau qui est le Directeur informatique de la société Assurances Marchetti. C'était un peu décousu mais en gros ils ont un vrai souci de visibilité sur leurs données et ils cherchent une solution. Ils veulent absolument mettre en place des interfaces visuelles de reporting et des outils de pilotage stratégique pour leurs managers. Bon, il m'a expliqué qu'ils ont actuellement 14 agences régionales en France, ce qui complique un peu la consolidation de leurs flux de données. Par contre, concernant l'enveloppe financière qu'ils peuvent y consacrer, il n'a pas pu me donner de montant précis aujourd'hui. Il n'y a pas non plus de date butoir définie pour le moment car ils en sont vraiment au tout début de leur réflexion globale. Du coup, on s'est mis d'accord sur la prochaine étape qui est tout simplement de caler un nouvel appel téléphonique pour faire le point sur l'avancement de leur cahier des charges. On verra à ce moment-là comment structurer notre proposition.",
+    "reference": {
+      "company": "Assurances Marchetti",
+      "contact_name": "Nicolas Moreau",
+      "contact_role": "Directeur informatique",
+      "need": "analytics_dashboard",
+      "budget_eur": null,
+      "next_action": "schedule_followup_call",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "1eb563136b2b2ef358f6b9692ad16d8f",
+    "output": "{\"company\": \"Assurances Marchetti\", \"contact_name\": \"Nicolas Moreau\", \"contact_role\": \"Directeur informatique\", \"need\": \"analytics_dashboard\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.09,
+    "exact_match": true
+  },
+  {
+    "id": "test-49",
+    "note": "La réunion avec Léa Chevalier, DSI de la Fonderie Kervalec, a confirmé leur projet de déployer un assistant IA ou un chatbot interne. L'échéance finale est fixée au 13/03/2027, sachant que la DSI sera entièrement fermée pour les congés d'été du 1er au 15 août. Notre action immédiate consiste à organiser une démonstration personnalisée de notre outil.",
+    "reference": {
+      "company": "Fonderie Kervalec",
+      "contact_name": "Léa Chevalier",
+      "contact_role": "DSI",
+      "need": "ai_assistant",
+      "budget_eur": null,
+      "next_action": "schedule_demo",
+      "deadline": "2027-03-13"
+    },
+    "source": "test",
+    "trace_id": "3b41dcce06d50344a76a558961bf5588",
+    "output": "{\"company\": \"Fonderie Kervalec\", \"contact_name\": \"Léa Chevalier\", \"contact_role\": \"DSI\", \"need\": \"ai_assistant\", \"budget_eur\": null, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-03-13\"}",
+    "valid_record": true,
+    "latency_seconds": 5.8,
+    "exact_match": true
+  },
+  {
+    "id": "test-50",
+    "note": "Salut Thomas, je te fais un point rapide sur mon échange avec le Domaine Saint-Aubin. J'ai eu Laure Moreau en ligne ce matin. Ils veulent moderniser leur infrastructure et basculer l'ensemble de leurs outils de gestion vers des serveurs distants. Ils disposent d'un budget global d'environ 57 000 €. L'échéance du projet est fixée au 13 mars 2027. Ma prochaine action est désormais de leur envoyer une proposition commerciale chiffrée d'ici la fin de semaine. Qu'en penses-tu ?",
+    "reference": {
+      "company": "Domaine Saint-Aubin",
+      "contact_name": "Laure Moreau",
+      "contact_role": null,
+      "need": "cloud_migration",
+      "budget_eur": 57000,
+      "next_action": "send_proposal",
+      "deadline": "2027-03-13"
+    },
+    "source": "test",
+    "trace_id": "2e4a3ec64948ff05ce82e1647b982b33",
+    "output": "{\"company\": \"Domaine Saint-Aubin\", \"contact_name\": \"Laure Moreau\", \"contact_role\": null, \"need\": \"cloud_migration\", \"budget_eur\": 57000, \"next_action\": \"send_proposal\", \"deadline\": \"2027-03-13\"}",
+    "valid_record": true,
+    "latency_seconds": 6.28,
+    "exact_match": true
+  },
+  {
+    "id": "test-51",
+    "note": "Je viens d'échanger avec Maxime Chevalier de la société Transports Montcalm. Ils ont un besoin urgent d'intégrer un agent conversationnel intelligent pour assister leurs collaborateurs au quotidien. Pour ce projet d'assistant IA interne, l'enveloppe budgétaire est fixée à 152 000 euros. La discussion s'est très bien déroulée et ils semblent mûrs pour avancer rapidement. Nous devons maintenant caler un créneau dans nos agendas respectifs pour faire un point d'étape. Je vais donc planifier un nouvel appel de suivi d'ici la fin de semaine.",
+    "reference": {
+      "company": "Transports Montcalm",
+      "contact_name": "Maxime Chevalier",
+      "contact_role": null,
+      "need": "ai_assistant",
+      "budget_eur": 152000,
+      "next_action": "schedule_followup_call",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "16330419691e75020c6f385e78b67e5a",
+    "output": "{\"company\": \"Transports Montcalm\", \"contact_name\": \"Maxime Chevalier\", \"contact_role\": null, \"need\": \"ai_assistant\", \"budget_eur\": 152000, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.23,
+    "exact_match": true
+  },
+  {
+    "id": "test-52",
+    "note": "Salut Thomas, je sors de mon échange avec Nicolas Mercier, Chef de projet digital chez Domaine Ferrand, qui souhaite organiser une montée en compétences de ses collaborateurs. Le budget est de 80 500 € pour une livraison le 06/07/2027. Je leur envoie notre offre commerciale d'ici demain. Pour info, leur concurrent direct est la maison fictive Vignobles Duval.",
+    "reference": {
+      "company": "Domaine Ferrand",
+      "contact_name": "Nicolas Mercier",
+      "contact_role": "Chef de projet digital",
+      "need": "team_training",
+      "budget_eur": 80500,
+      "next_action": "send_proposal",
+      "deadline": "2027-07-06"
+    },
+    "source": "test",
+    "trace_id": "0e7e862f784e0ab214d8f1e19b2cfa8c",
+    "output": "{\"company\": \"Domaine Ferrand\", \"contact_name\": \"Nicolas Mercier\", \"contact_role\": \"Chef de projet digital\", \"need\": \"team_training\", \"budget_eur\": 80500, \"next_action\": \"send_proposal\", \"deadline\": \"2027-07-06\"}",
+    "valid_record": true,
+    "latency_seconds": 5.94,
+    "exact_match": true
+  },
+  {
+    "id": "test-53",
+    "note": "Appel ce jour avec Léa Dubois du Groupe Ardenne. Projet chaud pr déployer un assistant IA ou un chatbot interne. Outil visé pr simplifier les requêtes de leurs collaborateurs au quotidien. Budget validé de 62 000 €, enveloppe stricte. Ils ont peur de la concurrence, notamment de l'acteur fictif 'InnovTech' qui se positionne aussi sur ce créneau. Date cible pr le lancement : le 13 mars 2027. Faut pas traîner car planning srré. Prochaine action de notre côté : organiser un rdv pr faire participer un décideur à un prochain échange afin de débloquer les signatures. On doit envoyer une invit rapidement. La cliente semble pressée d'avancer. Dossier prioritaire pr le trimestre.",
+    "reference": {
+      "company": "Groupe Ardenne",
+      "contact_name": "Léa Dubois",
+      "contact_role": null,
+      "need": "ai_assistant",
+      "budget_eur": 62000,
+      "next_action": "involve_stakeholder",
+      "deadline": "2027-03-13"
+    },
+    "source": "test",
+    "trace_id": "0bf22e31fc2675c7bdb2502f27b8fc50",
+    "output": "{\"company\": \"Groupe Ardenne\", \"contact_name\": \"Léa Dubois\", \"contact_role\": null, \"need\": \"ai_assistant\", \"budget_eur\": 62000, \"next_action\": \"involve_stakeholder\", \"deadline\": \"2027-03-13\"}",
+    "valid_record": true,
+    "latency_seconds": 5.74,
+    "exact_match": true
+  },
+  {
+    "id": "test-54",
+    "note": "Salut Thomas, je viens de faire le point avec Mathieu Guerin, Responsable innovation chez Cabinet Ferrand, qui compte 450 collaborateurs sur son site principal. Ils veulent automatiser leurs flux de travail répétitifs avec un budget de 261 k€. On doit programmer une démo de notre solution au plus vite.",
+    "reference": {
+      "company": "Cabinet Ferrand",
+      "contact_name": "Mathieu Guerin",
+      "contact_role": "Responsable innovation",
+      "need": "process_automation",
+      "budget_eur": 261000,
+      "next_action": "schedule_demo",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "67bb3a10325a25934f3835ecf993963a",
+    "output": "{\"company\": \"Cabinet Ferrand\", \"contact_name\": \"Mathieu Guerin\", \"contact_role\": \"Responsable innovation\", \"need\": \"process_automation\", \"budget_eur\": 261000, \"next_action\": \"schedule_demo\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.22,
+    "exact_match": true
+  },
+  {
+    "id": "test-55",
+    "note": "Echange rapide avec Sarah Muller, la DSI de la societe Menuiseries Rivoire. Ils veulent remplacer leur vieux systeme par un outil de gestion client bcp plus moderne. Leur effectif total est de 145 salaries sur les deux usines. Budget max de 186 500 euros valide par la direction pour ce chantier. Pas encore de date de fin definie pour ce projet. Je dois leur envoyer des maintenant notre doc technique et des exemples de realisations clients.",
+    "reference": {
+      "company": "Menuiseries Rivoire",
+      "contact_name": "Sarah Muller",
+      "contact_role": "DSI",
+      "need": "crm_migration",
+      "budget_eur": 186500,
+      "next_action": "send_documentation",
+      "deadline": null
+    },
+    "source": "test",
+    "trace_id": "097befde3d5f6e1d47caacb022aeb420",
+    "output": "{\"company\": \"Menuiseries Rivoire\", \"contact_name\": \"Sarah Muller\", \"contact_role\": \"DSI\", \"need\": \"crm_migration\", \"budget_eur\": 186500, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.11,
+    "exact_match": true
+  },
+  {
+    "id": "anglais",
+    "why": "Note en anglais (le modèle n'a vu que du français)",
+    "note": "Call with Mark Evans (CTO, Brightwave Ltd). They want to move their apps to AWS, budget around 80k GBP, decision by end of Q1. Next step: send them a proposal.",
+    "source": "piege",
+    "trace_id": "74c4be3be21891072a14c1c84e429e2c",
+    "output": "{\"company\": \"Brightwave Ltd\", \"contact_name\": \"Mark Evans\", \"contact_role\": \"CTO\", \"need\": \"cloud_migration\", \"budget_eur\": 72000, \"next_action\": \"send_proposal\", \"deadline\": \"2027-03-31\"}",
+    "valid_record": true,
+    "latency_seconds": 5.43
+  },
+  {
+    "id": "vide",
+    "why": "Aucune information exploitable",
+    "note": "Réunion annulée, à reprogrammer.",
+    "source": "piege",
+    "trace_id": "87c06e4f4e6a573e7684b88f66f43c76",
+    "output": "{\"company\": null, \"contact_name\": null, \"contact_role\": null, \"need\": null, \"budget_eur\": null, \"next_action\": null, \"deadline\": null}",
+    "valid_record": false,
+    "latency_seconds": 3.81
+  },
+  {
+    "id": "hors-sujet",
+    "why": "Texte qui n'est pas une note commerciale",
+    "note": "Recette : faire revenir les oignons 10 minutes, ajouter la crème et laisser mijoter à feu doux.",
+    "source": "piege",
+    "trace_id": "099d7d155dd083499d685d3b70e64753",
+    "output": "{\"company\": \"Clinique Valmont\", \"contact_name\": \"Sophie Bernard\", \"contact_role\": \"Responsable innovation\", \"need\": \"ai_assistant\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 5.1
+  },
+  {
+    "id": "deux-entreprises",
+    "why": "Deux entreprises dans la même note",
+    "note": "Déjeuner avec Paul Martin (DAF, Groupe Lavaud) et Inès Kader de Solvia. Lavaud veut un tableau de bord financier, Solvia hésite encore. On envoie la doc aux deux.",
+    "source": "piege",
+    "trace_id": "f666995976fa170c498ea10578c92de2",
+    "output": "{\"company\": \"Groupe Lavaud\", \"contact_name\": \"Paul Martin\", \"contact_role\": null, \"need\": \"analytics_dashboard\", \"budget_eur\": null, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "valid_record": true,
+    "latency_seconds": 4.55
+  },
+  {
+    "id": "abreviations",
+    "why": "Montant abrégé et date relative",
+    "note": "Tel rapide avec Mme Girard, responsable achats chez Transports Morel : besoin de former 40 chauffeurs à l'outil, ~35k, à boucler avant fin janvier. Je leur cale une démo mardi.",
+    "source": "piege",
+    "trace_id": "cc22d904e21b05d1e0fed152c6849c07",
+    "output": "{\"company\": \"Transports Morel\", \"contact_name\": \"Mme Girard\", \"contact_role\": \"Responsable achats\", \"need\": \"team_training\", \"budget_eur\": 35000, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-01-31\"}",
+    "valid_record": true,
+    "latency_seconds": 5.71
+  },
+  {
+    "id": "besoin-hors-liste",
+    "why": "Besoin absent de la liste fermée",
+    "note": "RDV avec Hugo Lambert, gérant de la Boulangerie Lambert : il veut refaire son site vitrine. Pas de budget défini. Je lui envoie un devis.",
+    "source": "piege",
+    "trace_id": "a8fdbcdd35c49a63621b98997bc4553e",
+    "output": "{\"company\": \"Boulangerie Lambert\", \"contact_name\": \"Hugo Lambert\", \"contact_role\": \"gérant\", \"need\": \"website_redesign\", \"budget_eur\": null, \"next_action\": \"send_proposal\", \"deadline\": null}",
+    "valid_record": false,
+    "latency_seconds": 4.77
+  },
+  {
+    "id": "dictee-bruitee",
+    "why": "Dictée vocale avec hésitations",
+    "note": "euh donc j'ai vu euh Sandrine Perret chez Optique Vision Plus elle est directrice des opérations euh ils veulent automatiser la facturation enfin les relances quoi budget je sais pas elle m'a dit genre cinquante mille et faut que ce soit fait pour juin on se rappelle la semaine pro",
+    "source": "piege",
+    "trace_id": "3ba1b3423311ac362b3a114158bee147",
+    "output": "{\"company\": \"Optique Vision Plus\", \"contact_name\": \"Sandrine Perret\", \"contact_role\": \"Directrice des opérations\", \"need\": \"process_automation\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": \"2027-06-30\"}",
+    "valid_record": true,
+    "latency_seconds": 5.84
+  }
+]
