@@ -1,0 +1,205 @@
+{
+  "test_set_size": 56,
+  "models": {
+    "finetuned": {
+      "run": "model-training-pipeline-20261112183827",
+      "metrics": {
+        "field_contact_name_mean": 1.0,
+        "field_need_mean": 1.0,
+        "field_budget_eur_mean": 1.0,
+        "field_next_action_mean": 1.0,
+        "field_company_mean": 1.0,
+        "field_contact_role_mean": 1.0,
+        "valid_schema_mean": 1.0,
+        "field_accuracy_mean": 0.9974489795918368,
+        "field_deadline_mean": 0.9821428571428571,
+        "exact_match_mean": 0.9821428571428571,
+        "hallucinated_field_mean": 0.017857142857142856,
+        "valid_json_mean": 1.0
+      },
+      "breakdown": {
+        "distractor": {
+          "colleague": {
+            "n": 11,
+            "exact": 11
+          },
+          "competitor": {
+            "n": 8,
+            "exact": 8
+          },
+          "date": {
+            "n": 14,
+            "exact": 13
+          },
+          "figure": {
+            "n": 13,
+            "exact": 13
+          },
+          "none": {
+            "n": 10,
+            "exact": 10
+          }
+        },
+        "style": {
+          "bullets": {
+            "n": 3,
+            "exact": 3
+          },
+          "crm_comment": {
+            "n": 6,
+            "exact": 6
+          },
+          "dictated": {
+            "n": 16,
+            "exact": 15
+          },
+          "email": {
+            "n": 13,
+            "exact": 13
+          },
+          "prose": {
+            "n": 12,
+            "exact": 12
+          },
+          "telegraphic": {
+            "n": 6,
+            "exact": 6
+          }
+        },
+        "length": {
+          "long": {
+            "n": 20,
+            "exact": 20
+          },
+          "medium": {
+            "n": 20,
+            "exact": 20
+          },
+          "short": {
+            "n": 16,
+            "exact": 15
+          }
+        }
+      },
+      "training": {
+        "per_device_train_batch_size": 4.0,
+        "max_length": 640.0,
+        "lora_alpha": 16.0,
+        "lora_dropout": 0.05,
+        "num_train_epochs": 3.0,
+        "lora_r": 8.0,
+        "eval_loss": 0.7595506310462952,
+        "gradient_accumulation_steps": 4.0,
+        "learning_rate": 0.0003,
+        "train_loss": 0.9427037891887483,
+        "trainable_params": 12582912.0
+      }
+    },
+    "base": {
+      "run": "base-model-evaluation-pipeline-20261112212113",
+      "metrics": {
+        "field_contact_name_mean": 0.8214285714285714,
+        "field_need_mean": 0.0,
+        "field_budget_eur_mean": 0.8571428571428571,
+        "field_next_action_mean": 0.0,
+        "field_company_mean": 0.875,
+        "valid_json_mean": 0.875,
+        "field_contact_role_mean": 0.8035714285714286,
+        "field_accuracy_mean": 0.5280612244897959,
+        "field_deadline_mean": 0.3392857142857143,
+        "exact_match_mean": 0.0,
+        "hallucinated_field_mean": 0.26785714285714285,
+        "valid_schema_mean": 0.0
+      },
+      "breakdown": {
+        "distractor": {
+          "colleague": {
+            "n": 11,
+            "exact": 0
+          },
+          "competitor": {
+            "n": 8,
+            "exact": 0
+          },
+          "date": {
+            "n": 14,
+            "exact": 0
+          },
+          "figure": {
+            "n": 13,
+            "exact": 0
+          },
+          "none": {
+            "n": 10,
+            "exact": 0
+          }
+        },
+        "style": {
+          "bullets": {
+            "n": 3,
+            "exact": 0
+          },
+          "crm_comment": {
+            "n": 6,
+            "exact": 0
+          },
+          "dictated": {
+            "n": 16,
+            "exact": 0
+          },
+          "email": {
+            "n": 13,
+            "exact": 0
+          },
+          "prose": {
+            "n": 12,
+            "exact": 0
+          },
+          "telegraphic": {
+            "n": 6,
+            "exact": 0
+          }
+        },
+        "length": {
+          "long": {
+            "n": 20,
+            "exact": 0
+          },
+          "medium": {
+            "n": 20,
+            "exact": 0
+          },
+          "short": {
+            "n": 16,
+            "exact": 0
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "notes": "Salut ! Suite à notre échange avec le Cabinet Rivoire, ils cherchent activement à concevoir et déployer une plateforme de données centralisée. Pour la suite des opérations, j'ai prévu de les recontacter afin de planifier un nouvel appel de suivi d'ici peu.",
+      "reference": "{\"company\": \"Cabinet Rivoire\", \"contact_name\": null, \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+      "base": "```json\n\n{\n\n  \"company\": \"Cabinet Rivoire\",\n\n  \"contact_name\": null,\n\n  \"contact_role\": null,\n\n  \"need\": \"plateforme de données centralisée\",\n\n  \"budget_eur\": null,\n\n  \"next_action\": \"recontacter pour planifier un nouvel appel de suivi\",\n\n  \"deadline\": \"dans peu\"\n\n}\n\n```",
+      "finetuned": "{\"company\": \"Cabinet Rivoire\", \"contact_name\": null, \"contact_role\": null, \"need\": \"data_platform\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}"
+    },
+    {
+      "notes": "Alors Antoine Simon de Logistique Kervalec veut blinder leur infra réseau avec de la cybersécurité robuste pour un budget exact de 238000 euros. Je dois planifier une démo de notre solution, mais attention je serai en vacances le 12 mai, alors que leur deadline finale est fixée au 14 juillet 2027.",
+      "reference": "{\"company\": \"Logistique Kervalec\", \"contact_name\": \"Antoine Simon\", \"contact_role\": null, \"need\": \"cybersecurity\", \"budget_eur\": 238000, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-07-14\"}",
+      "base": "```json\n\n{\n\n  \"company\": \"Logistique Kervalec\",\n\n  \"contact_name\": \"Antoine Simon\",\n\n  \"contact_role\": \"Logistique\",\n\n  \"need\": \"Cybersécurité robuste\",\n\n  \"budget_eur\": 238000,\n\n  \"next_action\": \"Planifier une démo\",\n\n  \"deadline\": \"2027-07-14\"\n\n}\n\n```",
+      "finetuned": "{\"company\": \"Logistique Kervalec\", \"contact_name\": \"Antoine Simon\", \"contact_role\": null, \"need\": \"cybersecurity\", \"budget_eur\": 238000, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-07-14\"}"
+    },
+    {
+      "notes": "Bonjour, j'ai rencontré Karim Simon, Chef de projet digital chez Logistique Marchetti. Ils disposent de 189 500 € pour migrer leurs applications vers le cloud avant le 02/11/2027. À noter qu'il sera en congé le 15 août. Prochaine étape : organiser une démonstration.",
+      "reference": "{\"company\": \"Logistique Marchetti\", \"contact_name\": \"Karim Simon\", \"contact_role\": \"Chef de projet digital\", \"need\": \"cloud_migration\", \"budget_eur\": 189500, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-11-02\"}",
+      "base": "```json\n\n{\n\n  \"company\": \"Logistique Marchetti\",\n\n  \"contact_name\": \"Karim Simon\",\n\n  \"contact_role\": \"Chef de projet digital\",\n\n  \"need\": \"migration des applications vers le cloud\",\n\n  \"budget_eur\": 189500,\n\n  \"next_action\": \"organiser une démonstration\",\n\n  \"deadline\": \"02/11/2027\"\n\n}\n\n```",
+      "finetuned": "{\"company\": \"Logistique Marchetti\", \"contact_name\": \"Karim Simon\", \"contact_role\": \"Chef de projet digital\", \"need\": \"cloud_migration\", \"budget_eur\": 189500, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-11-02\"}"
+    }
+  ],
+  "endpoint": {
+    "notes": 56,
+    "exact": 56,
+    "latency_median_s": 5.74
+  }
+}
