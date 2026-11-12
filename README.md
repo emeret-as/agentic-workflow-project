@@ -64,7 +64,7 @@ Lance une seule fois : chaque lancement crée un pipeline et réserve des GPU.
    ```bash
    uv run --env-file .env python -m scripts.register_model_with_custom_handler \
        --model-uri gs://<bucket>/vertexai-pipeline-root/<...>/fine-tuning-component_<...>/model \
-       --model-name yoda-phi-3-mini-4k-instruct
+       --model-name emeret-ureboullet_model
    # Nouvelle version d'un modèle existant : ajouter --parent-model <ID du modèle>
    ```
 2. Déployer le modèle sur un Endpoint depuis la console Vertex AI (n1-standard-8 + 1 T4,

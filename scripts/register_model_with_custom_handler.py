@@ -3,7 +3,7 @@
 Usage :
     uv run --env-file .env python -m scripts.register_model_with_custom_handler \
         --model-uri gs://emeret-llmops/vertexai-pipeline-root/.../model \
-        --model-name yoda-phi-3-mini-4k-instruct
+        --model-name emeret-ureboullet_model
 
 Pour enregistrer une nouvelle version d'un modèle existant, passer
 `--parent-model` (ID ou nom de ressource du modèle parent).
