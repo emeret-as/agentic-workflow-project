@@ -47,6 +47,11 @@ page_header(
 )
 
 
+def compact(text: str) -> str:
+    """Retire les lignes vides d'une sortie de modèle (le modèle de base en met beaucoup)."""
+    return "\n".join(line for line in text.splitlines() if line.strip())
+
+
 def pct(value: float) -> str:
     return f"{value * 100:.0f} %".replace(".", ",")
 
@@ -121,6 +126,14 @@ else:
     st.bar_chart(
         per_field, stack=False, horizontal=True, color=[BASE_COLOR, TUNED_COLOR]
     )
+    st.html(
+        "<p class='aside'><b>À lire avec prudence.</b> Le prompt ne donne pas les valeurs des listes "
+        "fermées : Phi-3 de base ne peut pas deviner <code>crm_migration</code> ou "
+        "<code>send_proposal</code>, d'où ses 0 % sur le besoin et la prochaine action. Sur les champs "
+        "recopiés des notes (entreprise, contact, budget), l'écart est de 12 à 20 points. La vraie faiblesse "
+        "du modèle de base est ailleurs : l'échéance (34 % de bonnes réponses) et les champs inventés, "
+        "dans 27 % des fiches.</p>"
+    )
 
     section("Les notes piégées")
     st.html(
@@ -146,7 +159,7 @@ else:
             with col_base:
                 st.html(label_html("Phi-3 de base"))
                 st.code(
-                    example["base"] or "(réponse vide)",
+                    compact(example["base"]) or "(réponse vide)",
                     language="json",
                     wrap_lines=True,
                 )

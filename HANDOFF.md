@@ -1,7 +1,7 @@
 # Passation du projet Agentic Workflow (LLMOps)
 
 Document destiné à un assistant de codage agentique qui reprend le projet. Il décrit l'objectif,
-l'état exact au 12/11/2026 à 19h20 UTC, les pièges déjà rencontrés et ce qu'il reste à faire.
+l'état exact au 12/11/2026 à 20h40 UTC (mise à jour par Ugo), les pièges déjà rencontrés et ce qu'il reste à faire.
 Répondre à l'utilisateur en **français**. Ne jamais afficher de secret (clés Gemini, Langfuse,
 mots de passe).
 
@@ -71,43 +71,24 @@ uvx ruff check . && uvx ruff format --check src scripts local_tests/crm_*.py
 `ruff format --check .` signale 2 anciens fichiers de tests Yoda (`local_tests/evaluation_test.py`
 et un autre) : ils ne sont pas à nous, ne pas les reformater.
 
-## 4. Pipeline d'entraînement CRM : où on en est
+## 4. État au 12/11 à 20h40 UTC (sessions 1 à 5)
 
-Job : `projects/123905721265/locations/europe-west2/pipelineJobs/model-training-pipeline-20261112183827`
-(lancé à 17h38 UTC).
+Le code est sur `main` : la PR #2 `crm-use-case` a été fusionnée. Le travail suivant est sur la
+branche `session-4-crm`.
 
-| Étape | État à 19h20 UTC |
+| Session | État |
 |---|---|
-| data-transformation | terminée (11 min) |
-| fine-tuning | terminée (1 h 23 min) |
-| inference | marquée en cours, mais son job Vertex était en `PENDING` (attente de GPU) |
-| evaluation | en attente |
+| 1-3 Données, pipeline | **Fait.** Run `model-training-pipeline-20261112183827` réussi. Sur 56 notes de test : JSON 100 %, schéma 100 %, fiche exacte 98,2 %, champ inventé 1,8 %. |
+| Référence Phi-3 de base | Pipeline `base_model_evaluation_pipeline` (même test, même évaluation, `use_base_model=True`), run `base-model-evaluation-pipeline-20261112212113`. |
+| 4 Registre, endpoint, app | **Fait.** Modèle `emeret-crm-phi3` v1 (`models/645705795597500416`). Endpoint déployé en `n1-standard-4` + T4, testé avec curl, l'app Chainlit et l'app Streamlit, puis **supprimé**. Sur l'endpoint (float16) : 56/56 fiches exactes, environ 5,5 s par note. |
+| 5 Langfuse | **Fait sauf le juge.** Langfuse v4 auto-hébergé dans `../langfuse`, projet `crm-notes`. 63 traces : 56 notes de test et 7 notes pièges, via `scripts/send_test_notes.py`. Dashboard créé par `scripts/create_langfuse_dashboard.py`. Le juge `fidelite_fiche` (prompt dans `docs/langfuse_judge_prompt.md`) attend une clé Gemini dans la connexion LLM de l'interface. |
+| 6 Présentation | App Streamlit dans `presentation/`, 7 pages, adaptée au schéma CRM. Mode rejeu sur de vraies réponses de l'endpoint. |
 
-Résultats d'entraînement : `eval_loss` = 0,7596, `train_loss` = 0,9427 (84 étapes, 3 epochs,
-LoRA r=8, 12,6 M paramètres entraînables).
-
-**URI du modèle entraîné** (déjà sauvegardé, utilisable même si l'inférence échoue) :
-`gs://emeret-llmops/vertexai-pipeline-root/123905721265/model-training-pipeline-20261112183827/fine-tuning-component_9118750344375959552/model`
-
-Suivre le pipeline :
-```bash
-uv run --env-file .env python -W ignore -c "
-from google.cloud import aiplatform as a
-a.init(project='agentics-workflows-510809', location='europe-west2')
-p=a.PipelineJob.get('projects/123905721265/locations/europe-west2/pipelineJobs/model-training-pipeline-20261112183827')
-print(p.state.name)
-for t in p.task_details: print(t.task_name, t.state.name)
-"
-```
-Les métriques d'évaluation se lisent dans les sorties de la tâche `evaluation-component`
-(`task_details[...].outputs`, artefact `metrics`) : `valid_json_mean`, `exact_match_mean`,
-`field_accuracy_mean`, `hallucinated_field_mean`, etc. Si le pipeline est en échec, **ne pas
-en relancer un sans vérifier d'abord la cause** (voir règles §5) ; si seule l'inférence a échoué,
-corriger puis relancer le pipeline (l'entraînement est refait, 1 h 20).
-
-Durées observées (T4, float32, 4 bits, gradient checkpointing) : ~52 s par étape, démarrages
-de conteneurs de 5 à 11 minutes, attentes de GPU imprévisibles (quota partagé avec les autres
-élèves). Prévoir large.
+Pièges trouvés le 12/11 au soir :
+- 13 notes ont des « é » remplacés par des tabulations : `has_corrupted_text` autorise `\t`.
+- Le pipeline (Phi-3 en 4 bits) rate une fiche que l'endpoint (float16) réussit.
+- Port 5432 pris sur le Mac d'Ugo : Postgres de Langfuse exposé sur 5433 (`docker-compose.override.yml`).
+- `gsutil` et `gcloud logging` demandent une ré-authentification ; le SDK Python (ADC) marche.
 
 ## 5. Règles et pièges à respecter
 
@@ -152,38 +133,15 @@ Secrets : `.env` (ignoré par git) contient les identifiants GCP, la clé Gemini
 Langfuse. Chaque personne doit remplir le sien à partir de `.env.example`. `GCP_ENDPOINT_ID`
 dans `.env` est **obsolète** (l'endpoint a été supprimé).
 
-## 6. Ce qu'il reste à faire (dans l'ordre)
+## 6. Ce qu'il reste à faire
 
-1. **Accès au repo.** Le code est déjà poussé (voir §3). Vérifier que vous avez accès en
-   écriture. Aucune PR n'est ouverte : décider avec l'utilisateur si une PR `crm-use-case` ->
-   `main` est nécessaire à la fin (elle inclut aussi `session-4-deployment`). Le collaborateur
-   `MathieuHS` (le prof) a été invité au repo.
-2. **Terminer le pipeline `...20261112183827`** : lire les métriques d'évaluation et analyser les
-   erreurs par style, longueur et présence d'un élément parasite (colonnes `style`, `length`,
-   `distractor` du CSV). Garder les chiffres pour le brief.
-3. **Enregistrer le modèle CRM** dans le registre :
-   ```bash
-   uv run --env-file .env python -m scripts.register_model_with_custom_handler \
-       --model-uri gs://emeret-llmops/vertexai-pipeline-root/123905721265/model-training-pipeline-20261112183827/fine-tuning-component_9118750344375959552/model \
-       --model-name emeret-ureboullet_model --parent-model 6374284521612771328
-   ```
-   `--parent-model` en fait la version 2 du modèle Yoda ; omettre cette option et choisir un
-   nouveau nom pour un modèle séparé (plus clair, puisque le cas d'usage a changé : à décider).
-4. **Déployer un endpoint** avec `scripts.deploy_endpoint --model <nom> --endpoint-name <nom>`,
-   renseigner `GCP_ENDPOINT_ID` dans `.env`, tester avec `curl` (voir `README.md`) puis avec l'app :
-   `PYTHONPATH=. uv run --env-file .env chainlit run src/app/main.py`.
-   **Supprimer l'endpoint ensuite**, et le redéployer uniquement pour la démo.
-5. **Langfuse** (UI, auto-hébergé via Docker Compose, voir `README.md`) : créer un évaluateur
-   LLM-as-a-judge adapté au CRM (par exemple fidélité de la fiche à la note, ou hallucination de
-   champs) et construire un dashboard : taux de JSON valide, `schema_valid`, `names_grounded`,
-   latence. Le prompt « Yoda-ness » est obsolète. Le Langfuse existant tourne sur la machine
-   d'Enzo (`http://localhost:3000`, projet `yoda-chatbot`) ; un autre poste doit monter le sien.
-6. **Rédiger l'AI product brief** et préparer la démo en direct : cas d'usage et utilisateur
-   visé, données (synthétiques, contrôle croisé, filtrage), modèle, métriques et résultats,
-   coûts, limites, monitoring, problèmes rencontrés (§5).
-7. **Questions à poser au prof** : le suivi d'expériences (Vertex AI Experiments) figure dans le
-   plan du cours mais n'est couvert par aucune pratique ; consignes exactes de rendu et dates.
-8. Mettre à jour `README.md` avec les résultats finaux et l'URL de la PR.
+1. Juge LLM Langfuse : connexion LLM (clé Gemini AI Studio) à créer dans l'interface, puis
+   l'évaluateur `fidelite_fiche` (voir `docs/langfuse_judge_prompt.md`). Ensuite, capture du
+   dashboard dans `presentation/data/langfuse_dashboard.png`.
+2. Corriger `has_corrupted_text` (tabulations au milieu d'un mot) avant tout nouvel entraînement.
+3. Jour de la démo : redéployer l'endpoint 30 minutes avant, renseigner `GCP_ENDPOINT_ID`, puis le
+   supprimer juste après.
+4. Questions au prof : suivi d'expériences (Vertex AI Experiments) et consignes exactes de rendu.
 
 ## 7. Fiabilité de ce document
 
