@@ -1,0 +1,27 @@
+[
+  {
+    "id": "dictee",
+    "title": "Dictée",
+    "notes": "Alors Antoine Simon de Logistique Kervalec veut blinder leur infra réseau avec de la cybersécurité robuste pour un budget exact de 238000 euros. Je dois planifier une démo de notre solution, mais attention je serai en vacances le 12 mai, alors que leur deadline finale est fixée au 14 juillet 2027."
+  },
+  {
+    "id": "telegraphique",
+    "title": "Télégraphique",
+    "notes": "Echange rapide avec Sarah Muller, la DSI de la societe Menuiseries Rivoire. Ils veulent remplacer leur vieux systeme par un outil de gestion client bcp plus moderne. Leur effectif total est de 145 salaries sur les deux usines. Budget max de 186 500 euros valide par la direction pour ce chantier. Pas encore de date de fin definie pour ce projet. Je dois leur envoyer des maintenant notre doc technique et des exemples de realisations clients."
+  },
+  {
+    "id": "recette",
+    "title": "Recette",
+    "notes": "Recette : faire revenir les oignons 10 minutes, ajouter la crème et laisser mijoter à feu doux."
+  },
+  {
+    "id": "hors-liste",
+    "title": "Hors liste",
+    "notes": "RDV avec Hugo Lambert, gérant de la Boulangerie Lambert : il veut refaire son site vitrine. Pas de budget défini. Je lui envoie un devis."
+  },
+  {
+    "id": "anglais",
+    "title": "Anglais",
+    "notes": "Call with Mark Evans (CTO, Brightwave Ltd). They want to move their apps to AWS, budget around 80k GBP, decision by end of Q1. Next step: send them a proposal."
+  }
+]

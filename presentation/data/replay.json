@@ -1,0 +1,37 @@
+{
+  "dictee": {
+    "output": "{\"company\": \"Logistique Kervalec\", \"contact_name\": \"Antoine Simon\", \"contact_role\": null, \"need\": \"cybersecurity\", \"budget_eur\": 238000, \"next_action\": \"schedule_demo\", \"deadline\": \"2027-07-14\"}",
+    "latency_s": 7.5,
+    "source": "enregistree",
+    "trace_id": "ecdb45724fa59e2dd8e5ecc929af2271",
+    "recorded": "2026-11-12, endpoint emeret-crm-phi3 v1"
+  },
+  "telegraphique": {
+    "output": "{\"company\": \"Menuiseries Rivoire\", \"contact_name\": \"Sarah Muller\", \"contact_role\": \"DSI\", \"need\": \"crm_migration\", \"budget_eur\": 186500, \"next_action\": \"send_documentation\", \"deadline\": null}",
+    "latency_s": 5.11,
+    "source": "enregistree",
+    "trace_id": "097befde3d5f6e1d47caacb022aeb420",
+    "recorded": "2026-11-12, endpoint emeret-crm-phi3 v1"
+  },
+  "recette": {
+    "output": "{\"company\": \"Clinique Valmont\", \"contact_name\": \"Sophie Bernard\", \"contact_role\": \"Responsable innovation\", \"need\": \"ai_assistant\", \"budget_eur\": null, \"next_action\": \"schedule_followup_call\", \"deadline\": null}",
+    "latency_s": 5.1,
+    "source": "enregistree",
+    "trace_id": "099d7d155dd083499d685d3b70e64753",
+    "recorded": "2026-11-12, endpoint emeret-crm-phi3 v1"
+  },
+  "hors-liste": {
+    "output": "{\"company\": \"Boulangerie Lambert\", \"contact_name\": \"Hugo Lambert\", \"contact_role\": \"gérant\", \"need\": \"website_redesign\", \"budget_eur\": null, \"next_action\": \"send_proposal\", \"deadline\": null}",
+    "latency_s": 4.77,
+    "source": "enregistree",
+    "trace_id": "a8fdbcdd35c49a63621b98997bc4553e",
+    "recorded": "2026-11-12, endpoint emeret-crm-phi3 v1"
+  },
+  "anglais": {
+    "output": "{\"company\": \"Brightwave Ltd\", \"contact_name\": \"Mark Evans\", \"contact_role\": \"CTO\", \"need\": \"cloud_migration\", \"budget_eur\": 72000, \"next_action\": \"send_proposal\", \"deadline\": \"2027-03-31\"}",
+    "latency_s": 5.43,
+    "source": "enregistree",
+    "trace_id": "74c4be3be21891072a14c1c84e429e2c",
+    "recorded": "2026-11-12, endpoint emeret-crm-phi3 v1"
+  }
+}
