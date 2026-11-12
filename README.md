@@ -2,7 +2,22 @@
 
 ## Description
 
-Projet de cours LLMOps — mise en place d'un environnement local et cloud pour des workflows agentiques avec GCP.
+Projet de cours LLMOps — flux de bout en bout (données, entraînement, registre, déploiement,
+interface, monitoring) sur GCP.
+
+**Cas d'usage : notes de réunion commerciale (français) -> fiche CRM JSON.**
+Un commercial colle ses notes brutes, le modèle renvoie une fiche à 7 champs
+(`company`, `contact_name`, `contact_role`, `need`, `budget_keur`, `deadline`, `next_action`).
+`need` et `next_action` sont des listes fermées, les champs absents de la note valent `null`
+(voir `src/crm_schema.py`). Modèle : Phi-3-mini-4k-instruct fine-tuné en LoRA.
+
+Données : `data/crm_meeting_notes.csv` (558 notes 100 % synthétiques, générées par Gemini avec
+contrôle croisé par une seconde extraction, voir `scripts/generate_crm_dataset.py`). Les notes
+contenant des caractères de contrôle ou invisibles sont écartées (`has_corrupted_text`).
+Régénération : `uv run --env-file .env python -m scripts.generate_crm_dataset --backend vertex`.
+
+Évaluation (déterministe, sans LLM juge) : `valid_json`, `valid_schema`, exactitude par champ,
+`exact_match`, `hallucinated_field`, `field_accuracy`.
 
 ## Prérequis
 
@@ -88,12 +103,18 @@ PYTHONPATH=. uv run --env-file .env chainlit run src/app/main.py
 
 `PYTHONPATH=.` est nécessaire pour que l'app trouve le package `src`.
 
-L'app (`src/app/main.py`) appelle l'endpoint avec un token `gcloud` (usage de développement
-uniquement : en production, utiliser un compte de service). Chaque message produit dans Langfuse :
-- un span `User Message` (message brut -> réponse extraite) ;
-- une generation imbriquée (prompt + paramètres -> sortie brute, modèle, version, latence).
+L'app (`src/app/main.py`) appelle l'endpoint avec les Application Default Credentials (usage de
+développement : en production, utiliser un compte de service). Les notes de plus de 3000 caractères
+sont refusées. Chaque message produit dans Langfuse :
+- un span `User Message` (note brute -> fiche extraite) ;
+- une generation imbriquée (prompt + paramètres -> sortie brute, modèle, version, latence) ;
+- trois scores : `json_valid`, `schema_valid`, `names_grounded` (société et contact retrouvés
+  dans la note).
+
+Tests locaux sans GCP : `PYTHONPATH=. uv run --env-file .env python local_tests/crm_app_test.py`
+et `local_tests/crm_metrics_test.py`.
 
 Langfuse s'héberge en local avec Docker Compose
 ([tutoriel](https://langfuse.com/self-hosting/deployment/docker-compose)). Créer un projet et des
-clés API sur http://localhost:3000, puis remplir `LANGFUSE_*` dans `.env`. L'évaluateur
-LLM-as-a-judge « Yoda-ness » et le dashboard se configurent ensuite dans l'interface Langfuse.
+clés API sur http://localhost:3000, puis remplir `LANGFUSE_*` dans `.env`. Les évaluateurs
+LLM-as-a-judge et les dashboards se configurent ensuite dans l'interface Langfuse.
