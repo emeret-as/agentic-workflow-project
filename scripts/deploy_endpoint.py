@@ -15,7 +15,9 @@ from google.cloud import aiplatform
 from src.constants import PROJECT_ID, REGION
 
 
-def deploy(model_name: str, endpoint_name: str) -> aiplatform.Endpoint:
+def deploy(
+    model_name: str, endpoint_name: str, machine_type: str = "n1-standard-8"
+) -> aiplatform.Endpoint:
     """Deploy the latest version of a registered model to a new endpoint."""
     models = aiplatform.Model.list(filter=f'display_name="{model_name}"')
     if not models:
@@ -25,7 +27,9 @@ def deploy(model_name: str, endpoint_name: str) -> aiplatform.Endpoint:
     endpoint.deploy(
         model=models[0],
         deployed_model_display_name=model_name,
-        machine_type="n1-standard-8",
+        # n1-standard-4 si le quota CustomModelServingCPUsPerProjectPerRegion
+        # est saturé par les endpoints des autres équipes
+        machine_type=machine_type,
         accelerator_type="NVIDIA_TESLA_T4",
         accelerator_count=1,
         # Un seul nœud : Vertex AI ne sait pas descendre à zéro
@@ -45,7 +49,8 @@ def main() -> None:
     """Deploy a model or delete an endpoint."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", help="Nom affiché du modèle dans le registre")
-    parser.add_argument("--endpoint-name", default="yoda-endpoint")
+    parser.add_argument("--endpoint-name", default="emeret-crm-endpoint")
+    parser.add_argument("--machine-type", default="n1-standard-8")
     parser.add_argument("--delete", metavar="ENDPOINT_ID", help="Supprimer l'endpoint")
     args = parser.parse_args()
 
@@ -53,7 +58,7 @@ def main() -> None:
     if args.delete:
         delete(args.delete)
     elif args.model:
-        endpoint = deploy(args.model, args.endpoint_name)
+        endpoint = deploy(args.model, args.endpoint_name, args.machine_type)
         print(f"Endpoint prêt : {endpoint.resource_name}")
     else:
         parser.error("--model ou --delete est requis")

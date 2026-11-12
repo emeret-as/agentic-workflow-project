@@ -1,6 +1,8 @@
 {
   "instances": [
-    {"input": "<|user|>\nThe Force is strong in you!<|end|>\n<|assistant|>\n"}
+    {
+      "input": "<|user|>\nExtrais la fiche CRM au format JSON à partir des notes de réunion ci-dessous. Clés : company, contact_name, contact_role, need, budget_eur, next_action, deadline. Utilise null quand l'information est absente.\n\nAppel avec Camille Roux, Directeur informatique chez Clinique Duchêne. Ils veulent migrer leur CRM, budget 124 k€, échéance le 26/02/2027. Prochaine étape : inviter leur sponsor au prochain échange.<|end|>\n<|assistant|>\n"
+    }
   ],
   "parameters": {"max_new_tokens": 160, "do_sample": false}
 }
