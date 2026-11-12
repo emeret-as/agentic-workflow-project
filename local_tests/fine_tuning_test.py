@@ -21,7 +21,7 @@ HYPERPARAMETERS = {
     "lora_alpha": 16,  # force de l'effet de LoRA sur le modèle
     "lora_dropout": 0.05,  # 5 % de valeurs éteintes au hasard pendant l'entraînement (évite d'apprendre par cœur)
     # Entraînement
-    "num_train_epochs": 10,  # nombre de passages sur tout le jeu d'entraînement
+    "num_train_epochs": 3,  # nombre de passages sur tout le jeu d'entraînement
     "learning_rate": 3e-4,  # taille des corrections à chaque mise à jour du modèle
     "per_device_train_batch_size": 16,  # nombre d'exemples traités en même temps
     "max_length": 64,  # longueur maximale d'un exemple, en tokens (morceaux de mots)

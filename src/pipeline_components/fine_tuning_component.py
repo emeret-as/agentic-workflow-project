@@ -27,12 +27,13 @@ def fine_tuning_component(
     lora_r: int = 8,
     lora_alpha: int = 16,
     lora_dropout: float = 0.05,
-    num_train_epochs: int = 10,
+    num_train_epochs: int = 3,
     learning_rate: float = 3e-4,
-    per_device_train_batch_size: int = 16,
-    max_length: int = 64,
+    per_device_train_batch_size: int = 4,
+    gradient_accumulation_steps: int = 4,
+    max_length: int = 640,
 ) -> None:
-    """Fine-tune Phi-3 on the Yoda dataset with LoRA."""
+    """Fine-tune Phi-3 on the CRM meeting notes dataset with LoRA."""
     import ast
     import logging
     import re
@@ -55,6 +56,7 @@ def fine_tuning_component(
         "num_train_epochs": num_train_epochs,
         "learning_rate": learning_rate,
         "per_device_train_batch_size": per_device_train_batch_size,
+        "gradient_accumulation_steps": gradient_accumulation_steps,
         "max_length": max_length,
     }
     logger.info(f"Hyperparameters: {hyperparameters}")
@@ -68,7 +70,13 @@ def fine_tuning_component(
         return {"messages": ast.literal_eval(fixed_text)}
 
     logger.info(f"Reading train dataset from {train_dataset.path}")
-    dataset = HFDataset.from_csv(train_dataset.path).map(parse_messages)
+    # On ne garde que `messages` : les autres colonnes (style, longueur...) sont
+    # des métadonnées d'analyse que le trainer ne doit pas voir
+    dataset = (
+        HFDataset.from_csv(train_dataset.path)
+        .select_columns(["messages"])
+        .map(parse_messages)
+    )
 
     # Une partie du train sert de validation pendant l'entraînement
     split_dataset = dataset.train_test_split(test_size=validation_split_ratio, seed=42)
@@ -115,11 +123,13 @@ def fine_tuning_component(
     sft_config = SFTConfig(
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
-        gradient_accumulation_steps=1,
+        gradient_accumulation_steps=gradient_accumulation_steps,
         per_device_train_batch_size=per_device_train_batch_size,
         auto_find_batch_size=True,
         max_length=max_length,
-        packing=True,
+        # Un exemple = une note : le packing collerait plusieurs notes dans la
+        # même séquence, ce qui brouille une extraction note -> fiche
+        packing=False,
         num_train_epochs=num_train_epochs,
         learning_rate=learning_rate,
         optim="paged_adamw_8bit",
