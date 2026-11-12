@@ -133,15 +133,33 @@ Secrets : `.env` (ignoré par git) contient les identifiants GCP, la clé Gemini
 Langfuse. Chaque personne doit remplir le sien à partir de `.env.example`. `GCP_ENDPOINT_ID`
 dans `.env` est **obsolète** (l'endpoint a été supprimé).
 
-## 6. Ce qu'il reste à faire
+## 6. Ce qu'il reste à faire (état au 13/11, repris par Enzo)
 
-1. Juge LLM Langfuse : connexion LLM (clé Gemini AI Studio) à créer dans l'interface, puis
-   l'évaluateur `fidelite_fiche` (voir `docs/langfuse_judge_prompt.md`). Ensuite, capture du
-   dashboard dans `presentation/data/langfuse_dashboard.png`.
-2. Corriger `has_corrupted_text` (tabulations au milieu d'un mot) avant tout nouvel entraînement.
-3. Jour de la démo : redéployer l'endpoint 30 minutes avant, renseigner `GCP_ENDPOINT_ID`, puis le
-   supprimer juste après.
-4. Questions au prof : suivi d'expériences (Vertex AI Experiments) et consignes exactes de rendu.
+1. **Juge LLM `fidelite_fiche` (session 5, partie 2) : pas encore fait.**
+   - Le prompt est prêt : `docs/langfuse_judge_prompt.md`.
+   - La connexion LLM « Google AI Studio » dans Langfuse
+     (http://localhost:3000/project/crm-notes/settings/llm-connections) échoue avec une clé
+     gratuite. `gemini-2.5-flash` est fermé aux nouveaux comptes, et `gemini-3.8-flash` puis
+     `gemini-3.5-flash` répondent « high demand » (503). L'API Generative Language est déjà
+     activée sur le projet Google de la clé.
+   - Option A : réessayer plus tard, ou avec `gemini-3.5-flash-lite` dans « Custom models »,
+     puis créer l'évaluateur dans l'interface (prévu par le TP). L'API publique
+     `/api/public/v2/evaluators` et `/api/public/v2/evaluation-rules` existe aussi.
+   - Option B : un script qui lit les traces `User Message` (`/api/public/v2/observations`),
+     appelle Gemini par Vertex AI avec les identifiants ADC, puis envoie le score
+     `fidelite_fiche` avec `create_score`. Le 13/11, sur Vertex `global`, ces modèles répondaient :
+     `gemini-3.5-flash`, `gemini-3.5-flash-lite`, `gemini-3.7-flash`, `gemini-3.8-flash`.
+2. **Capture du dashboard Langfuse** : l'enregistrer dans `presentation/data/langfuse_dashboard.png`
+   (la page Monitoring de l'app l'affiche).
+3. **Corriger `has_corrupted_text`** (tabulations au milieu d'un mot) avant tout nouvel entraînement.
+4. **Jour de la démo** : redéployer l'endpoint 30 minutes avant
+   (`scripts.deploy_endpoint --machine-type n1-standard-4`), renseigner `GCP_ENDPOINT_ID` dans
+   `.env`, puis le supprimer juste après.
+5. **Questions au prof** : suivi d'expériences (Vertex AI Experiments) et consignes exactes de rendu.
+
+Langfuse tourne sur le Mac d'Ugo (`../langfuse`, Docker). Le compte `admin@emeret.local` et son
+mot de passe sont dans `../langfuse/.env`, jamais commités. Un autre poste doit monter son propre
+Langfuse (voir le README).
 
 ## 7. Fiabilité de ce document
 

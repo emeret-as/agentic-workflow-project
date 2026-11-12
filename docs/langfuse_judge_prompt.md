@@ -1,5 +1,7 @@
 # Évaluateur LLM-as-a-judge Langfuse : « fidelite_fiche »
 
+> **État au 13/11 : pas encore créé.** La connexion Google AI Studio échoue (modèle saturé). Voir HANDOFF.md, §6.
+
 Évaluateur personnalisé créé dans l'interface Langfuse (session 5). Il remplace le
 critique « Yoda-ness » du cours. Il tourne sur chaque nouvelle trace de l'app
 (`User Message`).

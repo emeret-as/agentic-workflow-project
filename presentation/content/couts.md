@@ -15,8 +15,8 @@ Durées facturées lues dans Vertex AI. Le coût est estimé avec les prix ci-de
 | Génération des notes (Gemini sur Vertex AI) | une fois | quelques centimes |
 | Fine-tuning (pipeline du 12/11) | 79 min | ≈ 2,10 $ |
 | Inférence sur le jeu de test (même pipeline) | 10 min | ≈ 0,30 $ |
-| Évaluation de Phi-3 de base (second pipeline) | moins de 30 min | ≈ 0,50 $ au plus |
+| Évaluation de Phi-3 de base (second pipeline) | 10 min | ≈ 0,30 $ |
 | Endpoint : déploiement, 63 notes de test, démo Chainlit et Streamlit, puis suppression | 32 min | ≈ 0,55 $ au plus |
-| **Total** | | **≈ 3,50 $** |
+| **Total** | | **≈ 3,30 $** |
 
 L'endpoint n'a pas de mise en veille : il facture tant qu'il existe, jusqu'à environ 25 $ par jour. Il est supprimé après chaque usage par `scripts/deploy_endpoint.py --delete`, et redéployé environ 30 minutes avant la démo.
