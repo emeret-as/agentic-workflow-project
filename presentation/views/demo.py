@@ -21,7 +21,7 @@ from ui.components import (
 )
 
 FILE = "views/demo.py"
-MODE_LIVE, MODE_REPLAY = "Modèle en ligne", "Rejeu enregistré"
+MODE_LIVE, MODE_REPLAY = "Live model", "Recorded replay"
 
 examples = load_json("examples.json") or []
 state = st.session_state
@@ -48,16 +48,16 @@ def validation_input(key: str, label: str, value):
             options,
             index=options.index(value) if value in options else None,
             format_func=CHOICES[key].get,
-            placeholder="non mentionné",
+            placeholder="not mentioned",
         )
     help_text = {
-        "budget_eur": "En euros, sans espace : 124000",
-        "deadline": "Format AAAA-MM-JJ",
+        "budget_eur": "In euros, no spaces: 124000",
+        "deadline": "Format YYYY-MM-DD",
     }.get(key)
     return st.text_input(
         label,
         value="" if value is None else str(value),
-        placeholder="non mentionné",
+        placeholder="not mentioned",
         help=help_text,
     )
 
@@ -81,63 +81,61 @@ def matching_example_id() -> str | None:
 
 # -- Barre latérale : réglages de la démo --------------------------------------------
 with st.sidebar:
-    st.html('<div style="height:.6rem"></div>' + label_html("Réglages de la démo"))
+    st.html('<div style="height:.6rem"></div>' + label_html("Demo settings"))
     mode = st.radio(
-        "Source des réponses",
+        "Answer source",
         [MODE_LIVE, MODE_REPLAY],
         key="demo_mode",
-        help="Le rejeu affiche des réponses enregistrées à l'avance, en secours si l'endpoint ne répond pas.",
+        help="Replay shows answers recorded in advance, as a fallback if the endpoint does not answer.",
     )
-    endpoint_state = "configuré" if config.endpoint_configured() else "non configuré"
-    langfuse_state = (
-        "activé" if config.LANGFUSE_ENABLED else "désactivé (clés absentes)"
-    )
+    endpoint_state = "configured" if config.endpoint_configured() else "not configured"
+    langfuse_state = "on" if config.LANGFUSE_ENABLED else "off (no keys)"
     st.html(
         '<div class="facts facts--stack">'
-        f"<span>modèle <b>{escape(config.MODEL_NAME)}</b></span>"
+        f"<span>model <b>{escape(config.MODEL_NAME)}</b></span>"
         f"<span>version <b>{escape(config.MODEL_VERSION)}</b></span>"
         f"<span>prompt <b>{PROMPT_VERSION}</b></span>"
         f"<span>endpoint <b>{endpoint_state}</b></span>"
         f"<span>langfuse <b>{langfuse_state}</b></span></div>"
     )
     if st.button(
-        "Réveiller l'endpoint",
-        help="À faire juste avant la démo : un premier appel pour vérifier qu'il répond.",
+        "Wake up the endpoint",
+        help="Do this right before the demo: a first call to check that it answers.",
     ):
         try:
-            with st.spinner("Appel de l'endpoint…"):
+            with st.spinner("Calling the endpoint…"):
                 warmup = extract_live(
                     examples[0]["notes"] if examples else "Test note."
                 )
-            st.success(f"L'endpoint répond ({warmup.latency_s:.1f} s).")
+            st.success(f"The endpoint answers ({warmup.latency_s:.1f} s).")
         except EndpointError as error:
             st.error(str(error))
 
-page_header(FILE, "Collez des notes. Le modèle remplit la fiche.")
+page_header(FILE, "Paste notes. The model fills in the record.")
 
 left, right = st.columns(2, gap="large")
 current = state.demo_result
 
 # -- Gauche : les notes ---------------------------------------------------------------
 with left:
-    st.html(label_html("Notes du rendez-vous"))
+    st.html(label_html("Meeting notes"))
     if examples:
         st.pills(
-            "Exemples",
+            "Examples",
             [e["title"] for e in examples],
             key="example_pick",
             on_change=use_example,
             label_visibility="collapsed",
         )
     st.text_area(
-        "Notes du rendez-vous",
+        "Meeting notes",
         key="notes",
         height=200,
         label_visibility="collapsed",
-        placeholder="Collez ici les notes brutes, en français, telles que le commercial les a tapées ou dictées.",
+        placeholder="Paste the raw notes here, in French, as the salesperson typed or dictated them.",
     )
     if st.button(
-        "Remplir la fiche",
+        "Fill in the record",
         type="primary",
         disabled=not state.notes.strip(),
         width="stretch",
@@ -148,18 +146,20 @@ with left:
             if result is None:
                 st.html(
                     banner_html(
-                        "Pas de réponse enregistrée pour ce texte : le rejeu ne marche qu'avec les exemples.",
+                        "No recorded answer for this text: replay only works with the examples.",
                         alert=True,
                     )
                 )
         else:
             try:
-                with st.spinner("Le modèle remplit la fiche… (5 à 15 s sur GPU T4)"):
+                with st.spinner(
+                    "The model is filling in the record… (5 to 15 s on a T4 GPU)"
+                ):
                     result = extract_live(state.notes)
             except EndpointError as error:
                 st.html(
                     banner_html(
-                        f"{error} En secours : passer la source sur « {MODE_REPLAY} » dans la barre latérale.",
+                        f"{error} Fallback: switch the source to “{MODE_REPLAY}” in the sidebar.",
                         alert=True,
                     )
                 )
@@ -174,7 +174,8 @@ with left:
 
     if current is not None and current["result"].check.record is not None:
         st.html(
-            '<div style="height:.8rem"></div>' + label_html("D'où vient chaque champ")
+            '<div style="height:.8rem"></div>'
+            + label_html("Where each field comes from")
         )
         st.html(
             highlighted_notes_html(current["notes"], current["result"].check.record)
@@ -182,12 +183,12 @@ with left:
 
 # -- Droite : la fiche ------------------------------------------------------------------
 with right:
-    st.html(label_html("Fiche CRM"))
+    st.html(label_html("CRM record"))
     if current is None:
         st.html(
             empty_html(
-                "La fiche apparaîtra ici. Choisissez un exemple ou collez des notes, "
-                "puis cliquez sur <b>Remplir la fiche</b>."
+                "The record will appear here. Pick an example or paste notes, "
+                "then click <b>Fill in the record</b>."
             )
         )
     else:
@@ -195,27 +196,28 @@ with right:
         if result.source == "rejeu-fictif":
             st.html(
                 banner_html(
-                    "Rejeu · réponse fictive écrite à la main, en attendant une vraie réponse enregistrée du modèle.",
+                    "Replay · hand-written placeholder answer, waiting for a real recorded answer from the model.",
                     alert=True,
                 )
             )
         elif result.source == "rejeu-enregistre":
-            st.html(banner_html("Rejeu · réponse du modèle enregistrée à l'avance."))
+            st.html(banner_html("Replay · model answer recorded in advance."))
 
         checks = [
             (
-                "json valide" if result.check.json_valid else "json invalide",
+                "valid json" if result.check.json_valid else "invalid json",
                 result.check.json_valid,
             ),
             (
-                "schéma conforme"
-                if result.check.schema_valid
-                else "schéma non conforme",
+                "valid schema" if result.check.schema_valid else "invalid schema",
                 result.check.schema_valid,
             ),
         ]
         if result.latency_s is not None:
-            checks.append((f"{result.latency_s:.1f} s".replace(".", ","), True))
+            checks.append((f"{result.latency_s:.1f} s", True))
+        if result.verdict is not None:
+            score = result.verdict[0]
+            checks.append((f"LLM judge {score:g}/1", score == 1))
 
         record = result.check.record
         if record is None:
@@ -225,18 +227,20 @@ with right:
             st.html(
                 record_card_html(record, current["notes"], stamp=stamp, checks=checks)
             )
-        with st.expander("Réponse brute du modèle"):
-            st.code(result.answer or "(vide)", language="json")
+        if result.verdict is not None:
+            st.caption(f"LLM judge (Gemini): {result.verdict[1]}")
+        with st.expander("Raw model answer"):
+            st.code(result.answer or "(empty)", language="json")
 
         # -- Validation par le commercial : la vérité terrain envoyée à Langfuse -------
         if record is not None:
             st.html(
                 '<div style="height:.6rem"></div>'
-                + label_html("Validation par le commercial")
+                + label_html("Validation by the salesperson")
             )
             if result.trace_id is None:
                 st.caption(
-                    "Rejeu ou Langfuse désactivé : l'avis et la validation ne sont pas envoyés à Langfuse."
+                    "Replay or Langfuse off: feedback and validation are not sent to Langfuse."
                 )
             thumbs = st.feedback("thumbs", key=f"thumbs_{current['id']}")
             if thumbs is not None and not current["thumbs_sent"]:
@@ -245,7 +249,9 @@ with right:
                     current["thumbs_sent"] = True
                 except Exception as error:  # noqa: BLE001  Langfuse arrêté : la démo continue
                     st.html(
-                        banner_html(f"Avis non envoyé à Langfuse : {error}", alert=True)
+                        banner_html(
+                            f"Feedback not sent to Langfuse: {error}", alert=True
+                        )
                     )
 
             with st.form(key=f"validation_{current['id']}", border=False):
@@ -254,7 +260,7 @@ with right:
                     for key, label in FIELDS
                 }
                 submitted = st.form_submit_button(
-                    "Valider la fiche", type="primary", width="stretch"
+                    "Validate the record", type="primary", width="stretch"
                 )
             if submitted and current["validation"] is None:
                 corrected = {
@@ -268,18 +274,18 @@ with right:
                 except Exception as error:  # noqa: BLE001  Langfuse arrêté : la démo continue
                     st.html(
                         banner_html(
-                            f"Validation non envoyée à Langfuse : {error}", alert=True
+                            f"Validation not sent to Langfuse: {error}", alert=True
                         )
                     )
             if current["validation"] is not None:
                 sent = (
-                    " · envoyée dans Langfuse comme bonne réponse"
+                    " · sent to Langfuse as the correct answer"
                     if result.trace_id
                     else ""
                 )
                 st.html(
                     banner_html(
-                        f"Fiche validée · {current['validation']} champ(s) corrigé(s){sent}"
+                        f"Record validated · {current['validation']} field(s) corrected{sent}"
                     )
                 )
 

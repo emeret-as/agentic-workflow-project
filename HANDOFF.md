@@ -81,7 +81,7 @@ branche `session-4-crm`.
 | 1-3 Données, pipeline | **Fait.** Run `model-training-pipeline-20261112183827` réussi. Sur 56 notes de test : JSON 100 %, schéma 100 %, fiche exacte 98,2 %, champ inventé 1,8 %. |
 | Référence Phi-3 de base | Pipeline `base_model_evaluation_pipeline` (même test, même évaluation, `use_base_model=True`), run `base-model-evaluation-pipeline-20261112212113`. |
 | 4 Registre, endpoint, app | **Fait.** Modèle `emeret-crm-phi3` v1 (`models/645705795597500416`). Endpoint déployé en `n1-standard-4` + T4, testé avec curl, l'app Chainlit et l'app Streamlit, puis **supprimé**. Sur l'endpoint (float16) : 56/56 fiches exactes, environ 5,5 s par note. |
-| 5 Langfuse | **Fait sauf le juge.** Langfuse v4 auto-hébergé dans `../langfuse`, projet `crm-notes`. 63 traces : 56 notes de test et 7 notes pièges, via `scripts/send_test_notes.py`. Dashboard créé par `scripts/create_langfuse_dashboard.py`. Le juge `fidelite_fiche` (prompt dans `docs/langfuse_judge_prompt.md`) attend une clé Gemini dans la connexion LLM de l'interface. |
+| 5 Langfuse | **Fait.** Langfuse v4 auto-hébergé dans `../langfuse`, projet `crm-notes`. 63 traces : 56 notes de test et 7 notes pièges, via `scripts/send_test_notes.py`. Dashboard créé par `scripts/create_langfuse_dashboard.py`. Juge LLM `fidelite_fiche` (`src/llm_judge.py`) : Gemini sur Vertex AI, en direct dans la démo, et `scripts/run_llm_judge.py` pour les traces passées. |
 | 6 Présentation | App Streamlit dans `presentation/`, 7 pages, adaptée au schéma CRM. Mode rejeu sur de vraies réponses de l'endpoint. |
 
 Pièges trouvés le 12/11 au soir :
@@ -135,22 +135,12 @@ dans `.env` est **obsolète** (l'endpoint a été supprimé).
 
 ## 6. Ce qu'il reste à faire (état au 13/11, repris par Enzo)
 
-1. **Juge LLM `fidelite_fiche` (session 5, partie 2) : pas encore fait.**
-   - Le prompt est prêt : `docs/langfuse_judge_prompt.md`.
-   - La connexion LLM « Google AI Studio » dans Langfuse
-     (http://localhost:3000/project/crm-notes/settings/llm-connections) échoue avec une clé
-     gratuite. `gemini-2.5-flash` est fermé aux nouveaux comptes, et `gemini-3.8-flash` puis
-     `gemini-3.5-flash` répondent « high demand » (503). L'API Generative Language est déjà
-     activée sur le projet Google de la clé.
-   - Option A : réessayer plus tard, ou avec `gemini-3.5-flash-lite` dans « Custom models »,
-     puis créer l'évaluateur dans l'interface (prévu par le TP). L'API publique
-     `/api/public/v2/evaluators` et `/api/public/v2/evaluation-rules` existe aussi.
-   - Option B : un script qui lit les traces `User Message` (`/api/public/v2/observations`),
-     appelle Gemini par Vertex AI avec les identifiants ADC, puis envoie le score
-     `fidelite_fiche` avec `create_score`. Le 13/11, sur Vertex `global`, ces modèles répondaient :
-     `gemini-3.5-flash`, `gemini-3.5-flash-lite`, `gemini-3.7-flash`, `gemini-3.8-flash`.
-2. **Capture du dashboard Langfuse** : l'enregistrer dans `presentation/data/langfuse_dashboard.png`
-   (la page Monitoring de l'app l'affiche).
+1. **Juge LLM : fait le 13/11** (`src/llm_judge.py`). Il passe par Gemini sur Vertex AI, parce
+   que la connexion « Google AI Studio » de Langfuse échouait avec une clé gratuite (modèles
+   fermés aux nouveaux comptes ou saturés). Il note chaque fiche en direct dans la démo
+   Streamlit, et `scripts/run_llm_judge.py` note les traces passées.
+2. **Monitoring dans l'app** : la page Monitoring lit les chiffres en direct dans Langfuse ; il
+   n'y a plus de capture d'écran à faire.
 3. **Corriger `has_corrupted_text`** (tabulations au milieu d'un mot) avant tout nouvel entraînement.
 4. **Jour de la démo** : redéployer l'endpoint 30 minutes avant
    (`scripts.deploy_endpoint --machine-type n1-standard-4`), renseigner `GCP_ENDPOINT_ID` dans

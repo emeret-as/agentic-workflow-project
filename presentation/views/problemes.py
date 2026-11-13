@@ -4,8 +4,8 @@ FILE = "views/problemes.py"
 
 page_header(
     FILE,
-    "Ce qui a coincé, et ce qu'on a changé.",
-    "Journal tenu depuis le choix du sujet, complété à chaque étape.",
+    "What went wrong, and what we changed.",
+    "Log kept since we picked the topic, updated at every step.",
 )
 
 render_content("problemes.md")

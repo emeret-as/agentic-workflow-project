@@ -21,13 +21,13 @@ from rapidfuzz import fuzz
 
 # Étiquette courte posée à côté de chaque passage surligné
 FIELD_TAGS = {
-    "company": "entreprise",
+    "company": "company",
     "contact_name": "contact",
-    "contact_role": "fonction",
-    "need": "besoin",
+    "contact_role": "role",
+    "need": "need",
     "budget_eur": "budget",
     "next_action": "action",
-    "deadline": "échéance",
+    "deadline": "deadline",
 }
 # Ressemblance minimale (0-100) pour dire « ce champ vient de ce passage »
 _MIN_SCORE = 85
@@ -106,12 +106,12 @@ def _checks_html(checks: list[tuple[str, bool]]) -> str:
     return f'<div class="record__checks">{items}</div>'
 
 
-_STAMPS = {"draft": "Brouillon IA", "validated": "Validée", "refused": "Refusée"}
+_STAMPS = {"draft": "AI draft", "validated": "Validated", "refused": "Rejected"}
 
 
 def _head_html(stamp: str) -> str:
     return (
-        '<div class="record__head"><span class="record__title">Fiche CRM</span>'
+        '<div class="record__head"><span class="record__title">CRM record</span>'
         f'<span class="stamp stamp--{stamp}">{_STAMPS[stamp]}</span></div>'
     )
 
@@ -129,14 +129,14 @@ def record_card_html(
         value = record.get(key)
         dt_class = ' class="is-marked"' if key in marked else ""
         if value is None:
-            dd = '<dd class="is-empty">non mentionné</dd>'
+            dd = '<dd class="is-empty">not mentioned</dd>'
         else:
             status = field_status(key, value, notes)
             note = ""
             if status == FOUND:
-                note = '<span class="field__status">trouvé dans les notes</span>'
+                note = '<span class="field__status">found in the notes</span>'
             elif status == CHECK:
-                note = '<span class="field__status field__status--check">absent des notes · à vérifier</span>'
+                note = '<span class="field__status field__status--check">not in the notes · check it</span>'
             dd = f"<dd>{escape(format_value(key, value))}{note}</dd>"
         rows.append(f'<div class="field"><dt{dt_class}>{label}</dt>{dd}</div>')
     return f'<div class="record">{_head_html(stamp)}<dl>{"".join(rows)}</dl>{_checks_html(checks or [])}</div>'
@@ -148,8 +148,8 @@ def refused_card_html(
     items = "".join(f"<li>{escape(error)}</li>" for error in errors)
     return (
         f'<div class="record">{_head_html("refused")}'
-        '<p class="refused__lead">Le garde-fou a bloqué cette réponse : ce n\'est pas une fiche conforme, '
-        "donc rien n'est affiché ni enregistré.</p>"
+        '<p class="refused__lead">The guardrail blocked this answer: it is not a valid record, '
+        "so nothing is shown or saved.</p>"
         f'<ul class="refused__errors">{items}</ul>{_checks_html(checks or [])}</div>'
     )
 

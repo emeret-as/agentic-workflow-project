@@ -20,8 +20,7 @@ def _access_token() -> str:
         credentials.refresh(Request())
     except Exception as error:  # pas de compte Google configuré, réseau…
         raise EndpointError(
-            "Impossible d'obtenir un jeton Google. Lancer "
-            "`gcloud auth application-default login`."
+            "Could not get a Google token. Run `gcloud auth application-default login`."
         ) from error
     return credentials.token
 
@@ -42,7 +41,7 @@ def call_endpoint(prompt: str) -> str:
     """Envoie le prompt à l'endpoint et renvoie le texte brut généré."""
     if not config.endpoint_configured():
         raise EndpointError(
-            "Endpoint non configuré : renseigner GCP_PROJECT_NUMBER et GCP_ENDPOINT_ID dans .env."
+            "Endpoint not configured: set GCP_PROJECT_NUMBER and GCP_ENDPOINT_ID in .env."
         )
     payload = {"instances": [{"input": prompt}], "parameters": generation_parameters()}
     try:
@@ -54,15 +53,15 @@ def call_endpoint(prompt: str) -> str:
         )
     except requests.Timeout as error:
         raise EndpointError(
-            f"Pas de réponse de l'endpoint après {config.REQUEST_TIMEOUT_S} s."
+            f"No answer from the endpoint after {config.REQUEST_TIMEOUT_S} s."
         ) from error
     except requests.RequestException as error:
-        raise EndpointError(f"Endpoint injoignable : {error}") from error
+        raise EndpointError(f"Endpoint unreachable: {error}") from error
     if response.status_code != 200:
         raise EndpointError(
-            f"L'endpoint a répondu {response.status_code} : {response.text[:300]}"
+            f"The endpoint answered {response.status_code}: {response.text[:300]}"
         )
     predictions = response.json().get("predictions") or []
     if not predictions:
-        raise EndpointError("Réponse de l'endpoint vide.")
+        raise EndpointError("Empty answer from the endpoint.")
     return str(predictions[0])

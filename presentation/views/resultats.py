@@ -17,33 +17,33 @@ BASE_COLOR, TUNED_COLOR = "#A7AFC2", "#2F45C5"
 
 # (clé de la métrique, libellé, plus haut = mieux ?)
 SUMMARY = [
-    ("valid_json_mean", "JSON valide", True),
-    ("valid_schema_mean", "Schéma valide (types, listes fermées)", True),
-    ("exact_match_mean", "Fiche exacte (7 champs justes)", True),
-    ("field_accuracy_mean", "Champs justes", True),
-    ("hallucinated_field_mean", "Fiches avec un champ inventé", False),
+    ("valid_json_mean", "Valid JSON", True),
+    ("valid_schema_mean", "Valid schema (types, closed lists)", True),
+    ("exact_match_mean", "Exact record (all 7 fields right)", True),
+    ("field_accuracy_mean", "Correct fields", True),
+    ("hallucinated_field_mean", "Records with an invented field", False),
 ]
 DISTRACTORS = {
-    "none": "aucun",
-    "date": "une autre date (séminaire, congés…)",
-    "figure": "un autre chiffre (effectif, chiffre d'affaires…)",
-    "competitor": "un concurrent et son budget",
-    "colleague": "un collègue du contact",
+    "none": "none",
+    "date": "another date (seminar, holidays…)",
+    "figure": "another figure (headcount, revenue…)",
+    "competitor": "a competitor and its budget",
+    "colleague": "a colleague of the contact",
 }
 STYLES = {
     "prose": "prose",
     "email": "e-mail",
-    "dictated": "dictée",
-    "telegraphic": "télégraphique",
-    "bullets": "liste à puces",
-    "crm_comment": "commentaire CRM",
+    "dictated": "dictated",
+    "telegraphic": "telegraphic",
+    "bullets": "bullet list",
+    "crm_comment": "CRM comment",
 }
 
 page_header(
     FILE,
-    "Ce que le fine-tuning change, mesuré sur le même jeu de test.",
-    "Phi-3 de base et Phi-3 fine-tuné reçoivent les mêmes 56 notes, avec le même prompt, "
-    "et sont notés par le même composant d'évaluation du pipeline.",
+    "What fine-tuning changes, measured on the same test set.",
+    "Base Phi-3 and fine-tuned Phi-3 get the same 56 notes, with the same prompt, "
+    "and are scored by the same pipeline evaluation component.",
 )
 
 
@@ -53,7 +53,7 @@ def compact(text: str) -> str:
 
 
 def pct(value: float) -> str:
-    return f"{value * 100:.0f} %".replace(".", ",")
+    return f"{value * 100:.0f}%"
 
 
 def comparison_table(base: dict, tuned: dict) -> str:
@@ -69,8 +69,8 @@ def comparison_table(base: dict, tuned: dict) -> str:
             f"<td class='num {'up' if good else 'down'}'>{delta:+.0f} pts</td></tr>"
         )
     return (
-        "<table class='table'><thead><tr><th>Mesure</th><th class='num'>Phi-3 de base</th>"
-        "<th class='num'>Phi-3 fine-tuné</th><th class='num'>Écart</th></tr></thead>"
+        "<table class='table'><thead><tr><th>Metric</th><th class='num'>Base Phi-3</th>"
+        "<th class='num'>Fine-tuned Phi-3</th><th class='num'>Gap</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table>"
     )
 
@@ -88,8 +88,8 @@ def breakdown_table(base: dict, tuned: dict, column: str, labels: dict) -> str:
             f"<td class='num'>{base_cell}</td><td class='num'>{t['exact']}/{t['n']}</td></tr>"
         )
     return (
-        "<table class='table'><thead><tr><th>Notes</th><th class='num'>Nombre</th>"
-        "<th class='num'>Fiches exactes, base</th><th class='num'>Fiches exactes, fine-tuné</th></tr></thead>"
+        "<table class='table'><thead><tr><th>Notes</th><th class='num'>Count</th>"
+        "<th class='num'>Exact records, base</th><th class='num'>Exact records, fine-tuned</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table>"
     )
 
@@ -98,8 +98,8 @@ results = load_json("results.json")
 if results is None:
     st.html(
         empty_html(
-            "Pas encore de chiffres : lancer <code>scripts/build_results.py</code> une fois les deux "
-            "pipelines terminés, il écrit <code>presentation/data/results.json</code>."
+            "No figures yet: run <code>scripts/build_results.py</code> once both pipelines are "
+            "done, it writes <code>presentation/data/results.json</code>."
         )
     )
 else:
@@ -107,18 +107,17 @@ else:
     base_model = results["models"].get("base")
     tuned, base = tuned_model["metrics"], (base_model or {}).get("metrics", {})
     st.html(
-        f"<p class='aside'>Jeu de test : <b>{results['test_set_size']} notes</b> jamais vues à "
-        "l'entraînement, tirées au hasard dans les données.</p>"
-        + comparison_table(base, tuned)
+        f"<p class='aside'>Test set: <b>{results['test_set_size']} notes</b> never seen in "
+        "training, drawn at random from the data.</p>" + comparison_table(base, tuned)
     )
 
-    section("Champ par champ")
+    section("Field by field")
     per_field = pd.DataFrame(
         {
-            "Phi-3 de base": {
+            "Base Phi-3": {
                 label: base.get(f"field_{key}_mean", 0) for key, label in FIELDS
             },
-            "Phi-3 fine-tuné": {
+            "Fine-tuned Phi-3": {
                 label: tuned.get(f"field_{key}_mean", 0) for key, label in FIELDS
             },
         }
@@ -127,56 +126,55 @@ else:
         per_field, stack=False, horizontal=True, color=[BASE_COLOR, TUNED_COLOR]
     )
     st.html(
-        "<p class='aside'><b>À lire avec prudence.</b> Le prompt ne donne pas les valeurs des listes "
-        "fermées : Phi-3 de base ne peut pas deviner <code>crm_migration</code> ou "
-        "<code>send_proposal</code>, d'où ses 0 % sur le besoin et la prochaine action. Sur les champs "
-        "recopiés des notes (entreprise, contact, budget), l'écart est de 12 à 20 points. La vraie faiblesse "
-        "du modèle de base est ailleurs : l'échéance (34 % de bonnes réponses) et les champs inventés, "
-        "dans 27 % des fiches.</p>"
+        "<p class='aside'><b>Read with care.</b> The prompt does not list the closed-list values: "
+        "base Phi-3 cannot guess <code>crm_migration</code> or <code>send_proposal</code>, hence its "
+        "0% on need and next action. On the fields copied from the notes (company, contact, budget), "
+        "the gap is 12 to 20 points. The real weakness of the base model lies elsewhere: the deadline "
+        "(34% right) and invented fields, in 27% of its records.</p>"
     )
 
-    section("Les notes piégées")
+    section("Notes with a distractor")
     st.html(
-        "<p>Quatre notes sur cinq contiennent un élément parasite, que la fiche ne doit pas reprendre.</p>"
+        "<p>Four notes out of five contain a distractor that the record must not pick up.</p>"
         + breakdown_table(base_model, tuned_model, "distractor", DISTRACTORS)
     )
     endpoint = results.get("endpoint")
     if endpoint:
         st.html(
-            "<p class='aside'>La seule erreur du modèle fine-tuné est une date de séminaire prise pour "
-            "l'échéance. Sur l'endpoint, où Phi-3 tourne en float16 au lieu de 4 bits, les mêmes notes "
-            f"donnent <b>{endpoint['exact']}/{endpoint['notes']} fiches exactes</b>, en "
-            f"{str(endpoint['latency_median_s']).replace('.', ',')} s par note (médiane).</p>"
+            "<p class='aside'>The only mistake of the fine-tuned model is a seminar date taken as "
+            "the deadline. On the endpoint, where Phi-3 runs in float16 instead of 4 bits, the same "
+            f"notes give <b>{endpoint['exact']}/{endpoint['notes']} exact records</b>, in "
+            f"{endpoint['latency_median_s']} s per note (median).</p>"
         )
-    with st.expander("Par style de note"):
+    with st.expander("By note style"):
         st.html(breakdown_table(base_model, tuned_model, "style", STYLES))
 
     if results.get("examples"):
-        section("Même note, deux modèles")
+        section("Same note, two models")
         for example in results["examples"][:2]:
             st.html(f'<div class="notes">{escape(example["notes"])}</div>')
             col_base, col_tuned = st.columns(2)
             with col_base:
-                st.html(label_html("Phi-3 de base"))
+                st.html(label_html("Base Phi-3"))
                 st.code(
-                    compact(example["base"]) or "(réponse vide)",
+                    compact(example["base"]) or "(empty answer)",
                     language="json",
                     wrap_lines=True,
                 )
             with col_tuned:
-                st.html(label_html("Phi-3 fine-tuné"))
+                st.html(label_html("Fine-tuned Phi-3"))
                 st.code(example["finetuned"], language="json", wrap_lines=True)
 
     training = tuned_model.get("training")
     if training:
-        section("Entraînement")
+        section("Training")
         st.html(
             '<div class="facts">'
             f"<span>epochs <b>{training['num_train_epochs']:.0f}</b></span>"
             f"<span>LoRA <b>r={training['lora_r']:.0f}, α={training['lora_alpha']:.0f}</b></span>"
-            f"<span>paramètres entraînés <b>{training['trainable_params'] / 1e6:.1f} M</b></span>"
-            f"<span>perte entraînement <b>{training['train_loss']:.2f}</b></span>"
-            f"<span>perte validation <b>{training['eval_loss']:.2f}</b></span></div>"
+            f"<span>trained parameters <b>{training['trainable_params'] / 1e6:.1f} M</b></span>"
+            f"<span>train loss <b>{training['train_loss']:.2f}</b></span>"
+            f"<span>validation loss <b>{training['eval_loss']:.2f}</b></span></div>"
         )
 
 nav_buttons(FILE)

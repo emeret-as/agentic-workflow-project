@@ -1,28 +1,20 @@
-## Ce qui est tracé
-Chaque fiche remplie crée une trace `User Message`, que la note vienne de l'app Chainlit ou de cette démo Streamlit. Elle garde les notes en entrée et la fiche en sortie. À l'intérieur, une generation `Vertex AI endpoint` garde :
-- la requête envoyée (prompt et paramètres de génération) ;
-- la réponse brute ;
-- le modèle, sa version et le temps de réponse.
+## What is traced
+Each record filled in creates a `User Message` trace, holding the notes as input and the record as output. Inside it, a `Vertex AI endpoint` generation keeps:
+- the request sent (prompt and generation parameters);
+- the raw answer;
+- the model, its version and the response time.
 
-Une panne de l'endpoint y est marquée `ERROR`.
+An endpoint failure is marked `ERROR`.
 
-## Les scores
-| Score | Rempli par | Ce qu'il mesure |
-|---|---|---|
-| `json_valid` | le code, à chaque appel | la réponse contient un JSON lisible |
-| `schema_valid` | le code, à chaque appel | les 7 champs, les bons types, les listes fermées |
-| `names_grounded` | le code, à chaque appel | l'entreprise et le contact se retrouvent dans les notes |
-| `fidelite_fiche` | un juge LLM (Gemini), dans Langfuse | la fiche est fidèle aux notes : 1, 0,5 ou 0, avec une justification |
-| `exact_match` | le script d'envoi des notes de test | les 7 champs égaux à la référence (jeu de test seulement) |
-| `avis_utilisateur`, `champs_corriges` | le commercial, dans la démo | pouce levé ou baissé ; nombre de champs modifiés avant validation |
+## The LLM judge
+For every valid record, Gemini reads the notes and the record and gives a fidelity score (1, 0.5 or 0) with a one-sentence reason. Its prompt has two hand-written examples (few-shot), and the reason is stored as a comment on the score.
 
-## Ce que le monitoring a déjà attrapé
-Les 56 notes de test et 7 notes pièges, écrites à la main, ont été envoyées à l'endpoint.
+The course sets the judge up inside Langfuse, with an LLM connection. Our free Gemini key failed there, because the models were overloaded. So the judge calls Gemini through Vertex AI with our GCP project, then writes its score into Langfuse. The result in Langfuse is the same: a score on every trace, visible in the dashboard.
 
-Sur les notes pièges :
-- **La recette de cuisine** a reçu une fiche « valide », mais inventée de bout en bout (« Clinique Valmont », « Sophie Bernard »). Seul `names_grounded` passe à 0 : la forme est bonne, le fond est faux. C'est pour ce cas que le juge LLM existe.
-- **Le besoin hors liste** (refaire un site vitrine) a produit une catégorie inventée, `website_redesign`. Le garde-fou bloque la fiche (`schema_valid` = 0).
-- **La note en anglais** passe les contrôles, mais le budget de 80 k£ est converti en 72 000 € sans que la note le dise.
+## What monitoring has already caught
+On the hand-written trap notes:
+- **The cooking recipe** got a "valid" record, entirely made up ("Clinique Valmont", "Sophie Bernard"). `names_grounded` and the judge both give 0.
+- **The off-list need** (redoing a website) produced an invented category, `website_redesign`. The guardrail blocks the record.
+- **The English note** passes the format checks, but its budget of £80k is converted to €72,000 without the note saying so. The judge gives 0.
 
-## Limite du juge
-Les notes d'entraînement viennent de Gemini, et le juge est aussi un Gemini : ils peuvent partager les mêmes angles morts. Pour cette raison, les exemples du prompt du juge sont écrits à la main.
+**Limit:** the training notes and the judge both come from Gemini, so they may share the same blind spots.

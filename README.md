@@ -183,9 +183,17 @@ et `local_tests/crm_metrics_test.py`.
 5. Dashboard : `uv run --env-file .env python -m scripts.create_langfuse_dashboard`. Il crée
    « Fiches CRM - suivi en production » par l'API publique : notes traitées, qualité des
    fiches, qualité dans le temps, latence p50/p95 de l'endpoint.
-6. Juge LLM : connexion LLM (clé Gemini) et évaluateur `fidelite_fiche`, créés dans
-   l'interface (l'API publique ne crée pas d'évaluateurs). Le prompt et les réglages sont
-   dans `docs/langfuse_judge_prompt.md`.
+6. Juge LLM `fidelite_fiche` (`src/llm_judge.py`, prompt dans `docs/langfuse_judge_prompt.md`).
+   Gemini (`gemini-3.5-flash`, sur Vertex AI avec les identifiants ADC) relit la note et la
+   fiche, puis donne 1, 0,5 ou 0 avec une justification, envoyée comme score sur la trace. Il
+   tourne en direct dans la démo Streamlit et dans l'app Chainlit. Pour noter les traces
+   passées :
+   ```bash
+   PYTHONPATH=. uv run --env-file .env python -m scripts.run_llm_judge
+   ```
+   Pourquoi pas l'évaluateur de l'interface Langfuse, comme dans le TP : la connexion LLM avec
+   une clé Gemini gratuite échouait (`gemini-2.5-flash` fermé aux nouveaux comptes, les modèles
+   plus récents saturés).
 
 Langfuse v4 tourne en mode `events_only` : les anciennes routes de lecture
 (`/api/public/traces`, `/api/public/scores`) répondent par une erreur. Pour relire les
@@ -193,8 +201,8 @@ données, utiliser `/api/public/v2/observations` et `/api/public/v3/scores`.
 
 ## Présentation (session 6)
 
-Toute la présentation se fait dans une app Streamlit (`presentation/`) en 7 pages : brief, démo en
-direct, pipeline, résultats, monitoring, problèmes rencontrés, coûts et IA responsable. L'app
+Toute la présentation se fait dans une app Streamlit (`presentation/`) en 6 pages : brief, démo en
+direct, pipeline, résultats, monitoring, problèmes rencontrés. L'app
 réutilise le schéma du projet (`src/crm_schema.py`) et trace ses appels dans Langfuse, comme l'app
 Chainlit (mêmes noms de span, de generation et de scores).
 
@@ -205,6 +213,8 @@ cd presentation && uv run streamlit run app.py
 - **Démo « Modèle en ligne »** : appelle l'endpoint, si `GCP_ENDPOINT_ID` est renseigné dans `.env`.
 - **Démo « Rejeu enregistré »** : réponses réelles de l'endpoint, enregistrées le 12/11 dans
   `presentation/data/replay.json`. C'est le secours si l'endpoint ne répond pas.
+- **Page Monitoring** : lit en direct dans Langfuse le nombre de traces, la moyenne de chaque
+  score, les verdicts du juge LLM et la latence de l'endpoint.
 - **Page Résultats** : lit `presentation/data/results.json`, produit par
   `uv run --env-file .env python -m scripts.build_results --finetuned-run <run> --base-run <run>`.
 - Tests : `uv run python -m pytest presentation/tests -q`.

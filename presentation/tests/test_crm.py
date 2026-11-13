@@ -74,11 +74,11 @@ def test_guardrail_explains_schema_errors():
     }
     result = check_output(json.dumps(bad))
     assert result.json_valid and not result.schema_valid
-    assert any("Besoin hors liste" in error for error in result.errors)
+    assert any("Need not in the list" in error for error in result.errors)
     assert any("Budget" in error for error in result.errors)
-    assert any("Échéance" in error for error in result.errors)
+    assert any("Deadline" in error for error in result.errors)
     empty = check_output(json.dumps({key: None for key in RECORD}))
-    assert any("Entreprise absente" in error for error in empty.errors)
+    assert any("Company missing" in error for error in empty.errors)
 
 
 def test_parse_amounts_french_formats():
@@ -118,17 +118,17 @@ def test_names_grounded_catches_invented_names():
 
 
 def test_format_value():
-    assert format_value("budget_eur", 124000) == "124 000 €"
-    assert format_value("deadline", "2027-02-26") == "26 février 2027"
-    assert format_value("need", "crm_migration") == "Migration du CRM"
+    assert format_value("budget_eur", 124000) == "€124,000"
+    assert format_value("deadline", "2027-02-26") == "26 February 2027"
+    assert format_value("need", "crm_migration") == "CRM migration"
 
 
 def test_highlight_and_card():
     html = highlighted_notes_html(NOTES, RECORD)
-    for tag in ("entreprise", "contact", "fonction", "budget", "échéance"):
+    for tag in ("company", "contact", "role", "budget", "deadline"):
         assert tag in html
     assert "124 k€" in html and "<script" not in highlighted_notes_html(
         "<script>x</script>", RECORD
     )
     card = record_card_html(RECORD, NOTES)
-    assert "Migration du CRM" in card and "26 février 2027" in card
+    assert "CRM migration" in card and "26 February 2027" in card

@@ -11,12 +11,11 @@ from ui.theme import CSS
 # (fichier, titre court) dans l'ordre de l'exposé
 PAGES: list[tuple[str, str]] = [
     ("views/accueil.py", "Brief"),
-    ("views/demo.py", "Démo"),
+    ("views/demo.py", "Demo"),
     ("views/pipeline.py", "Pipeline"),
-    ("views/resultats.py", "Résultats"),
+    ("views/resultats.py", "Results"),
     ("views/monitoring.py", "Monitoring"),
-    ("views/problemes.py", "Problèmes"),
-    ("views/couts_ia.py", "Coûts & IA responsable"),
+    ("views/problemes.py", "Problems"),
 ]
 _FILES = [file for file, _ in PAGES]
 

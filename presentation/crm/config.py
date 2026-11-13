@@ -30,7 +30,11 @@ LANGFUSE_HOST = os.getenv("LANGFUSE_HOST", "http://localhost:3000")
 LANGFUSE_ENABLED = bool(
     os.getenv("LANGFUSE_PUBLIC_KEY") and os.getenv("LANGFUSE_SECRET_KEY")
 )
-LANGFUSE_DASHBOARD_URL = os.getenv("LANGFUSE_DASHBOARD_URL", LANGFUSE_HOST)
+# Dashboard « Fiches CRM - suivi en production » (créé par scripts/create_langfuse_dashboard.py)
+LANGFUSE_DASHBOARD_URL = os.getenv(
+    "LANGFUSE_DASHBOARD_URL",
+    f"{LANGFUSE_HOST.rstrip('/')}/project/crm-notes/dashboards/cmwdzucg9000amt32rmn7jthk",
+)
 
 
 def endpoint_configured() -> bool:

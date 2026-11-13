@@ -19,6 +19,7 @@ from crm.client import EndpointError, call_endpoint, generation_parameters
 from crm.guardrail import GuardrailResult, check_output
 from crm.prompt import PROMPT_VERSION, build_prompt, extract_answer
 from src.crm_schema import normalize
+from src.llm_judge import SCORE_NAME, judge
 
 REPLAY_FILE = config.DATA_DIR / "replay.json"
 
@@ -30,6 +31,7 @@ class ExtractionResult:
     check: GuardrailResult
     latency_s: float | None
     trace_id: str | None = None
+    verdict: tuple[float, str] | None = None  # juge LLM : (score, justification)
 
 
 def names_grounded(record: dict | None, notes: str) -> bool:
@@ -64,7 +66,7 @@ def _check_and_score(
 def _extract_untraced(notes: str) -> tuple[str, GuardrailResult, str | None]:
     answer = extract_answer(call_endpoint(build_prompt(notes)))
     check, _ = _check_and_score(None, notes, answer)
-    return answer, check, None
+    return answer, check, None, None
 
 
 def _extract_traced(notes: str) -> tuple[str, GuardrailResult, str | None]:
@@ -91,13 +93,29 @@ def _extract_traced(notes: str) -> tuple[str, GuardrailResult, str | None]:
             metadata={"prompt_version": PROMPT_VERSION},
         ) as generation:
             try:
+                started = time.perf_counter()
                 answer = extract_answer(call_endpoint(prompt))
+                model_latency = time.perf_counter() - started
             except EndpointError as error:
                 generation.update(level="ERROR", status_message=str(error))
                 raise
             generation.update(output=answer)
         check, trace_id = _check_and_score(langfuse, notes, answer)
-        return answer, check, trace_id
+        verdict = None
+        if (
+            check.record is not None
+        ):  # une fiche refusée par le garde-fou n'est pas jugée
+            try:
+                verdict = judge(notes, answer)
+                langfuse.score_current_span(
+                    name=SCORE_NAME,
+                    value=verdict[0],
+                    data_type="NUMERIC",
+                    comment=verdict[1],
+                )
+            except Exception:  # noqa: BLE001  juge indisponible : la démo continue
+                verdict = None
+        return answer, check, trace_id, verdict, model_latency
 
     try:
         return run(notes)
@@ -107,12 +125,12 @@ def _extract_traced(notes: str) -> tuple[str, GuardrailResult, str | None]:
 
 def extract_live(notes: str) -> ExtractionResult:
     """Appelle le vrai modèle. Lève EndpointError avec un message lisible si ça échoue."""
+    if config.LANGFUSE_ENABLED:
+        answer, check, trace_id, verdict, latency = _extract_traced(notes)
+        return ExtractionResult("endpoint", answer, check, latency, trace_id, verdict)
     start = time.perf_counter()
-    extractor = _extract_traced if config.LANGFUSE_ENABLED else _extract_untraced
-    answer, check, trace_id = extractor(notes)
-    return ExtractionResult(
-        "endpoint", answer, check, time.perf_counter() - start, trace_id
-    )
+    answer, check, trace_id, verdict = _extract_untraced(notes)
+    return ExtractionResult("endpoint", answer, check, time.perf_counter() - start)
 
 
 def load_replay() -> dict:

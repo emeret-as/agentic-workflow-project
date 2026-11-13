@@ -16,13 +16,13 @@ FIELDS: list[tuple[str, str]] = list(
     zip(
         FIELD_KEYS,
         [
-            "Entreprise",
-            "Interlocuteur",
-            "Fonction",
-            "Besoin",
+            "Company",
+            "Contact",
+            "Role",
+            "Need",
             "Budget",
-            "Prochaine action",
-            "Échéance",
+            "Next action",
+            "Deadline",
         ],
         strict=True,
     )
@@ -31,38 +31,38 @@ FIELD_LABELS: dict[str, str] = dict(FIELDS)
 
 # Libellés courts des listes fermées (les valeurs du JSON restent en anglais)
 NEED_LABELS: dict[str, str] = {
-    "crm_migration": "Migration du CRM",
-    "data_platform": "Plateforme de données",
-    "cybersecurity": "Cybersécurité",
-    "cloud_migration": "Migration vers le cloud",
-    "ai_assistant": "Assistant IA interne",
-    "process_automation": "Automatisation de processus",
-    "analytics_dashboard": "Tableaux de bord",
-    "team_training": "Formation des équipes",
+    "crm_migration": "CRM migration",
+    "data_platform": "Data platform",
+    "cybersecurity": "Cybersecurity",
+    "cloud_migration": "Cloud migration",
+    "ai_assistant": "Internal AI assistant",
+    "process_automation": "Process automation",
+    "analytics_dashboard": "Analytics dashboards",
+    "team_training": "Team training",
 }
 NEXT_ACTION_LABELS: dict[str, str] = {
-    "send_proposal": "Envoyer une proposition chiffrée",
-    "schedule_demo": "Organiser une démonstration",
-    "send_documentation": "Envoyer la documentation",
-    "schedule_followup_call": "Planifier un appel de suivi",
-    "involve_stakeholder": "Faire venir un décideur",
-    "internal_review": "Attendre la validation interne",
+    "send_proposal": "Send a priced proposal",
+    "schedule_demo": "Schedule a demo",
+    "send_documentation": "Send documentation",
+    "schedule_followup_call": "Schedule a follow-up call",
+    "involve_stakeholder": "Bring in a decision-maker",
+    "internal_review": "Wait for internal approval",
 }
 assert list(NEED_LABELS) == NEEDS and list(NEXT_ACTION_LABELS) == NEXT_ACTIONS
 
 _MONTHS = [
-    "janvier",
-    "février",
-    "mars",
-    "avril",
-    "mai",
-    "juin",
-    "juillet",
-    "août",
-    "septembre",
-    "octobre",
-    "novembre",
-    "décembre",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ]
 
 
@@ -71,7 +71,7 @@ def format_value(key: str, value) -> str:
     if value is None:
         return ""
     if key == "budget_eur" and isinstance(value, int):
-        return f"{value:,} €".replace(",", " ")
+        return f"€{value:,}"
     if key == "need":
         return NEED_LABELS.get(value, str(value))
     if key == "next_action":

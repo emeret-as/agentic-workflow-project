@@ -1,10 +1,11 @@
 # Évaluateur LLM-as-a-judge Langfuse : « fidelite_fiche »
 
-> **État au 13/11 : pas encore créé.** La connexion Google AI Studio échoue (modèle saturé). Voir HANDOFF.md, §6.
+Juge LLM de la session 5, à la place du critique « Yoda-ness » du cours. Il tourne sur chaque
+fiche de la démo (`src/llm_judge.py`), et `scripts/run_llm_judge.py` note les traces passées.
 
-Évaluateur personnalisé créé dans l'interface Langfuse (session 5). Il remplace le
-critique « Yoda-ness » du cours. Il tourne sur chaque nouvelle trace de l'app
-(`User Message`).
+Il appelle Gemini par Vertex AI, et non par la connexion LLM de l'interface Langfuse prévue
+au TP. Avec une clé Gemini gratuite, cette connexion échouait : `gemini-2.5-flash` est fermé
+aux nouveaux comptes, et les modèles plus récents étaient saturés.
 
 - **Nom du score** : `fidelite_fiche`
 - **Variables** : `{{input}}` = input de la trace (note brute), `{{output}}` = output de
@@ -52,9 +53,8 @@ Fiche produite par le modèle :
 Donne d'abord ton raisonnement en une ou deux phrases, puis le score.
 ```
 
-## Réglages dans Langfuse
+## Réglages
 
-- Score : numérique, de 0 à 1.
-- Raisonnement : « Une ou deux phrases qui citent le champ en cause. »
-- Cible : nouvelles traces **et** traces existantes, filtre sur le nom de trace `User Message`.
-- Modèle évaluateur : Gemini via la connexion LLM du projet (température 0).
+- Score : numérique, 1, 0,5 ou 0. La justification est enregistrée comme commentaire du score.
+- Cible : les traces `User Message` dont la fiche passe le garde-fou.
+- Modèle : `gemini-3.5-flash` sur Vertex AI, température 0, réponse en JSON.

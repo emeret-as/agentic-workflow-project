@@ -1,13 +1,15 @@
-| Problème | Ce qu'on a changé |
+| Problem | What we changed |
 |---|---|
-| Le sujet du TP (traduire en langage de Yoda) n'était pas notre cas d'usage | Changement pour notes de réunion → fiche CRM. On a gardé tout le pipeline du cours, en changeant les données, le prompt et les métriques. |
-| Aucun jeu de données public ne correspond (les jeux « texte → JSON » trouvés sont génériques, et leurs fiches contiennent des inventions) | Données synthétiques : on tire d'abord la fiche, puis Gemini rédige la note. Une seconde extraction contrôle chaque note : 558 notes gardées. |
-| Clé Gemini gratuite limitée à 20 requêtes par jour | Génération via Gemini sur Vertex AI, dans notre projet GCP, pour quelques centimes |
-| 32 notes générées contenaient des caractères invisibles | Filtre `has_corrupted_text` avant l'entraînement |
-| 13 notes ont des « é » remplacés par des tabulations : le filtre autorise la tabulation, elles sont passées | Repéré à l'analyse des erreurs. C'est la seule note ratée par le pipeline. Le filtre est à corriger avant le prochain entraînement. |
-| Surapprentissage au TP Yoda : la perte de validation remontait après 2 epochs | 3 epochs au lieu de 10 (Rouge-L de 0,831 à 0,861) |
-| Longueur des sorties : la fiche fait 58 à 92 tokens, et les exemples complets jusqu'à 512 | `max_length` 640 à l'entraînement, `max_new_tokens` 160 au service |
-| Déploiement de l'endpoint refusé : quota de CPU partagé avec les autres équipes | Machine `n1-standard-4` au lieu de `n1-standard-8`, avec un script qui déploie et supprime l'endpoint |
-| Langfuse v4 refuse les anciennes routes de lecture (`/traces`, `/scores`) | Lecture par `/api/public/v2/observations` et `/api/public/v3/scores`. SDK gardé en v3 : la v5 n'a plus `start_as_current_generation`. |
-| Port 5432 déjà pris par un Postgres local, Docker limité à 4 Go | Postgres de Langfuse exposé sur 5433 (`docker-compose.override.yml`) ; Langfuse occupe environ 2,4 Go |
-| Écart entre le pipeline (55/56 fiches exactes) et l'endpoint (56/56) | Le pipeline charge Phi-3 en 4 bits, l'endpoint en float16 : la quantification coûte une fiche. À garder en tête avant de comparer deux chiffres. |
+| The practice use case (Yoda-speak translation) was not ours | Switched to meeting notes → CRM record, keeping the whole course pipeline and changing the data, prompt and metrics |
+| No public dataset fits (the "text → JSON" sets we found are generic, and their records contain inventions) | Synthetic data: we draw the record first, then Gemini writes the note. A second extraction checks every note: 558 notes kept. |
+| Free Gemini key limited to 20 requests a day | Data generated with Gemini on Vertex AI, in our GCP project, for a few cents |
+| 32 generated notes contained invisible characters | `has_corrupted_text` filter before training |
+| 13 notes have "é" replaced by tabs: the filter allows tabs, so they got through | Found while analysing errors. It is the only note the pipeline got wrong. The filter must be fixed before the next training run. |
+| Overfitting in the Yoda practice: validation loss went up after 2 epochs | 3 epochs instead of 10 (Rouge-L from 0.831 to 0.861) |
+| Output length: the record takes 58 to 92 tokens, and full examples up to 512 | `max_length` 640 for training, `max_new_tokens` 160 for serving |
+| Endpoint deployment refused: CPU quota shared with the other teams | `n1-standard-4` instead of `n1-standard-8`, with a script that deploys and deletes the endpoint |
+| An endpoint is billed as long as it exists, with no scale-to-zero | Deleted after every use, redeployed about 30 minutes before the demo |
+| Langfuse v4 rejects the old read routes (`/traces`, `/scores`) | Reads through `/api/public/v2/observations` and `/api/public/v3/scores`. SDK kept at v3: v5 no longer has `start_as_current_generation`. |
+| Port 5432 already taken by a local Postgres, Docker limited to 4 GB | Langfuse's Postgres exposed on 5433 (`docker-compose.override.yml`); Langfuse uses about 2.4 GB |
+| Langfuse's LLM connection failed with our free Gemini key (models closed to new users, then overloaded) | The LLM judge calls Gemini through Vertex AI with our GCP project, and writes its score into Langfuse |
+| Gap between the pipeline (55/56 exact records) and the endpoint (56/56) | The pipeline loads Phi-3 in 4 bits, the endpoint in float16: quantization costs one record |

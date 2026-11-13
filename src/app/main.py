@@ -17,6 +17,7 @@ from langfuse import Langfuse, observe
 
 from src.constants import ENDPOINT_ID, PROJECT_NUMBER, REGION
 from src.crm_schema import build_user_content, is_valid_record, normalize, parse_json
+from src.llm_judge import SCORE_NAME, judge
 
 # Chainlit émet ses propres traces OpenTelemetry : on les écarte de Langfuse pour
 # ne garder que nos spans et generations
@@ -135,8 +136,18 @@ def answer(note: str) -> str:
     raw_output = call_endpoint(note)
     extracted = extract_response(raw_output)
     langfuse.update_current_span(output=extracted)
-    for name, value in score_output(note, extracted).items():
+    scores = score_output(note, extracted)
+    for name, value in scores.items():
         langfuse.score_current_span(name=name, value=value, data_type="NUMERIC")
+    if scores["schema_valid"]:
+        # Juge LLM (Gemini sur Vertex AI) : la fiche est-elle fidèle à la note ?
+        try:
+            score, reason = judge(note, extracted)
+            langfuse.score_current_span(
+                name=SCORE_NAME, value=score, data_type="NUMERIC", comment=reason
+            )
+        except Exception as error:  # noqa: BLE001  juge indisponible : l'app répond quand même
+            langfuse.update_current_span(metadata={"judge_error": str(error)})
     return extracted
 
 

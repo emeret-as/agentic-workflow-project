@@ -21,7 +21,7 @@ def send_thumbs(trace_id: str, thumbs_up: bool) -> None:
         value=1.0 if thumbs_up else 0.0,
         trace_id=trace_id,
         data_type="BOOLEAN",
-        comment="pouce levé" if thumbs_up else "pouce baissé",
+        comment="thumbs up" if thumbs_up else "thumbs down",
     )
     langfuse.flush()
 

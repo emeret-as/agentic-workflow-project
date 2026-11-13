@@ -30,32 +30,32 @@ def _schema_errors(record: dict) -> list[str]:
     missing = [key for key in FIELDS if key not in record]
     extra = [key for key in record if key not in FIELDS]
     if missing:
-        errors.append(f"Champs manquants : {', '.join(missing)}")
+        errors.append(f"Missing fields: {', '.join(missing)}")
     if extra:
-        errors.append(f"Champs en trop : {', '.join(extra)}")
+        errors.append(f"Unexpected fields: {', '.join(extra)}")
     if not missing and not extra and list(record) != FIELDS:
-        errors.append("Les champs ne sont pas dans l'ordre attendu")
+        errors.append("Fields are not in the expected order")
     company = record.get("company")
     if not isinstance(company, str) or not company.strip():
-        errors.append("Entreprise absente : une fiche doit toujours en avoir une")
+        errors.append("Company missing: a record must always have one")
     for key in ("contact_name", "contact_role"):
         value = record.get(key)
         if value is not None and not (isinstance(value, str) and value.strip()):
-            errors.append(f"{FIELD_LABELS[key]} : texte ou null attendu")
+            errors.append(f"{FIELD_LABELS[key]}: text or null expected")
     budget = record.get("budget_eur")
     if budget is not None and not (
         isinstance(budget, int) and not isinstance(budget, bool) and budget > 0
     ):
-        errors.append("Budget : montant entier en euros attendu")
+        errors.append("Budget: integer amount in euros expected")
     deadline = record.get("deadline")
     if deadline is not None and not (
         isinstance(deadline, str) and _ISO_DATE.match(deadline)
     ):
-        errors.append("Échéance : date au format AAAA-MM-JJ attendue")
+        errors.append("Deadline: date in YYYY-MM-DD format expected")
     if "need" in record and record["need"] not in NEEDS:
-        errors.append(f"Besoin hors liste : « {record['need']} »")
+        errors.append(f"Need not in the list: “{record['need']}”")
     if "next_action" in record and record["next_action"] not in NEXT_ACTIONS:
-        errors.append(f"Prochaine action hors liste : « {record['next_action']} »")
+        errors.append(f"Next action not in the list: “{record['next_action']}”")
     return errors
 
 
@@ -63,10 +63,8 @@ def check_output(answer: str) -> GuardrailResult:
     """Vérifie la réponse du modèle et renvoie la fiche si elle est conforme."""
     record = parse_json(answer)
     if record is None:
-        return GuardrailResult(
-            False, False, None, ["Pas de JSON lisible dans la réponse"]
-        )
+        return GuardrailResult(False, False, None, ["No readable JSON in the answer"])
     if is_valid_record(record):
         return GuardrailResult(True, True, record)
-    errors = _schema_errors(record) or ["Fiche non conforme au schéma"]
+    errors = _schema_errors(record) or ["Record does not match the schema"]
     return GuardrailResult(True, False, None, errors)
