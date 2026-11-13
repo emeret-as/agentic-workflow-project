@@ -15,7 +15,6 @@ PAGES: list[tuple[str, str]] = [
     ("views/pipeline.py", "Pipeline"),
     ("views/resultats.py", "Results"),
     ("views/monitoring.py", "Monitoring"),
-    ("views/problemes.py", "Problems"),
 ]
 _FILES = [file for file, _ in PAGES]
 
