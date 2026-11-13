@@ -1,7 +1,8 @@
 # Presentation script — Meeting notes → CRM record (10 minutes)
 
-One section per page of the Streamlit app, in order. Times are targets; the whole script is about
-1,350 words, which is 10 minutes at a calm pace. *Italic lines* are actions, not words to say.
+One section per page of the Streamlit app, in order. Times are targets: about 1,100 spoken words
+(8.5 minutes at a calm pace) plus the waiting time of the live demo, so 10 minutes in total.
+*Italic lines* are actions, not words to say.
 
 **Before you start**
 - *Deploy the endpoint ~30 minutes before (it takes 15–30 min).*
