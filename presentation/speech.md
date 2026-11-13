@@ -84,21 +84,21 @@ Four notes out of five have a distractor. The model misses one record, taking a 
 
 ## 5. Monitoring — 1:15
 
-*Page "Monitoring". Figures are read live from Langfuse, including this demo's calls.*
+*Page "Monitoring". The numbers on this page are read live from Langfuse — they already include the call I just ran in the demo.*
 
-Offline we score against references; online there are none, so the scores are reference-free. Langfuse is self-hosted — the notes are client data and stay on our machine.
+Every extraction the app does is logged as a trace: a span with the note and the record, and inside it a generation with the prompt, the parameters, the raw output, the model version and the latency.
 
-Each extraction is a trace: a span for the record, a nested generation for the endpoint call with prompt, params, raw output, model version and latency. On each we push the two schema checks and `names_grounded` — company and contact present in the note, a cheap hallucination proxy.
+*Point at the top row.*
 
-The real reference-free signal is the **LLM-as-a-judge**: Gemini rates faithfulness, 1 / 0.5 / 0 with a reason, few-shot so a seminar date isn't read as a deadline.
+Here, live: trace count, endpoint latency p50 and p95, and the judge breakdown — how many records faithful, minor, unfaithful.
 
-*Point at the judge figures.*
+*Point at the scores table.*
 
-It catches what the deterministic checks can't: the recipe, valid schema but fully made up, and an English note where it quietly converted GBP to EUR. Both score 0.
+And the scores we attach to each trace. The first three run in our code on every call: valid JSON, valid schema, and `names_grounded` — company and contact actually in the note, a cheap hallucination proxy. The fourth is the one that matters in production, where we have no reference: the **LLM-as-a-judge**. Gemini rates how faithful the record is, 1 / 0.5 / 0 with a reason, few-shot so it doesn't read a seminar date as a deadline. It catches what the checks can't — the recipe, valid schema but fully made up, and the English note where it converted GBP to EUR on its own. Both score 0.
 
 *Click "Open the Langfuse dashboard".*
 
-Scores over time with p50/p95 latency — the drift signal. One bias to flag: generator and judge are both Gemini, so the judge's few-shot examples are hand-written.
+Same scores plotted over time with the latency — that's our drift signal. One bias to flag: generator and judge are both Gemini, so the judge's few-shot examples are hand-written.
 
 ## Wrap-up — 0:30
 
