@@ -191,19 +191,7 @@ retrain, using the records the salespeople validated as fresh labelled data.
 One honest limitation on the judge: our training data and our judge both come from Gemini, so they
 may share the same blind spots. That is why the judge's examples are written by hand, not generated.
 
-## 6. Problems — 1:00
-
-*Page "Problems".*
-
-The main problems we hit, and what we changed.
-- **Data.** The free Gemini key allowed 20 requests a day, so we generated the data on Vertex AI.
-  We also found 13 notes where accents had been replaced by tabs. That is exactly the note the
-  pipeline got wrong, and the filter must be fixed before the next training run.
-- **Serving.** The endpoint deployment was refused because the CPU quota is shared with the other
-  teams, so we moved to a smaller machine. An endpoint is billed as long as it exists, so we
-  delete it after every use.
-- **Monitoring.** Langfuse's own LLM connection failed with a free Gemini key, so our judge calls
-  Gemini through Vertex AI and writes its score into Langfuse.
+## Wrap-up — 0:30
 
 To sum up: a small model, fine-tuned on synthetic data, fills in a CRM record reliably. It runs
 in our own cloud, and it is monitored on every call. The salesperson always has the last word.
