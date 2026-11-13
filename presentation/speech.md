@@ -68,57 +68,43 @@ This is the course workflow, end to end, with our own data, prompt and metrics.
 
 **Serve and monitor.** The model is registered in the Model Registry with a custom handler, then deployed on an endpoint. The endpoint is called by this app, and every call is traced in a self-hosted Langfuse.
 
-## 4. Results — 2:30
+## 4. Results — 2:00
 
 *Page "Results".*
 
-To measure what fine-tuning actually brings, we always compare against a **baseline**: base Phi-3, the model exactly as Microsoft publishes it, with no training. We ran a second pipeline that loads base Phi-3 without our LoRA adapters, and runs it on the **same 56 test notes**, with the **same prompt** and the **same evaluation component**. So the only thing that changes between the two columns is the fine-tuning itself.
+Baseline is base Phi-3 run through a second pipeline: same 56 held-out notes, same prompt, same evaluation component, LoRA adapters off. So the delta is the fine-tuning alone.
 
-Here are the five metrics.
-- **Valid JSON**: the answer is a readable JSON object. 88% for the base model, 100% fine-tuned.
-- **Valid schema**: the seven keys in order, the right types — budget as an integer, deadline as a YYYY-MM-DD date — and the need and action taken from the closed lists. 0% for the base model, 100% fine-tuned.
-- **Exact match**: all seven fields equal to the reference record. 0% for the base model, 98% fine-tuned.
-- **Field accuracy**: the share of correct fields on average. 53% to 99.7%.
-- **Hallucinated field**: a record where the model fills a field the note never mentioned. From 27% of records down to under 2%.
+*Point at the table.*
 
-Now, we want to be honest about this, because 100% everywhere looks suspicious. Two things to say.
+Exact match goes from 0% to 98.2%, valid schema 0% to 100%, hallucinated-field rate 27% down to 1.8%. Field accuracy 53% to 99.7%.
 
-First, the base model's 0% on the schema is partly unfair. The prompt does **not** list the allowed values, so base Phi-3 cannot guess that the need must be written exactly `crm_migration`; it writes "CRM migration" in plain words, which fails the closed-list check. On the fields that are simply **copied from the notes** — company, contact, budget — the gap is smaller, 12 to 20 points. The base model's real weaknesses are the deadline, around a third correct, and invented values.
+Two caveats before anyone asks. First, base Phi-3's 0% schema is partly an artifact: we don't inline the closed-list values in the prompt, so it emits free-form needs and actions that fail the enum check. On the copy-from-source fields — company, contact, budget — the gap is 12 to 20 points, which is the honest measure of what fine-tuning buys us on this task.
 
-Second, is the fine-tuned model overfitting? Strictly, no. The 56 test notes are **held out**: the model never sees them during training. And the overfitting signal would be a low train loss with a high validation loss, but here it is the opposite — train loss 0.94, validation loss 0.76. We also chose **three epochs** instead of ten precisely to avoid the overfitting we had seen earlier. That said, the 100% is optimistic, and here is why: the test notes come from the **same synthetic generator** as the training notes — same Gemini, same templates, same closed lists, same kinds of distractors. So the model has learned the distribution very well, but on **real salespeople's notes** the score would almost certainly be lower. That is exactly why we also tested hand-written trap notes, which you saw in the demo.
+Second, the obvious objection on 98% exact match: this is not test-set overfitting — the split is held out, seed-fixed, and eval loss sits below train loss at 0.76 versus 0.94, on 3 epochs. The real caveat is distribution: train and test come from the same Gemini generator, same templates, same distractor taxonomy. So this is in-distribution performance, an upper bound. The number on real sales notes would be lower, which is why we keep the hand-written out-of-distribution traps as a separate signal.
 
 *Scroll to "Notes with a distractor".*
 
-The distractors were the hard part: four notes out of five contain one. The fine-tuned model handles all of them except a single note, where it took a seminar date as the deadline — and that note is actually a corrupted one, with its accents replaced by tabs. On the endpoint, where the model runs in **float16** instead of 4 bits — so a bit more precise than in the pipeline — the same 56 notes give 56 exact records.
+Distractors are in four notes out of five, and the per-distractor breakdown is the interesting part: the fine-tuned model drops exactly one record, taking a seminar date as the deadline — on the one note whose accents were corrupted into tabs upstream. Worth noting the quantization gap: the pipeline evaluates in 4-bit and scores 55 of 56, the float16 endpoint scores 56 of 56 on the same notes.
 
-*Scroll to the training facts at the bottom.*
+## 5. Monitoring — 1:45
 
-A word on the training itself. We use **LoRA**: instead of retraining the 3.8 billion parameters of Phi-3, we only train small added matrices, 12.6 million parameters — that is what makes it cheap and fast on a single T4. Three epochs means the model sees each training note three times.
+*Page "Monitoring". Figures are read live from Langfuse, including this demo's calls.*
 
-## 5. Monitoring — 2:00
+Offline we score against references. Online there are none, so the whole point is reference-free evaluation. Langfuse is self-hosted — the notes are client data and stay on-prem.
 
-*Page "Monitoring". The figures are read live from Langfuse, including the calls of this demo.*
+Each extraction is one trace: span at the record level, nested generation at the endpoint call, with templated prompt, params, raw output, model version and latency. On each we push reference-free scores: the two schema checks, and `names_grounded`, which just verifies company and contact are substrings of the source — a cheap hallucination proxy.
 
-Results tell us how the model did **offline**, on a fixed test set where we know the answer. But in production we have no reference answer, so we need **online** monitoring, and that is **Langfuse**. We self-host it with Docker, which matters here: the notes talk about real clients, and they never leave our machine.
-
-Every record filled in creates a **trace**. It holds an outer **span** — the raw note as input, the record as output — and inside it a **generation**, which keeps the exact prompt and parameters sent to the model, the raw answer, the model version, and the **latency**. So for any record we can open its trace and see exactly what the model received and returned.
-
-On each trace we attach several **scores**:
-- valid JSON and valid schema, the format checks;
-- names grounded: whether the company and contact actually appear in the notes — a cheap way to catch invented names with no reference answer;
-- and the score from our **LLM-as-a-judge**.
-
-The judge is the key piece for production. Since we have no ground truth, we ask another model, **Gemini**, to read the note and the record and rate how faithful the record is: 1, 0.5 or 0, with a one-sentence reason. Its prompt has two hand-written examples, so it knows, for instance, that a seminar date is not a deadline.
+The real reference-free signal is the **LLM-as-a-judge**: Gemini scores faithfulness of the record against the note, 1 / 0.5 / 0 with a rationale, few-shot with two hand-written examples so a seminar date doesn't get read as a deadline.
 
 *Point at the judge figures.*
 
-And it works: the judge gives 0 to the cooking recipe, where the format is perfect but everything is invented, and 0 to an English note where the model converted pounds to euros on its own. These are exactly the failures the format checks cannot see.
+It catches exactly what the deterministic checks can't: the recipe, where the schema is valid but the content is fully hallucinated, and an English note where the model silently converted GBP to EUR. Both score 0.
 
 *Click "Open the Langfuse dashboard".*
 
-In the dashboard, the same scores are plotted **over time**, together with the endpoint latency, p50 and p95. This is how we would detect **drift**: if real notes start to look different from our training data — a new style, another language — these curves drop, and that is the signal to retrain, using the records the salespeople validated as fresh labelled data.
+Scores over time plus p50/p95 latency. This is the drift signal — a shift in input distribution shows up as a drop here, and the validated records give us the labelled data to retrain on.
 
-One honest limitation on the judge: our training data and our judge both come from Gemini, so they may share the same blind spots. That is why the judge's examples are written by hand, not generated.
+One bias to flag: generator and judge are both Gemini, so shared blind spots are possible. That's why the judge's few-shot examples are hand-written, not generated.
 
 ## Wrap-up — 0:30
 
