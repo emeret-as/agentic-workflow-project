@@ -68,43 +68,37 @@ This is the course workflow, end to end, with our own data, prompt and metrics.
 
 **Serve and monitor.** The model is registered in the Model Registry with a custom handler, then deployed on an endpoint. The endpoint is called by this app, and every call is traced in a self-hosted Langfuse.
 
-## 4. Results — 2:00
+## 4. Results — 1:15
 
 *Page "Results".*
 
-The baseline is base Phi-3, run through a second pipeline on the same 56 held-out notes, same prompt, same evaluation, with the LoRA adapters off. So the difference between the two columns is only the fine-tuning.
+The baseline is base Phi-3, same 56 held-out notes, same prompt and evaluation, adapters off. Exact match goes from 0% to 98.2%, valid schema from 0% to 100%, hallucinated-field rate from 27% to 1.8%.
 
-*Point at the table.*
+Two points before you ask. The base model's 0% schema is partly unfair: we don't put the closed-list values in the prompt, so its free-form needs and actions fail the enum check. On the copied fields — company, contact, budget — the gap is 12 to 20 points.
 
-Exact match goes from 0% to 98.2%, valid schema from 0% to 100%, and the hallucinated-field rate from 27% down to 1.8%. Field accuracy from 53% to 99.7%.
-
-Two points before you ask. First, the base model's 0% on schema is partly unfair: we don't put the closed-list values in the prompt, so it writes free-form needs and actions that fail the enum check. On the fields it just copies from the note — company, contact, budget — the gap is 12 to 20 points, and that is the honest measure of what fine-tuning adds here.
-
-Second, the 98% exact match: this is not overfitting on the test set. The split is held out and seed-fixed, and eval loss is below train loss, 0.76 against 0.94, on 3 epochs. The real limit is the distribution: train and test come from the same Gemini generator, same templates, same kinds of distractors. So this is in-distribution performance — a best case. On real sales notes it would be lower, which is why we keep the hand-written out-of-distribution traps as a separate check.
+And the 98% is not test-set overfitting: the split is held out and seed-fixed, eval loss is below train loss. The real limit is distribution — train and test share the same Gemini generator, so this is in-distribution, a best case. On real notes it would be lower, which is why we keep the hand-written out-of-distribution traps.
 
 *Scroll to "Notes with a distractor".*
 
-Four notes out of five have a distractor, and the breakdown per distractor is the interesting part. The fine-tuned model misses one record only: it takes a seminar date as the deadline, on the one note whose accents were corrupted into tabs. One more thing: the pipeline runs in 4-bit and scores 55 of 56, the float16 endpoint scores 56 of 56 on the same notes — that is the quantization gap.
+Four notes out of five have a distractor. The model misses one record, taking a seminar date as the deadline, on the one note whose accents were corrupted into tabs. Side note: 4-bit in the pipeline scores 55 of 56, float16 on the endpoint 56 of 56 — the quantization gap.
 
-## 5. Monitoring — 1:45
+## 5. Monitoring — 1:15
 
 *Page "Monitoring". Figures are read live from Langfuse, including this demo's calls.*
 
-Offline we score against references. Online we have none, so the scores have to be reference-free. Langfuse is self-hosted — the notes are client data and stay on our machine.
+Offline we score against references; online there are none, so the scores are reference-free. Langfuse is self-hosted — the notes are client data and stay on our machine.
 
-Each extraction is one trace: a span at the record level, and inside it a generation for the endpoint call, with the prompt, the parameters, the raw output, the model version and the latency. On each one we push reference-free scores: the two schema checks, and `names_grounded`, which checks that the company and contact appear in the note — a cheap hallucination proxy.
+Each extraction is a trace: a span for the record, a nested generation for the endpoint call with prompt, params, raw output, model version and latency. On each we push the two schema checks and `names_grounded` — company and contact present in the note, a cheap hallucination proxy.
 
-The real reference-free signal is the **LLM-as-a-judge**: Gemini rates how faithful the record is to the note, 1 / 0.5 / 0 with a reason, few-shot with two hand-written examples so a seminar date is not read as a deadline.
+The real reference-free signal is the **LLM-as-a-judge**: Gemini rates faithfulness, 1 / 0.5 / 0 with a reason, few-shot so a seminar date isn't read as a deadline.
 
 *Point at the judge figures.*
 
-It catches what the deterministic checks can't: the recipe, where the schema is valid but everything is made up, and an English note where the model quietly converted GBP to EUR. Both score 0.
+It catches what the deterministic checks can't: the recipe, valid schema but fully made up, and an English note where it quietly converted GBP to EUR. Both score 0.
 
 *Click "Open the Langfuse dashboard".*
 
-Scores over time, with p50/p95 latency. This is the drift signal: if the input distribution shifts, it shows up as a drop here, and the validated records give us the labelled data to retrain on.
-
-One bias to flag: the generator and the judge are both Gemini, so they can share blind spots. That is why the judge's few-shot examples are hand-written, not generated.
+Scores over time with p50/p95 latency — the drift signal. One bias to flag: generator and judge are both Gemini, so the judge's few-shot examples are hand-written.
 
 ## Wrap-up — 0:30
 
