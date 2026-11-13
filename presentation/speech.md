@@ -72,39 +72,39 @@ This is the course workflow, end to end, with our own data, prompt and metrics.
 
 *Page "Results".*
 
-Baseline is base Phi-3 run through a second pipeline: same 56 held-out notes, same prompt, same evaluation component, LoRA adapters off. So the delta is the fine-tuning alone.
+The baseline is base Phi-3, run through a second pipeline on the same 56 held-out notes, same prompt, same evaluation, with the LoRA adapters off. So the difference between the two columns is only the fine-tuning.
 
 *Point at the table.*
 
-Exact match goes from 0% to 98.2%, valid schema 0% to 100%, hallucinated-field rate 27% down to 1.8%. Field accuracy 53% to 99.7%.
+Exact match goes from 0% to 98.2%, valid schema from 0% to 100%, and the hallucinated-field rate from 27% down to 1.8%. Field accuracy from 53% to 99.7%.
 
-Two caveats before anyone asks. First, base Phi-3's 0% schema is partly an artifact: we don't inline the closed-list values in the prompt, so it emits free-form needs and actions that fail the enum check. On the copy-from-source fields — company, contact, budget — the gap is 12 to 20 points, which is the honest measure of what fine-tuning buys us on this task.
+Two points before you ask. First, the base model's 0% on schema is partly unfair: we don't put the closed-list values in the prompt, so it writes free-form needs and actions that fail the enum check. On the fields it just copies from the note — company, contact, budget — the gap is 12 to 20 points, and that is the honest measure of what fine-tuning adds here.
 
-Second, the obvious objection on 98% exact match: this is not test-set overfitting — the split is held out, seed-fixed, and eval loss sits below train loss at 0.76 versus 0.94, on 3 epochs. The real caveat is distribution: train and test come from the same Gemini generator, same templates, same distractor taxonomy. So this is in-distribution performance, an upper bound. The number on real sales notes would be lower, which is why we keep the hand-written out-of-distribution traps as a separate signal.
+Second, the 98% exact match: this is not overfitting on the test set. The split is held out and seed-fixed, and eval loss is below train loss, 0.76 against 0.94, on 3 epochs. The real limit is the distribution: train and test come from the same Gemini generator, same templates, same kinds of distractors. So this is in-distribution performance — a best case. On real sales notes it would be lower, which is why we keep the hand-written out-of-distribution traps as a separate check.
 
 *Scroll to "Notes with a distractor".*
 
-Distractors are in four notes out of five, and the per-distractor breakdown is the interesting part: the fine-tuned model drops exactly one record, taking a seminar date as the deadline — on the one note whose accents were corrupted into tabs upstream. Worth noting the quantization gap: the pipeline evaluates in 4-bit and scores 55 of 56, the float16 endpoint scores 56 of 56 on the same notes.
+Four notes out of five have a distractor, and the breakdown per distractor is the interesting part. The fine-tuned model misses one record only: it takes a seminar date as the deadline, on the one note whose accents were corrupted into tabs. One more thing: the pipeline runs in 4-bit and scores 55 of 56, the float16 endpoint scores 56 of 56 on the same notes — that is the quantization gap.
 
 ## 5. Monitoring — 1:45
 
 *Page "Monitoring". Figures are read live from Langfuse, including this demo's calls.*
 
-Offline we score against references. Online there are none, so the whole point is reference-free evaluation. Langfuse is self-hosted — the notes are client data and stay on-prem.
+Offline we score against references. Online we have none, so the scores have to be reference-free. Langfuse is self-hosted — the notes are client data and stay on our machine.
 
-Each extraction is one trace: span at the record level, nested generation at the endpoint call, with templated prompt, params, raw output, model version and latency. On each we push reference-free scores: the two schema checks, and `names_grounded`, which just verifies company and contact are substrings of the source — a cheap hallucination proxy.
+Each extraction is one trace: a span at the record level, and inside it a generation for the endpoint call, with the prompt, the parameters, the raw output, the model version and the latency. On each one we push reference-free scores: the two schema checks, and `names_grounded`, which checks that the company and contact appear in the note — a cheap hallucination proxy.
 
-The real reference-free signal is the **LLM-as-a-judge**: Gemini scores faithfulness of the record against the note, 1 / 0.5 / 0 with a rationale, few-shot with two hand-written examples so a seminar date doesn't get read as a deadline.
+The real reference-free signal is the **LLM-as-a-judge**: Gemini rates how faithful the record is to the note, 1 / 0.5 / 0 with a reason, few-shot with two hand-written examples so a seminar date is not read as a deadline.
 
 *Point at the judge figures.*
 
-It catches exactly what the deterministic checks can't: the recipe, where the schema is valid but the content is fully hallucinated, and an English note where the model silently converted GBP to EUR. Both score 0.
+It catches what the deterministic checks can't: the recipe, where the schema is valid but everything is made up, and an English note where the model quietly converted GBP to EUR. Both score 0.
 
 *Click "Open the Langfuse dashboard".*
 
-Scores over time plus p50/p95 latency. This is the drift signal — a shift in input distribution shows up as a drop here, and the validated records give us the labelled data to retrain on.
+Scores over time, with p50/p95 latency. This is the drift signal: if the input distribution shifts, it shows up as a drop here, and the validated records give us the labelled data to retrain on.
 
-One bias to flag: generator and judge are both Gemini, so shared blind spots are possible. That's why the judge's few-shot examples are hand-written, not generated.
+One bias to flag: the generator and the judge are both Gemini, so they can share blind spots. That is why the judge's few-shot examples are hand-written, not generated.
 
 ## Wrap-up — 0:30
 
